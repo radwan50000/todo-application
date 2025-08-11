@@ -1,1 +1,17 @@
 @import 'tailwindcss';
+
+
+@layer components {
+    .login-input-container{
+        @apply flex flex-col gap-1 mt-8 items-start;
+    }
+
+    .login-input-container .input-name{
+        @apply text-xl font-medium text-gray-500 pl-1;
+    }
+    .login-input-container .input-field{
+    @apply outline-none border border-black rounded-md
+    w-6/12 px-2 pt-3 pb-1 text-xl;
+    }
+}
+
