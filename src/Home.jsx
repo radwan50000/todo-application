@@ -1,15 +1,16 @@
 import Cookies from "js-cookie";
+import HomeNav from './HomeComponents/HomeNav.jsx';
 
 const Home = () => {
 
-
     return (
         <>
-            <h1 className='text-red-800 text-8xl'>
-                Welcome {
-                Cookies.get('username')
-            }
-            </h1>
+            <div
+                className='flex flex-row items-start
+                    bg-gray-bg w-full h-dvh
+                    '>
+                <HomeNav/>
+            </div>
         </>
     )
 }

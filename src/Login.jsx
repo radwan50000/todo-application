@@ -15,7 +15,7 @@ const Login = () => {
     const pen_1 = useRef(null);
     const pen_2 = useRef(null);
     const nav = useNavigate();
-    const api_key = 'https://api.quotable.io/random?tags=education|study';
+    const api_key = 'https://api.quotable.io/random?tags=education|study|success';
     const quote = useRef(null);
     const quote_auth = useRef(null);
 
@@ -140,9 +140,9 @@ const Login = () => {
                         />
                         <span
                             className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
-                            " <span
+                            “ <span
                                 className={'italic edu-font font-light'}
-                                ref={quote}></span> "
+                                ref={quote}></span> ”
                         </span>
                         <span
                             className={' text-white w-fit text-sm'}

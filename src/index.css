@@ -19,6 +19,8 @@
 
 @theme {
     --color-primary-blue: #000000;
+    --color-gray-bg: #2a2b2d;
+    --color-gray-bg-dark: #222325;
 }
 
 
@@ -38,9 +40,23 @@
         @apply text-xl font-black text-gray-600 pl-1;
     }
     .login-input-container .input-field{
-    @apply outline-none border border-b-black rounded-md
-    w-6/12 px-2 pt-3 pb-1 text-xl;
+        @apply outline-none border border-b-black rounded-md
+        w-6/12 px-2 pt-3 pb-1 text-xl;
     }
+    .task-nav-bar{
+        @apply flex flex-row gap-5 text-gray-300 px-2
+            items-center text-xl font-bold select-none hover:opacity-70
+            hover:bg-gray-bg-dark rounded-md
+            cursor-pointer w-11/12 transition duration-350 ease-in-out
+            py-4;
+    }
+    .task-nav-bar:first-child img{
+        @apply w-10;
+    }
+    .task-nav-bar img{
+        @apply w-6;
+    }
+
 
 }
 
