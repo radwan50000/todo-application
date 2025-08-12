@@ -3,15 +3,44 @@ import ill_image from './assets/image-1.png';
 import pen_img1 from './assets/pen1.svg';
 import pen_img2 from './assets/anim-img1.webp';
 import {gsap} from 'gsap';
+import {useEffect} from 'react';
 import {useGSAP} from '@gsap/react';
 import {useRef} from 'react';
+import Cookies from 'js-cookie';
+import {useNavigate} from 'react-router-dom';
 
 const Login = () => {
     const userName = useRef(null);
     const password = useRef(null);
     const pen_1 = useRef(null);
     const pen_2 = useRef(null);
+    const nav = useNavigate();
+    const api_key = 'https://api.quotable.io/random?tags=education|study';
+    const quote = useRef(null);
+    const quote_auth = useRef(null);
 
+    const getQuote = async () => {
+        fetch(api_key)
+            .then(res => {
+                if(res.status === 200  && res.ok === true){
+                    return res;
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data !== null)
+                quote.current.innerHTML = data.content;
+                quote_auth.current.innerHTML = data.author;
+            });
+    }
+
+    useEffect(() => {
+        if(Cookies.get().length > 0){
+            nav('/Home');
+        }
+        getQuote();
+
+    },[]);
 
     useGSAP(() => {
         const t1 = gsap.timeline();
@@ -30,21 +59,6 @@ const Login = () => {
                 ease: 'power4.inOut',
             }
         )
-        // t1.fromTo(
-        //     pen_2.current,
-        //     {
-        //         rotate: -30,
-        //         y: 0,
-        //     },
-        //     {
-        //         rotate: -10,
-        //         y: 40,
-        //         repeat: -1,
-        //         yoyo: true,
-        //         duration: 3,
-        //         ease: 'power4.inOut',
-        //     }
-        // )
     },[])
 
 
@@ -64,12 +78,13 @@ const Login = () => {
                         >
                         <h3
                             className='input-name'>
-                            User Name
+                            Username
                         </h3>
                         <input
                             type='text'
                             placeholder={'Enter Username ...'}
                             id={'username-input'}
+                            key={'username-field'}
                             className='input-field'
                             ref={userName}
                             />
@@ -84,7 +99,8 @@ const Login = () => {
                         <input
                             type='password'
                             placeholder={'Enter Password ...'}
-                            id={'username-input'}
+                            id={'password-input'}
+                            key={'password-field'}
                             className='input-field'
                             ref={password}
                         />
@@ -95,7 +111,14 @@ const Login = () => {
                         rounded-md my-4 hover:bg-gray-700 transition ease-in-out duration-300
                         cursor-pointer select-none'
                         onClick={() => {
-
+                            if(
+                                userName.current.value.trim().length > 0
+                                &&
+                                password.current.value.trim().length > 0
+                            ) {
+                                Cookies.set('username',userName.current.value.trim());
+                                nav('/Home');
+                            }
                         }}>
                         SIGN IN
                     </div>
@@ -105,18 +128,31 @@ const Login = () => {
                     <img
                         src={wave}
                         alt={'wave image'}
-                        className='rotate-270
-                            absolute left-0 top-0 w-auto h-dvh
-                            select-none
-                            translate-x-[-50%] z-[-1]
-                            '
+                        className='wave'
                         />
-                    <img
-                        src={ill_image}
-                        alt={'working people image'}
-                        className='w-5/12 bg-white p-16 box-content
+                    <span
+                        className='flex flex-col gap-4 w-fit items-center'>
+                        <img
+                            src={ill_image}
+                            alt={'working people image'}
+                            className='w-5/12 bg-white p-16 box-content
                         rounded-full'
                         />
+                        <span
+                            className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
+                            " <span
+                                className={'italic edu-font font-light'}
+                                ref={quote}></span> "
+                        </span>
+                        <span
+                            className={' text-white w-fit text-sm'}
+                        >
+                            - <span
+                                className={'italic'}
+                                ref={quote_auth}
+                                ></span> -
+                        </span>
+                    </span>
                     <img
                         src={pen_img1}
                         alt={'pen image'}

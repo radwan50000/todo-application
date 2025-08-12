@@ -3,10 +3,19 @@
 *{
     font-family: 'Roboto', sans-serif;
     font-optical-sizing: auto;
-    font-style: normal;
     font-variation-settings:
             "slnt" 0;
 }
+
+.cairo{
+    font-family: 'Cairo', cursive !important;
+}
+
+.edu-font{
+    font-family: "Edu NSW ACT Cursive", cursive !important;
+    font-optical-sizing: auto;
+}
+
 
 @theme {
     --color-primary-blue: #000000;
@@ -14,12 +23,19 @@
 
 
 @layer components {
+    .wave{
+        @apply rotate-270
+        absolute left-0 top-0 w-auto h-dvh
+        select-none
+        translate-x-[-50%] z-[-1];
+    }
+
     .login-input-container{
         @apply flex flex-col gap-1 mt-4 items-start;
     }
 
     .login-input-container .input-name{
-        @apply text-xl font-black text-gray-500 pl-1;
+        @apply text-xl font-black text-gray-600 pl-1;
     }
     .login-input-container .input-field{
     @apply outline-none border border-b-black rounded-md
