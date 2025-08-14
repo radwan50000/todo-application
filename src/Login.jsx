@@ -70,65 +70,67 @@ const Login = () => {
                 <div className='w-5/12 h-dvh bg-transparent
                     pl-16 pb-32
                     flex justify-center flex-col'>
-                    <h1 className='text-7xl font-black mb-8'>
-                        Sign In
-                    </h1>
-                    <div
-                        className='login-input-container'
+                    <form>
+                        <h1 className='text-7xl font-black mb-8'>
+                            Sign In
+                        </h1>
+                        <div
+                            className='login-input-container'
                         >
-                        <h3
-                            className='input-name'>
-                            Username
-                        </h3>
-                        <input
-                            type='text'
-                            placeholder={'Enter Username ...'}
-                            id={'username-input'}
-                            key={'username-field'}
-                            className='input-field'
-                            ref={userName}
+                            <h3
+                                className='input-name'>
+                                Username
+                            </h3>
+                            <input
+                                type='text'
+                                placeholder={'Enter Username ...'}
+                                id={'username-input'}
+                                key={'username-field'}
+                                className='input-field'
+                                ref={userName}
                             />
-                    </div>
-                    <div
-                        className='login-input-container'
-                    >
-                        <h3
-                            className='input-name'>
-                            Password
-                        </h3>
-                        <input
-                            type='password'
-                            placeholder={'Enter Password ...'}
-                            id={'password-input'}
-                            key={'password-field'}
-                            className='input-field'
-                            ref={password}
-                        />
-                    </div>
-                    <div
-                        className='w-6/12 py-2 font-black text-white
+                        </div>
+                        <div
+                            className='login-input-container'
+                        >
+                            <h3
+                                className='input-name'>
+                                Password
+                            </h3>
+                            <input
+                                type='password'
+                                placeholder={'Enter Password ...'}
+                                id={'password-input'}
+                                key={'password-field'}
+                                className='input-field'
+                                ref={password}
+                            />
+                        </div>
+                        <div
+                            className='w-6/12 py-2 font-black text-white
                         text-xl flex items-center justify-center bg-black
                         rounded-md my-4 hover:bg-gray-700 transition ease-in-out duration-300
                         cursor-pointer select-none'
-                        onClick={() => {
-                            if(
-                                userName.current.value.trim().length > 0
-                                &&
-                                password.current.value.trim().length > 0
-                            ) {
-                                Cookies.set('username',userName.current.value.trim(),{
-                                    secure: true,
-                                    sameSite: 'Strict'
-                                });
-                                Cookies.set('password',password.current.value.trim(),{
-                                    secure: true,
-                                    sameSite: 'Strict',
-                                });
-                                nav('/Home');
-                            }
-                        }}>
-                        SIGN IN
-                    </div>
+                            onClick={() => {
+                                if(
+                                    userName.current.value.trim().length > 0
+                                    &&
+                                    password.current.value.trim().length > 0
+                                ) {
+                                    Cookies.set('username',userName.current.value.trim(),{
+                                        secure: true,
+                                        sameSite: 'Strict'
+                                    });
+                                    Cookies.set('password',password.current.value.trim(),{
+                                        secure: true,
+                                        sameSite: 'Strict',
+                                    });
+                                    nav('/Home');
+                                }
+                            }}>
+                            SIGN IN
+                        </div>
+                    </form>
                 </div>
                 <div className='w-7/12 h-dvh bg-primary-blue
                     relative flex items-center justify-center'>
