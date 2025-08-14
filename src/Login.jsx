@@ -116,8 +116,14 @@ const Login = () => {
                                 &&
                                 password.current.value.trim().length > 0
                             ) {
-                                Cookies.set('username',userName.current.value.trim());
-                                Cookies.set('password',password.current.value.trim());
+                                Cookies.set('username',userName.current.value.trim(),{
+                                    secure: true,
+                                    sameSite: 'Strict'
+                                });
+                                Cookies.set('password',password.current.value.trim(),{
+                                    secure: true,
+                                    sameSite: 'Strict',
+                                });
                                 nav('/Home');
                             }
                         }}>
