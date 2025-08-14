@@ -21,6 +21,19 @@
     --color-primary-blue: #000000;
     --color-gray-bg: #2a2b2d;
     --color-gray-bg-dark: #222325;
+    --color-trans-white: rgba(255, 255, 255, 0.3);
+}
+
+@tailwind utilities;
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge */
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and older Edge */
+        scrollbar-width: none;     /* Firefox */
+    }
 }
 
 
@@ -55,6 +68,18 @@
     }
     .task-nav-bar img{
         @apply w-6;
+    }
+
+    .task-img{
+        @apply w-10 border-gray-300 border p-2
+        transition duration-250 ease-in-out
+        rounded-md cursor-pointer hover:bg-trans-white;
+    }
+    .active-task-img{
+        @apply border-green-400!;
+    }
+    .active-flag-img{
+        @apply border-green-400!;
     }
 
 

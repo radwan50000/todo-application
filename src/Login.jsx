@@ -35,7 +35,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if(Cookies.get().length > 0){
+        if(Cookies.get('username') !== undefined){
             nav('/Home');
         }
         getQuote();
@@ -117,6 +117,7 @@ const Login = () => {
                                 password.current.value.trim().length > 0
                             ) {
                                 Cookies.set('username',userName.current.value.trim());
+                                Cookies.set('password',password.current.value.trim());
                                 nav('/Home');
                             }
                         }}>
