@@ -1,5 +1,5 @@
 import wave from './assets/wave.svg';
-import ill_image from './assets/image-1.png';
+import ill_image from './assets/Calendar image animation.json';
 import pen_img1 from './assets/pen1.svg';
 import pen_img2 from './assets/anim-img1.webp';
 import {gsap} from 'gsap';
@@ -8,6 +8,7 @@ import {useGSAP} from '@gsap/react';
 import {useRef} from 'react';
 import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom';
+import Lottie from "lottie-react";
 
 const Login = () => {
     const userName = useRef(null);
@@ -36,7 +37,7 @@ const Login = () => {
 
     useEffect(() => {
         if(Cookies.get('username') !== undefined){
-            nav('/Home');
+            nav('/');
         }
         getQuote();
 
@@ -125,7 +126,7 @@ const Login = () => {
                                         secure: true,
                                         sameSite: 'Strict',
                                     });
-                                    nav('/Home');
+                                    nav('/');
                                 }
                             }}>
                             SIGN IN
@@ -141,12 +142,13 @@ const Login = () => {
                         />
                     <span
                         className='flex flex-col gap-4 w-fit items-center'>
-                        <img
-                            src={ill_image}
-                            alt={'working people image'}
-                            className='w-5/12 bg-white p-16 box-content
-                        rounded-full'
-                        />
+                        <div className='w-8/12 bg-white p-2 box-content
+                        rounded-md'>
+                            <Lottie animationData={ill_image}
+                                    loop={false}
+                            />
+                        </div>
+
                         <span
                             className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
                             “ <span
@@ -166,7 +168,7 @@ const Login = () => {
                         src={pen_img1}
                         alt={'pen image'}
                         className='
-                            absolute left-40 top-50 w-30
+                            absolute left-20 top-5 w-30
                             translate-x-[-50%] z-96 box-border
                             p-4 rounded-full invert-100
                             '

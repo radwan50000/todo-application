@@ -13,12 +13,16 @@ import greenFlag from '../assets/greenFlag.png';
 import redFlag from '../assets/redFlag.png';
 import blueFlag from '../assets/blueFlag.png';
 import {useRef, useState} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import {v4 as uuidv4} from 'uuid';
 
 
 const AddTask = () => {
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
+    const ST_toAdd = useRef(null);
     const [tempTasks , setTempTasks] = useState({});
+
 
     const activeTask = (e,className) => {
         const ele = document.querySelectorAll('.task-img');
@@ -108,7 +112,7 @@ const AddTask = () => {
                                         src={ele.taskImg}
                                         key={index}
                                         alt={ele.taskType}
-                                        className= {index > 0 ? 'task-img':'task-img active-task-img'}
+                                        className= {index > 0 ? 'task-img select-none':'task-img active-task-img select-none'}
                                         onClick={(e) => activeTask(e,'active-task-img')}
                                     />
                                 )
@@ -126,21 +130,6 @@ const AddTask = () => {
                     flex flex-col gap-2 items-start
                     '
                     ref={tasksContainer}>
-
-
-                    <div
-                        className='flex flex-row items-center justify-start
-                                        gap-4 text-xl'
-                    >
-                        <img
-                            src={greenFlag}
-                            alt={'green flag'}
-                            className='w-4'
-                        />
-                        <p>
-                            Clean the House.
-                        </p>
-                    </div>
 
 
                 </div>
@@ -173,8 +162,8 @@ const AddTask = () => {
                 ref={addTaskContainer}
                 className='w-full h-dvh
                 absolute top-0 left-0
-                flex items-center justify-center
-                z-95 bg-trans-white
+                items-center justify-center
+                z-95 bg-trans-white hidden
                 '
             >
                 <div
@@ -193,6 +182,7 @@ const AddTask = () => {
                             placeholder=''
                             className='border border-gray-300 rounded-md w-[35rem]
                              p-2 outline-none text-xl'
+                            ref={ST_toAdd}
                         />
                         <h3
                             className='text-xl font-medium cairo text-red-800'>
@@ -229,7 +219,7 @@ const AddTask = () => {
                                             key={index}
                                             alt={ele.flagType}
                                             id={ele.flagType}
-                                            className= {index > 0 ? 'task-img':'task-img active-flag-img'}
+                                            className= {index > 0 ? 'task-img select-none':'task-img active-flag-img select-none'}
                                             onClick={(e) => activeTask(e,'active-flag-img')}
                                         />
                                     )
@@ -247,6 +237,8 @@ const AddTask = () => {
                         '
                             onClick={() => {
                                 addTaskContainer.current.style.display = 'none';
+                                ST_toAdd.current.value = ''
+
                             }}>
                             Cancel
                         </div>
@@ -256,15 +248,40 @@ const AddTask = () => {
                         hover:bg-green-400 hover:text-gray-300
                         '
                             onClick={() => {
-                                tasksContainer.current.innerHTML +=
-                                addTaskContainer.current.style.display = 'none';
+                                if(ST_toAdd.current.value.trim() !== '') {
+                                    tasksContainer.current.innerHTML += `
+                                    <div
+                                            id=${uuidv4()}
+                                            style='display: flex;flex-direction: row;align-items: center;justify-content: start;gap: 12px;font-size: 1.25rem;'
+                                        >
+                                            <img
+                                                src=${document.querySelector('.active-flag-img').src}
+                                                alt={'redFlag flag'}
+                                                style='width: 1rem;'
+                                            />
+                                            <p>
+                                                ${ST_toAdd.current.value.trim()}
+                                            </p>
+                                        </div>
+                                    `
+                                        ST_toAdd.current.value = ''
+                                        addTaskContainer.current.style.display = 'none';
+                                }else {
+                                    toast('No Data Entered!',{
+                                        theme: 'dark',
+                                        closeOnClick: true,
+                                        type: 'warning',
+                                    });
+                                }
                             }}
                         >
-                            Submit
+                            Add Task
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer />
+
         </>
     )
 }
