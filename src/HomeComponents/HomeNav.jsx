@@ -100,9 +100,6 @@ const HomeNav = () => {
                     className={'task-nav-bar'}
                     onClick={() => {
                         confirmSignOutContainer.current.style.display = 'flex';
-                    //     const allCookies = Object.keys(Cookies.get());
-                    //     allCookies.forEach((cookie) => Cookies.remove(cookie));
-                    //     nav('/');
                     }}>
                     <img
                         src={signOut}
@@ -122,7 +119,7 @@ const HomeNav = () => {
                     className='w-6/12 h-fit pt-18 pb-8 px-12 bg-white rounded-md
                         relative flex flex-col items-center'>
                     <h1
-                        className='text-red-800 text-8xl font-black cairo'>
+                        className='text-red-900 text-8xl font-black cairo'>
                         Warning
                     </h1>
                     <p
@@ -154,7 +151,7 @@ const HomeNav = () => {
                         </p>
                     </div>
                     <div className='absolute top-2 right-2 w-fit h-fit p-1
-                     text-3xl font-black cairo bg-red-800 text-white
+                     text-3xl font-black cairo bg-red-900 text-white
                      transition duration-250 ease-in-out
                      rounded-sm select-none cursor-pointer hover:opacity-70
                     '

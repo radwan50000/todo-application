@@ -21,6 +21,7 @@ const AddTask = () => {
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
+    const mainTaskName = useRef(null);
     const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','tasks':[],'completed':0});
 
 
@@ -53,6 +54,7 @@ const AddTask = () => {
                         placeholder=''
                         className='border border-gray-300 rounded-md
                              p-2 outline-none text-xl'
+                        ref={mainTaskName}
                         />
                     <h3
                         className='text-xl font-medium cairo text-red-800'>
@@ -152,7 +154,17 @@ const AddTask = () => {
                         hover:bg-gray-300 hover:text-gray-bg-dark
                         '
                         onClick={() => {
-
+                            if(mainTaskName.current.value.trim() !== '') {
+                                tempTasks.taskname =  mainTaskName.current.value.trim();
+                                tempTasks.taskicon = document.querySelector('.active-task-img').src;
+                                console.log(tempTasks);
+                            }else {
+                                toast('Tasks Name must be filled', {
+                                    theme: 'dark',
+                                    closeOnClick: true,
+                                    type: 'error',
+                                });
+                            }
                         }}>
                         Submit
                     </div>
@@ -249,20 +261,36 @@ const AddTask = () => {
                         '
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
+                                    const uniqueID = uuidv4();
+                                    const obj = {
+                                        [uniqueID]: {
+                                            'task': ST_toAdd.current.value.trim(),
+                                            'priority': document.querySelector('.active-flag-img').src,
+                                            done: false,
+                                        }
+                                    }
+                                    tempTasks.tasks.push(obj);
                                     tasksContainer.current.innerHTML += `
                                     <div
-                                            id=${uuidv4()}
-                                            style='display: flex;flex-direction: row;align-items: start;justify-content: start;gap: 12px;font-size: 1.25rem;
-                                                width: 90%;height: fit-content;flex-wrap: wrap;word-break: break-word;position:relative;'
+                                            id=${uniqueID}
+                                            
+                                                class='
+                                                flex flex-row items-start justify-start text-xl w-11/12 h-fit flex-wrap break-words relative
+                                                border-gray-300 border
+                                                rounded-md p-3'
                                                      >
-                                            <img
-                                                src=${document.querySelector('.active-flag-img').src}
-                                                alt={'redFlag flag'}
-                                                style='width: 1rem;padding: 0.2rem;box-sizing: content-box;padding-top: 0.5rem;'
-                                            />
-                                            <p style='width: calc(100% - 4rem);height: auto;'>
-                                                ${ST_toAdd.current.value.trim()}
-                                            </p>
+                                            <div
+                                                class='flex flex-row gap-4 w-8/12 '
+                                                >
+                                                <img
+                                                    src=${document.querySelector('.active-flag-img').src}
+                                                    alt={'redFlag flag'}
+                                                    style='width: 1rem;height: fit-content;padding: 0.2rem;box-sizing: content-box;padding-top: 0.5rem;'
+                                                />
+                                                <p style='width: calc(100% - 4rem);height: auto;'>
+                                                    ${ST_toAdd.current.value.trim()}
+                                                </p>
+                                            </div>
                                         </div>
                                     `
                                         ST_toAdd.current.value = ''

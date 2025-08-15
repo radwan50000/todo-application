@@ -10,7 +10,6 @@ const ProtectedRoute = ({children}) => {
     useEffect(() => {
         if(Cookies.get('username') !== undefined){
             setGoHome(true);
-            console.log(Cookies.get('test'));
         }else{
             setGoHome(false);
             nav('/');
