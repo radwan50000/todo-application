@@ -21,7 +21,7 @@ const AddTask = () => {
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
-    const [tempTasks , setTempTasks] = useState({});
+    const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','tasks':[],'completed':0});
 
 
     const activeTask = (e,className) => {
@@ -252,14 +252,15 @@ const AddTask = () => {
                                     tasksContainer.current.innerHTML += `
                                     <div
                                             id=${uuidv4()}
-                                            style='display: flex;flex-direction: row;align-items: center;justify-content: start;gap: 12px;font-size: 1.25rem;'
-                                        >
+                                            style='display: flex;flex-direction: row;align-items: start;justify-content: start;gap: 12px;font-size: 1.25rem;
+                                                width: 90%;height: fit-content;flex-wrap: wrap;word-break: break-word;position:relative;'
+                                                     >
                                             <img
                                                 src=${document.querySelector('.active-flag-img').src}
                                                 alt={'redFlag flag'}
-                                                style='width: 1rem;'
+                                                style='width: 1rem;padding: 0.2rem;box-sizing: content-box;padding-top: 0.5rem;'
                                             />
-                                            <p>
+                                            <p style='width: calc(100% - 4rem);height: auto;'>
                                                 ${ST_toAdd.current.value.trim()}
                                             </p>
                                         </div>
