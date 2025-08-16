@@ -22,7 +22,7 @@ const AddTask = () => {
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
     const mainTaskName = useRef(null);
-    const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','tasks':[],'completed':0});
+    const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
 
 
     const activeTask = (e,className) => {
@@ -157,6 +157,7 @@ const AddTask = () => {
                             if(mainTaskName.current.value.trim() !== '') {
                                 tempTasks.taskname =  mainTaskName.current.value.trim();
                                 tempTasks.taskicon = document.querySelector('.active-task-img').src;
+                                tempTasks.taskid = uuidv4();
                                 console.log(tempTasks);
                             }else {
                                 toast('Tasks Name must be filled', {
@@ -263,11 +264,10 @@ const AddTask = () => {
                                 if(ST_toAdd.current.value.trim() !== '') {
                                     const uniqueID = uuidv4();
                                     const obj = {
-                                        [uniqueID]: {
                                             'task': ST_toAdd.current.value.trim(),
                                             'priority': document.querySelector('.active-flag-img').src,
-                                            done: false,
-                                        }
+                                            'done': false,
+                                            'id': uniqueID,
                                     }
                                     tempTasks.tasks.push(obj);
                                     tasksContainer.current.innerHTML += `
