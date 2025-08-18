@@ -12,16 +12,18 @@ import yellowFlag from '../assets/yellowFlag.png';
 import greenFlag from '../assets/greenFlag.png';
 import redFlag from '../assets/redFlag.png';
 import blueFlag from '../assets/blueFlag.png';
-import {useRef, useState} from 'react';
+import {useRef, useState , useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import TaskComponent from './TaskComponent.jsx';
 import {v4 as uuidv4} from 'uuid';
 
 
-const AddTask = () => {
+const AddTask = ({setTasks, tasks}) => {
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
     const mainTaskName = useRef(null);
+    const [addedTasks, setAddedTasks] = useState([]);
     const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
 
 
@@ -32,6 +34,11 @@ const AddTask = () => {
         })
         e.target.classList.add(className);
     }
+
+    useEffect( () => {
+        // tasksContainer.current.innerHTML = '';
+
+    },[addedTasks])
 
 
 
@@ -133,6 +140,22 @@ const AddTask = () => {
                     '
                     ref={tasksContainer}>
 
+                    {
+                        addedTasks.map(t => {
+                                return (
+                                    <TaskComponent
+                                        task={t.task}
+                                        id={t.id}
+                                        flag={t.priority}
+                                        setTempTasks={setTempTasks}
+                                        tempTasks={tempTasks}
+                                        key={t.id}/>
+                                )
+                            }
+                        )
+                    }
+
+
 
                 </div>
                 <div
@@ -145,6 +168,7 @@ const AddTask = () => {
                         '
                         onClick={() => {
                             addTaskContainer.current.style.display = 'flex';
+                            ST_toAdd.current.focus();
                         }}>
                         Add Task
                     </div>
@@ -158,7 +182,10 @@ const AddTask = () => {
                                 tempTasks.taskname =  mainTaskName.current.value.trim();
                                 tempTasks.taskicon = document.querySelector('.active-task-img').src;
                                 tempTasks.taskid = uuidv4();
-                                console.log(tempTasks);
+                                setTasks([...tasks , tempTasks]);
+                                tasksContainer.current.innerHTML = '';
+                                mainTaskName.current.value = '';
+
                             }else {
                                 toast('Tasks Name must be filled', {
                                     theme: 'dark',
@@ -270,29 +297,7 @@ const AddTask = () => {
                                             'id': uniqueID,
                                     }
                                     tempTasks.tasks.push(obj);
-                                    tasksContainer.current.innerHTML += `
-                                    <div
-                                            id=${uniqueID}
-                                            
-                                                class='
-                                                flex flex-row items-start justify-start text-xl w-11/12 h-fit flex-wrap break-words relative
-                                                border-gray-300 border
-                                                rounded-md p-3'
-                                                     >
-                                            <div
-                                                class='flex flex-row gap-4 w-8/12 '
-                                                >
-                                                <img
-                                                    src=${document.querySelector('.active-flag-img').src}
-                                                    alt={'redFlag flag'}
-                                                    style='width: 1rem;height: fit-content;padding: 0.2rem;box-sizing: content-box;padding-top: 0.5rem;'
-                                                />
-                                                <p style='width: calc(100% - 4rem);height: auto;'>
-                                                    ${ST_toAdd.current.value.trim()}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    `
+                                        setAddedTasks([...addedTasks,obj]);
                                         ST_toAdd.current.value = ''
                                         addTaskContainer.current.style.display = 'none';
                                 }else {

@@ -7,8 +7,7 @@ const Home = () => {
     const [searchSection , setSearchSection] = useState(false);
     const [todaySection , setTodaySection] = useState(false);
     const [weeklySection , setWeeklySection] = useState(false);
-
-
+    const [manuallyAddedTasks, setManuallyAddedTasks] = useState([]);
 
     return (
         <>
@@ -16,10 +15,10 @@ const Home = () => {
                 className='flex flex-row items-start
                     bg-gray-bg w-full h-dvh
                     '>
-                <HomeNav/>
+                <HomeNav tasks={manuallyAddedTasks}/>
                 {
                     addTaskSection ?
-                        <AddTask/>:null
+                        <AddTask setTasks={setManuallyAddedTasks} tasks={manuallyAddedTasks}/>:null
                 }
             </div>
         </>

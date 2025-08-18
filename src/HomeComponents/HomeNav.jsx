@@ -8,11 +8,17 @@ import weekImg from '../assets/calendar.png';
 import signOut from '../assets/logout.png';
 import {useNavigate} from 'react-router-dom';
 import {useRef} from 'react';
+import {useEffect} from 'react';
 
-const HomeNav = () => {
+const HomeNav = ({tasks}) => {
     const nav = useNavigate();
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
+
+    useEffect(() => {
+        console.log('this log from nav-bar');
+        console.log(tasks);
+    },[tasks]);
 
     return (
         <>
