@@ -44,9 +44,7 @@ const AddTask = ({setTasks, tasks}) => {
     return (
         <>
             <div
-                style={{width: 'calc(100% - 24rem)'}}
-                className='h-dvh pt-20 pl-8 bg-gray-bg-dark
-                text-gray-300 flex items-start flex-col gap-12
+                className='right-component-style
                 '
             >
                 <div
@@ -278,7 +276,6 @@ const AddTask = ({setTasks, tasks}) => {
                             onClick={() => {
                                 addTaskContainer.current.style.display = 'none';
                                 ST_toAdd.current.value = ''
-
                             }}>
                             Cancel
                         </div>

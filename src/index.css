@@ -92,6 +92,12 @@
         py-4;
     }
 
+    .right-component-style{
+        @apply h-dvh pt-20 pl-8 bg-gray-bg-dark
+        w-[calc(100%-24rem)]
+        text-gray-300 flex items-start flex-col gap-12;
+    }
+
 
 }
 

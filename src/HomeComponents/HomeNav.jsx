@@ -10,7 +10,7 @@ import {useNavigate} from 'react-router-dom';
 import {useRef} from 'react';
 import {useEffect} from 'react';
 
-const HomeNav = ({tasks}) => {
+const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSearchSection,setCustomSection,setTaskId}) => {
     const nav = useNavigate();
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
@@ -60,7 +60,15 @@ const HomeNav = ({tasks}) => {
                        />
                    </div>
                    <div
-                       className={'task-nav-bar'}>
+                       className={'task-nav-bar'}
+                        onClick={() => {
+                            setCustomSection(false);
+                            setAddTaskSection(true);
+                            setSearchSection(false);
+                            setWeeklySection(false);
+                            setTodaySection(false);
+                        }}
+                   >
                        <img
                            src={addImg}
                            alt={'add icon image'}
@@ -117,7 +125,16 @@ const HomeNav = ({tasks}) => {
                            tasks.map((task) => {
                                return (
                                    <div id={task.taskid} key={task.taskid}
-                                        className='custom-task-button'>
+                                        className='custom-task-button'
+                                        onClick={() => {
+                                            setCustomSection(true);
+                                            setAddTaskSection(false);
+                                            setSearchSection(false);
+                                            setWeeklySection(false);
+                                            setTodaySection(false);
+                                            setTaskId(task.taskid);
+                                        }}
+                                   >
                                        <img
                                            src={task.taskicon}
                                            alt={'task icon'}
