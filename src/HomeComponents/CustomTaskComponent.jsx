@@ -16,7 +16,7 @@ const CustomTaskComponent = ({task,taskId}) => {
                 setTaskName(t.taskname);
                 setTaskImg(t.taskicon);
                 setMiniTasks([...t.tasks]);
-                setNoOfTasks(miniTasks.length);
+                setNoOfTasks(t.tasks.length);
             }
         });
 
