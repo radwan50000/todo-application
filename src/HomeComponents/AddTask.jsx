@@ -36,7 +36,6 @@ const AddTask = ({setTasks, tasks}) => {
     }
 
     useEffect( () => {
-        // tasksContainer.current.innerHTML = '';
 
     },[addedTasks])
 
@@ -183,6 +182,7 @@ const AddTask = ({setTasks, tasks}) => {
                                 tempTasks.taskicon = document.querySelector('.active-task-img').src;
                                 tempTasks.taskid = uuidv4();
                                 setTasks([...tasks , tempTasks]);
+                                setTempTasks({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
                                 tasksContainer.current.innerHTML = '';
                                 mainTaskName.current.value = '';
 

@@ -14,10 +14,15 @@ const HomeNav = ({tasks}) => {
     const nav = useNavigate();
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
+    //CTB_Container -> Custom Tasks Button Container
+    const CTB_Container = useRef(null);
+
+
 
     useEffect(() => {
-        console.log('this log from nav-bar');
+
         console.log(tasks);
+
     },[tasks]);
 
     return (
@@ -101,6 +106,31 @@ const HomeNav = ({tasks}) => {
                        className='py-3 px-2 text-3xl font-bold text-gray-300'>
                        My Projects
                    </h2>
+                   <div
+                        className='w-full h-[45vh]
+                            flex flex-col items-start justify-start gap-4
+                            overflow-y-scroll overflow-x-hidden no-scrollbar
+                            '
+                        ref={CTB_Container}
+                   >
+                       {
+                           tasks.map((task) => {
+                               return (
+                                   <div id={task.taskid} key={task.taskid}
+                                        className='custom-task-button'>
+                                       <img
+                                           src={task.taskicon}
+                                           alt={'task icon'}
+                                           className='w-6'
+                                       />
+                                        <h2>
+                                            {task.taskname}
+                                        </h2>
+                                   </div>
+                               )
+                           })
+                       }
+                   </div>
                </div>
                 <div
                     className={'task-nav-bar'}

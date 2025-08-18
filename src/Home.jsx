@@ -7,6 +7,7 @@ const Home = () => {
     const [searchSection , setSearchSection] = useState(false);
     const [todaySection , setTodaySection] = useState(false);
     const [weeklySection , setWeeklySection] = useState(false);
+    const [customSection , setCustomSection] = useState(false);
     const [manuallyAddedTasks, setManuallyAddedTasks] = useState([]);
 
     return (
