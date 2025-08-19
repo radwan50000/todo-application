@@ -59,7 +59,7 @@ const CustomTaskComponent = ({task,setTask,taskId}) => {
                     </span>
                 </div>
                 <div
-                    className='w-11/12 h-[65%] border border-gray-300 rounded-md
+                    className='w-11/12 h-[65%] border border-t-gray-300 border-b-0 border-l-0 border-r-0
                     overflow-x-hidden overflow-y-scroll no-scrollbar p-8
                     flex flex-col gap-2 items-start mt-20
                     '

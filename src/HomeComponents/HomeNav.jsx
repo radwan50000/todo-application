@@ -6,9 +6,12 @@ import searchImg from '../assets/magnifying-glass.png';
 import todayImg from '../assets/june.png';
 import weekImg from '../assets/calendar.png';
 import signOut from '../assets/logout.png';
+import warningImg from '../assets/warning-svgrepo-com.svg';
+import closeImg from '../assets/close2.svg';
 import {useNavigate} from 'react-router-dom';
 import {useRef} from 'react';
 import {useEffect} from 'react';
+
 
 const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSearchSection,setCustomSection,setTaskId}) => {
     const nav = useNavigate();
@@ -171,14 +174,19 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
                         absolute bg-trans-white z-95 hidden'
                 ref={confirmSignOutContainer}>
                 <div
-                    className='w-6/12 h-fit pt-18 pb-8 px-12 bg-white rounded-md
+                    className='w-6/12 h-fit pb-8 bg-white rounded-md overflow-hidden
                         relative flex flex-col items-center'>
-                    <h1
-                        className='text-red-900 text-8xl font-black cairo'>
-                        Warning
-                    </h1>
+                    <div
+                        className='flex items-center justify-center w-full py-4 h-fit bg-[#ffb703]'
+                    >
+                        <img
+                            src={warningImg}
+                            alt='warning img'
+                            className='w-4/12'
+                            />
+                    </div>
                     <p
-                        className='text-black text-2xl my-8 font-medium'>
+                        className='text-text-dark text-2xl my-8 font-medium px-9'>
                         by sign out all data will be loss and deleted forever . you will can't retrieve it again , make sure that you don't have any important or sensitive data to loss here . <br/> To confirm sign out please enter your password :
                     </p>
                     <input
@@ -206,9 +214,9 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
                         </p>
                     </div>
                     <div className='absolute top-2 right-2 w-fit h-fit p-1
-                     text-3xl font-black cairo bg-red-900 text-white
+                     text-3xl font-black cairo bg-text-dark text-white
                      transition duration-250 ease-in-out
-                     rounded-sm select-none cursor-pointer hover:opacity-70
+                     rounded-sm select-none cursor-pointer hover:shadow-xs hover:shadow-gray-600
                     '
                         onClick={() => {
                             confirmSignOutContainer.current.style.display= 'none';
