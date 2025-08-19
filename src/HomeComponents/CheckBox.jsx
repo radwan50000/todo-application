@@ -17,17 +17,17 @@ const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP})
                          if(t.taskid === objId){
                              t.tasks.forEach((j) => {
                                  if(j.id === taskId){
-                                     console.log(j.done);
-                                     j.done = !j.done;
+                                     j.done = j.done ? false:true;
                                      setCompleted(perv => j.done ? perv+1:perv-1);
-                                     t.completed = j.done ? t.completed++:t.completed--;
+                                     t.completed = j.done ? t.completed+1:t.completed-1;
                                      taskP.current.style.textDecoration = j.done ? 'line-through' : 'none';
+                                     console.log(t);
                                  }
                              })
+
                          }
                      })
                      setAllTasks(allTasks);
-                     console.log(allTasks);
                  }}
             >
                 {

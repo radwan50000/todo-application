@@ -104,8 +104,9 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 alt={'redFlag flag'}
                                 className='w-4 h-fit p-1 box-content mt-[3px]'
                             />
-                            <p style={{width: 'calc(85% - 4rem)',height: 'auto'}}
+                            <p style={{width: 'calc(85% - 4rem)',height: 'auto',textDecoration: isDone ? 'line-through' : 'none'}}
                                className='text-xl'
+
                                 ref={taskP}
                             >
                                 {taskField}
