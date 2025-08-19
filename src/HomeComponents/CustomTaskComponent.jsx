@@ -1,6 +1,5 @@
 import {useRef, useState , useEffect} from 'react';
 import TaskComponent2 from "./TaskComponent2.jsx";
-import TaskComponent from "./TaskComponent.jsx";
 
 
 const CustomTaskComponent = ({task,setTask,taskId}) => {
