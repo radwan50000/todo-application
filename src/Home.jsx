@@ -12,6 +12,7 @@ const Home = () => {
     const [manuallyAddedTasks, setManuallyAddedTasks] = useState([]);
     const [taskId , setTaskId] = useState('');
 
+
     return (
         <>
             <div
@@ -31,7 +32,7 @@ const Home = () => {
                     addTaskSection ?
                         <AddTask setTasks={setManuallyAddedTasks} tasks={manuallyAddedTasks}/> :
                         customSection ?
-                            <CustomTaskComponent task={manuallyAddedTasks} taskId={taskId}/>: null
+                            <CustomTaskComponent task={manuallyAddedTasks} setTask={setManuallyAddedTasks} taskId={taskId}/>: null
                 }
             </div>
         </>

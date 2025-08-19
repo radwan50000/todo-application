@@ -29,7 +29,9 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
         <>
             <div
                 className='flex flex-col p-4
-                    h-dvh w-[24rem] justify-between'>
+                    h-dvh w-[24rem] justify-between
+                    overflow-x-hidden overflow-y-scroll no-scrollbar
+                    '>
                <div
                     className='flex flex-col'>
                    <div

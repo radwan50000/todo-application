@@ -3,19 +3,23 @@ import edit from '../assets/edit-svgrepo-com.svg';
 import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import close from '../assets/close-bold-svgrepo-com.svg';
 import {useState , useRef} from 'react';
+import CheckBox from "./CheckBox.jsx";
 
-const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
+
+const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,objId}) => {
     const [editingMode , setEditingMode] = useState(false);
+    const taskP = useRef(null);
     const [taskField, setTaskField] = useState(task);
     const [oldField , setOldField] = useState(taskField);
     const container = useRef(null);
+
 
     return (
         <div ref={container} className="w-full h-fit">
             {
                 editingMode ?
                     <div
-                        id={id}
+                        id={taskId}
                         className='flex flex-row items-start justify-between text-xl w-11/12 h-fit flex-wrap
                      break-words relative  rounded-md p-3'
                     >
@@ -45,20 +49,23 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                                 src={done}
                                 alt={'edit image'}
                                 className='w-4 h-fit p-2 box-content border border-green-400 rounded-sm
-                    transition duration-250 ease-in-out select-none
-                    cursor-pointer hover:bg-green-400'
+                                    transition duration-250 ease-in-out select-none
+                                    cursor-pointer hover:bg-green-400'
                                 onClick={() => {
-                                    tempTasks.tasks = tempTasks.tasks.map((t) => {
-                                        if(t.id !== id) return t;
-                                        else{
-                                            t.task = taskField;
-                                            return t;
+                                    allTasks.forEach((t) => {
+                                        if(t.taskid == objId){
+                                            t.tasks.forEach((j) => {
+                                                if(j.id === taskId){
+                                                    j.task = taskField;
+                                                    console.log('Editied');
+                                                    setOldField(taskField);
+                                                    setEditingMode(false);
+                                                }
+                                            })
                                         }
-                                    });
-                                    setTempTasks(tempTasks);
-                                    setOldField(taskField);
-                                    console.log(tempTasks.tasks);
-                                    setEditingMode(false);
+                                    })
+                                    setAllTasks(allTasks);
+                                    console.log(allTasks);
                                 }}
                             />
                             <img
@@ -69,27 +76,38 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                     cursor-pointer hover:bg-red-800'
                                 onClick={() => {
                                     setTaskField(oldField);
-                                    setEditingMode(false)
+                                    setEditingMode(false);
                                 }}
                             />
                         </div>
                     </div>
                     :
                     <div
-                        id={id}
+                        id={taskId}
                         className='flex flex-row items-start justify-between text-xl w-11/12 h-fit flex-wrap
                      break-words relative  rounded-md p-3'
                     >
                         <div
-                            className='flex flex-row gap-4 w-8/12 '
+                            className='flex flex-row gap-4 w-8/12'
                         >
+                            <CheckBox
+                                isDone={isDone}
+                                setCompleted={setCompleted}
+                                allTasks={allTasks}
+                                setAllTasks={setAllTasks}
+                                objId={objId}
+                                taskId={taskId}
+                                taskP={taskP}
+                            />
                             <img
                                 src={flag}
                                 alt={'redFlag flag'}
                                 className='w-4 h-fit p-1 box-content mt-[3px]'
                             />
                             <p style={{width: 'calc(85% - 4rem)',height: 'auto'}}
-                               className='text-xl'>
+                               className='text-xl'
+                                ref={taskP}
+                            >
                                 {taskField}
                             </p>
                         </div>
@@ -100,8 +118,8 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                                 src={edit}
                                 alt={'edit image'}
                                 className='w-4 h-fit p-2 box-content border border-green-400 rounded-sm
-                                transition duration-250 ease-in-out select-none
-                                cursor-pointer hover:bg-green-400'
+                    transition duration-250 ease-in-out select-none
+                    cursor-pointer hover:bg-green-400'
                                 onClick={() => {
                                     setEditingMode(true);
                                 }}
@@ -112,12 +130,19 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                                 className='w-4 h-fit p-2 box-content border border-cyan-500 rounded-sm invert-100
                                     transition duration-250 ease-in-out select-none
                                     cursor-pointer hover:bg-cyan-500'
-                                onClick={(e) => {
-                                    tempTasks.tasks = tempTasks.tasks.filter((task) => task.id !== id);
-                                    setTempTasks(tempTasks);
-                                    console.log(tempTasks);
-                                    console.log(id);
-                                    container.current.remove();
+                                onClick={() => {
+                                    allTasks.forEach((t) => {
+                                        if(t.taskid == objId){
+                                            t.tasks.forEach((j, k) => {
+                                                if(j.id === taskId){
+                                                    t.tasks.splice(k, 1);
+                                                }
+                                            })
+                                        }
+                                    })
+                                    setAllTasks(allTasks);
+                                    container.current.style.display= 'none';
+
                                 }}
                             />
                         </div>
@@ -127,4 +152,4 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
     )
 }
 
-export default TaskComponent;
+export default TaskComponent2;

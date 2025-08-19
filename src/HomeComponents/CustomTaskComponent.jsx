@@ -1,7 +1,9 @@
 import {useRef, useState , useEffect} from 'react';
+import TaskComponent2 from "./TaskComponent2.jsx";
 import TaskComponent from "./TaskComponent.jsx";
 
-const CustomTaskComponent = ({task,taskId}) => {
+
+const CustomTaskComponent = ({task,setTask,taskId}) => {
     const header = useRef(null);
     const [taskName, setTaskName] = useState('');
     const [taskImg , setTaskImg] = useState(null);
@@ -10,6 +12,7 @@ const CustomTaskComponent = ({task,taskId}) => {
     const [noOfTasks , setNoOfTasks] = useState(0);
 
     useEffect(() => {
+        console.log('this is task - manually Added Tasks');
         console.log(task);
         task.forEach((t) => {
             if(t.taskid === taskId){
@@ -17,19 +20,23 @@ const CustomTaskComponent = ({task,taskId}) => {
                 setTaskImg(t.taskicon);
                 setMiniTasks([...t.tasks]);
                 setNoOfTasks(t.tasks.length);
+                setCompleted(t.completed);
             }
         });
-
     },[task , taskId]);
+
+    useEffect(() => {
+
+
+    },[completed , miniTasks]);
 
 
     return (
         <>
-            <div className='right-component-style'>
+            <div className='right-component-style no-scrollbar'>
                 <div
                     className='flex flex-row items-center justify-between gap-4
-                        w-[90%]
-                        '
+                        w-[90%]'
                 >
                     <div
                         className='flex flex-row items-center justify-between gap-4'
@@ -37,10 +44,10 @@ const CustomTaskComponent = ({task,taskId}) => {
                         <img
                             src={taskImg}
                             alt='task image'
-                            className='w-9'
+                            className='w-12'
                         />
                         <h1
-                            className='text-3xl font-semibold text-gray-300 cairo'
+                            className='text-5xl font-semibold text-gray-300 cairo'
                             ref={header}
                         >
                             {taskName}
@@ -58,7 +65,23 @@ const CustomTaskComponent = ({task,taskId}) => {
                     flex flex-col gap-2 items-start mt-20
                     '
                     >
-
+                    {
+                        miniTasks.map((t) => {
+                            return (
+                                <TaskComponent2
+                                    setCompleted={setCompleted}
+                                    allTasks={task}
+                                    setAllTasks={setTask}
+                                    key={t.id}
+                                    taskId={t.id}
+                                    objId={taskId}
+                                    flag={t.priority}
+                                    task={t.task}
+                                    isDone={t.done}
+                                />
+                            )
+                        })
+                    }
                 </div>
             </div>
         </>

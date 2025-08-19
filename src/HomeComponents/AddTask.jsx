@@ -12,6 +12,7 @@ import yellowFlag from '../assets/yellowFlag.png';
 import greenFlag from '../assets/greenFlag.png';
 import redFlag from '../assets/redFlag.png';
 import blueFlag from '../assets/blueFlag.png';
+import gymImg from '../assets/dumbbell.png';
 import {useRef, useState , useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import TaskComponent from './TaskComponent.jsx';
@@ -85,6 +86,10 @@ const AddTask = ({setTasks, tasks}) => {
                                 {
                                     'taskImg' : familyImg,
                                     'taskType': 'family'
+                                },
+                                {
+                                    'taskImg' : gymImg,
+                                    'taskType': 'Training'
                                 },
                                 {
                                 'taskImg' : groceryImg,

@@ -38,6 +38,9 @@
 
 
 @layer components {
+
+
+
     .wave{
         @apply rotate-270
         absolute left-0 top-0 w-auto h-dvh
@@ -94,7 +97,7 @@
 
     .right-component-style{
         @apply h-dvh pt-20 pl-8 bg-gray-bg-dark
-        w-[calc(100%-24rem)]
+        w-[calc(100%-24rem)] overflow-x-hidden overflow-y-scroll
         text-gray-300 flex items-start flex-col gap-12;
     }
 
