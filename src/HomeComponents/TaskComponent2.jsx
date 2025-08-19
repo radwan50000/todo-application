@@ -6,7 +6,7 @@ import {useState , useRef} from 'react';
 import CheckBox from "./CheckBox.jsx";
 
 
-const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,objId}) => {
+const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,objId,setNoOfTasks}) => {
     const [editingMode , setEditingMode] = useState(false);
     const taskP = useRef(null);
     const [taskField, setTaskField] = useState(task);
@@ -137,6 +137,11 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                             t.tasks.forEach((j, k) => {
                                                 if(j.id === taskId){
                                                     t.tasks.splice(k, 1);
+                                                    if(j.done) {
+                                                        setCompleted(perv => perv - 1);
+                                                        t.completed = t.completed - 1;
+                                                    }
+                                                    setNoOfTasks(perv => perv - 1);
                                                 }
                                             })
                                         }

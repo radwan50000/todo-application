@@ -78,6 +78,8 @@ const CustomTaskComponent = ({task,setTask,taskId}) => {
                                     flag={t.priority}
                                     task={t.task}
                                     isDone={t.done}
+                                    setNoOfTasks={setNoOfTasks}
+                                    noOfTasks={noOfTasks}
                                 />
                             )
                         })
