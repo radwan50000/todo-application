@@ -13,6 +13,7 @@ import greenFlag from '../assets/greenFlag.png';
 import redFlag from '../assets/redFlag.png';
 import blueFlag from '../assets/blueFlag.png';
 import gymImg from '../assets/dumbbell.png';
+import todayImg from '../assets/june.png';
 import {useRef, useState , useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import TaskComponent from './TaskComponent.jsx';
@@ -29,6 +30,16 @@ const AddTask = ({setTasks, tasks}) => {
     const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
 
 
+    const initTodayLS = () => {
+        if(localStorage.getItem('daily-tasks') === null){
+            const obj = {
+                'projectTitle': 'Daily Tasks',
+                'projectIcon': todayImg,
+                'tasks': [],
+            }
+            localStorage.setItem('daily-tasks',JSON.stringify(obj));
+        }
+    }
 
 
     const activeTask = (e,className) => {
@@ -40,7 +51,7 @@ const AddTask = ({setTasks, tasks}) => {
     }
 
     useEffect( () => {
-
+        initTodayLS();
     },[addedTasks])
 
 

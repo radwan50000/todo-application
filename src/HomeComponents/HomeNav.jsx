@@ -7,13 +7,12 @@ import todayImg from '../assets/june.png';
 import weekImg from '../assets/calendar.png';
 import signOut from '../assets/logout.png';
 import warningImg from '../assets/warning-svgrepo-com.svg';
-import closeImg from '../assets/close2.svg';
 import {useNavigate} from 'react-router-dom';
 import {useRef} from 'react';
 import {useEffect} from 'react';
 
 
-const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSearchSection,setCustomSection,setTaskId}) => {
+const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,setWeeklySection,setSearchSection,setCustomSection,setTaskId}) => {
     const nav = useNavigate();
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
@@ -106,7 +105,11 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
                        </p>
                    </div>
                    <div
-                       className={'task-nav-bar'}>
+                       className={'task-nav-bar'}
+                        onClick={() => {
+                            dailySectionEnable();
+                        }}
+                   >
                        <img
                            src={todayImg}
                            alt={'today icon image'}

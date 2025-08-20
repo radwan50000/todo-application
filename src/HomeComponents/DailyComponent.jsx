@@ -1,24 +1,26 @@
-import {useRef, useState , useEffect} from 'react';
-import TaskComponent2 from "./TaskComponent2.jsx";
-import greenFlag from "../assets/greenFlag.png";
-import blueFlag from "../assets/blueFlag.png";
+import {useEffect, useRef, useState} from "react";
+import TaskComponent3 from "./TaskComponent3.jsx";
 import redFlag from "../assets/redFlag.png";
 import yellowFlag from "../assets/yellowFlag.png";
+import greenFlag from "../assets/greenFlag.png";
+import blueFlag from "../assets/blueFlag.png";
+import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
-import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
+import SaveDailyTasks from "./SaveDailyTasks.js";
 
 
-const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
+const DailyComponent = () => {
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
     const removePageSection = useRef(null);
-    const [taskName, setTaskName] = useState('');
-    const [taskImg , setTaskImg] = useState(null);
+    const [dailyObj , setDailyObj] = useState(JSON.parse(localStorage.getItem('daily-tasks')));
+    const [projectName, setProjectName] = useState('');
+    const [projectImg , setProjectImg] = useState(null);
     const [completed , setCompleted] = useState(0);
-    const [miniTasks , setMiniTasks] = useState([]);
+    const [tasks , setTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
 
     const activeTask = (e,className) => {
@@ -32,22 +34,13 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
 
 
     useEffect(() => {
-        console.log(task);
-        task.forEach((t) => {
-            if(t.taskid === taskId){
-                setTaskName(t.taskname);
-                setTaskImg(t.taskicon);
-                setMiniTasks([...t.tasks]);
-                setNoOfTasks(t.tasks.length);
-                setCompleted(t.completed);
-            }
-        });
-    },[task , taskId]);
-
-    useEffect(() => {
-
-
-    },[completed , miniTasks]);
+        console.log(dailyObj);
+        setProjectName(dailyObj.projectTitle);
+        setProjectImg(dailyObj.projectIcon);
+        setTasks([...dailyObj.tasks]);
+        setNoOfTasks(dailyObj.tasks.length);
+        dailyObj.tasks.forEach((t) => t.done? setCompleted(perv => perv+1):setCompleted(completed));
+    },[dailyObj]);
 
 
     return (
@@ -61,7 +54,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         className='flex flex-row items-center justify-between gap-4'
                     >
                         <img
-                            src={taskImg}
+                            src={projectImg}
                             alt='task image'
                             className='w-12'
                         />
@@ -69,7 +62,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                             className='text-5xl font-semibold text-gray-300 cairo'
                             ref={header}
                         >
-                            {taskName}
+                            {projectName}
                         </h1>
                     </div>
                     <span
@@ -83,17 +76,16 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                     overflow-x-hidden overflow-y-scroll no-scrollbar p-8
                     flex flex-col gap-2 items-start mt-20
                     '
-                    >
+                >
                     {
-                        miniTasks.map((t) => {
+                        tasks.map((t) => {
                             return (
-                                <TaskComponent2
+                                <TaskComponent3
                                     setCompleted={setCompleted}
-                                    allTasks={task}
-                                    setAllTasks={setTask}
+                                    allTasks={dailyObj}
+                                    setAllTasks={setDailyObj}
                                     key={t.id}
                                     taskId={t.id}
-                                    objId={taskId}
                                     flag={t.priority}
                                     task={t.task}
                                     isDone={t.done}
@@ -106,7 +98,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                 </div>
                 <div
                     className='flex w-11/12  h-fit items-center justify-between'
-                    >
+                >
                     <div
                         className='py-2 px-5 border border-red-800 rounded-lg text-red-800
                         font-bold text-lg cursor-pointer transition duration-250 select-none
@@ -115,7 +107,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         onClick={() => {
                             removePageSection.current.style.display = 'flex';
                         }}>
-                        Remove Page
+                        Clear All
                     </div>
                     <div
                         className='py-2 px-5 border border-gray-300 rounded-lg
@@ -179,9 +171,9 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                                         'flagImg': yellowFlag
                                     },
                                     {
-                                    'flagType': 'green flag',
-                                    'flagImg': greenFlag
-                                     },
+                                        'flagType': 'green flag',
+                                        'flagImg': greenFlag
+                                    },
                                     {
                                         'flagType': 'blue flag',
                                         'flagImg': blueFlag,
@@ -228,16 +220,12 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                                         'done': false,
                                         'id': uniqueID,
                                     }
-                                    task.forEach((t) => {
-                                        if(t.taskid === taskId){
-                                            t.tasks.push(obj);
-                                            setMiniTasks(t.tasks);
-                                            setNoOfTasks(t.tasks.length);
-                                        }
-                                    });
-                                    setTask(task);
-                                    setMiniTasks([...miniTasks,obj]);
-                                    saveAllCustomTaskInLS(task);
+                                    dailyObj.tasks.push(obj);
+                                    setTasks(dailyObj.tasks);
+                                    setNoOfTasks(dailyObj.tasks.length);
+
+
+                                    SaveDailyTasks(dailyObj);
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
                                 }else {
@@ -310,7 +298,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                                 addTaskSectionEnable();
                                 removePageSection.current.style.display = 'none';
                             }}>
-                            Remove
+                            Clear All
                         </div>
 
                     </div>
@@ -321,4 +309,4 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
     )
 }
 
-export default CustomTaskComponent;
+export default DailyComponent;

@@ -2,6 +2,7 @@ import HomeNav from './HomeComponents/HomeNav.jsx';
 import AddTask from './HomeComponents/AddTask.jsx';
 import {useState , useEffect } from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
+import DailyComponent from './HomeComponents/DailyComponent.jsx';
 
 const Home = () => {
     const [addTaskSection , setAddTaskSection] = useState(true);
@@ -29,6 +30,14 @@ const Home = () => {
         setTodaySection(false);
     }
 
+    const dailySectionEnable = () => {
+        setCustomSection(false);
+        setAddTaskSection(false);
+        setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(true);
+    }
+
     return (
         <>
             <div
@@ -43,6 +52,7 @@ const Home = () => {
                     setSearchSection={setSearchSection}
                     setAddTaskSection={setAddTaskSection}
                     setTaskId={setTaskId}
+                    dailySectionEnable={dailySectionEnable}
                 />
                 {
                     addTaskSection ?
@@ -56,7 +66,11 @@ const Home = () => {
                                 taskId={taskId}
                                 addTaskSectionEnable={addTaskSectionEnable}
                             />
-                            : null
+                        :todaySection ?
+                            <DailyComponent
+
+                            />
+                        : null
                 }
             </div>
         </>
