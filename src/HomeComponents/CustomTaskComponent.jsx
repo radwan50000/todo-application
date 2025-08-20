@@ -232,6 +232,8 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                                     task.forEach((t) => {
                                         if(t.taskid === taskId){
                                             t.tasks.push(obj);
+                                            setMiniTasks(t.tasks);
+                                            setNoOfTasks(t.tasks.length);
                                         }
                                     });
                                     setTask(task);
@@ -263,19 +265,19 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
             >
                 <div
                     className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8
+                    text-gray-300 flex flex-col gap-8 m-8
                     '
                 >
                     <div
-                        className='flex flex-row items-center gap-2'>
-                        <h3
-                            className='text-2xl font-black cairo w-fit text-red-800'>
-                            Alert!
-                        </h3>
+                        className='flex flex-row items-center gap-4'>
+
                         <p
                             className='text-2xl font-light cairo w-fit text-gray-300'
                         >
-                            you are now about to remove this page of tasks , are you sure you want to delete it ?
+                            <span
+                                className='text-2xl font-black cairo w-fit text-red-800 px-1 underline'>
+                                Alert!
+                            </span> you are now about to remove this page of tasks , are you sure you want to delete it ?
                         </p>
                     </div>
 

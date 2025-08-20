@@ -1,10 +1,6 @@
 import wave from './assets/wave.svg';
 import ill_image from './assets/Calendar image animation.json';
-import pen_img1 from './assets/pen1.svg';
-import pen_img2 from './assets/anim-img1.webp';
-import {gsap} from 'gsap';
-import {useEffect} from 'react';
-import {useGSAP} from '@gsap/react';
+import {useEffect, useState} from 'react';
 import {useRef} from 'react';
 import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom';
@@ -13,12 +9,11 @@ import Lottie from "lottie-react";
 const Login = () => {
     const userName = useRef(null);
     const password = useRef(null);
-    const pen_1 = useRef(null);
-    const pen_2 = useRef(null);
     const nav = useNavigate();
     const api_key = 'https://api.quotable.io/random?tags=education|study|success';
     const quote = useRef(null);
     const quote_auth = useRef(null);
+    const [quoateLoaded , setQuoteLoaded] = useState(false);
 
     const getQuote = async () => {
         fetch(api_key)
@@ -30,8 +25,10 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 if(data !== null)
-                quote.current.innerHTML = data.content;
-                quote_auth.current.innerHTML = data.author;
+                    setQuoteLoaded(true);
+                    quote.current.textContent = `“ ${data.content} ”`;
+                    quote_auth.current.textContent = `- ${data.author} -`;
+
             });
     }
 
@@ -42,25 +39,6 @@ const Login = () => {
         getQuote();
 
     },[]);
-
-    useGSAP(() => {
-        const t1 = gsap.timeline();
-        t1.fromTo(
-            pen_1.current,
-            {
-                rotate: -30,
-                y: 0,
-            },
-            {
-                rotate: 10,
-                y: 40,
-                repeat: -1,
-                yoyo: true,
-                duration: 3,
-                ease: 'power4.inOut',
-            }
-        )
-    },[])
 
 
     return (
@@ -149,40 +127,31 @@ const Login = () => {
                             />
                         </div>
 
-                        <span
-                            className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
-                            “ <span
-                                className={'italic edu-font font-light'}
-                                ref={quote}></span> ”
-                        </span>
-                        <span
-                            className={' text-white w-fit text-sm'}
-                        >
-                            - <span
-                                className={'italic'}
-                                ref={quote_auth}
-                                ></span> -
-                        </span>
+                        {
+                            quoateLoaded ?
+                            <div
+                                className='flex flex-col gap-4 w-fit items-center'
+                            >
+                            <span
+                                className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
+                                <span className={'italic edu-font font-light'} ref={quote}></span>
+                            </span>
+                                <span
+                                    className={' text-white w-fit text-sm'}
+                                >
+                                <span
+                                    className={'italic'}
+                                    ref={quote_auth}
+                                ></span>
+                            </span>
+                            </div>
+                                : <span
+                                    className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
+                                        Loading...
+                                    </span>
+                        }
                     </span>
-                    <img
-                        src={pen_img1}
-                        alt={'pen image'}
-                        className='
-                            absolute left-20 top-5 w-30
-                            translate-x-[-50%] z-96 box-border
-                            p-4 rounded-full invert-100
-                            '
-                        ref={pen_1}
-                    />
-                    <img
-                        src={pen_img2}
-                        alt={'pen image'}
-                        className='
-                            absolute right-0 bottom-20 w-30
-                            translate-x-[-50%] z-96 contrast-[500%]
-                            '
-                        ref={pen_2}
-                    />
+
                 </div>
             </div>
 

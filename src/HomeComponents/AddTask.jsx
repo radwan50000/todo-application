@@ -75,7 +75,7 @@ const AddTask = ({setTasks, tasks}) => {
                         className='text-xl font-light cairo'>
                         Task Icon
                     </h3>
-                    <div className='flex flex-row gap-2'>
+                    <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar'>
                         {
                             [
                                 {
@@ -217,7 +217,7 @@ const AddTask = ({setTasks, tasks}) => {
             >
                 <div
                     className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8
+                    text-gray-300 flex flex-col gap-8  m-8
                     '
                 >
                     <div
