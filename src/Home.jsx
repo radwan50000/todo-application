@@ -9,7 +9,7 @@ const Home = () => {
     const [todaySection , setTodaySection] = useState(false);
     const [weeklySection , setWeeklySection] = useState(false);
     const [customSection , setCustomSection] = useState(false);
-    const [manuallyAddedTasks, setManuallyAddedTasks] = useState([]);
+    const [manuallyAddedTasks, setManuallyAddedTasks] = useState(localStorage.getItem('custom-tasks') === null ? []:JSON.parse(localStorage.getItem('custom-tasks')));
     const [taskId , setTaskId] = useState('');
 
 

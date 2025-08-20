@@ -1,5 +1,6 @@
 import doneIcon from '../assets/done-mini-1484-svgrepo-com.svg';
 import {useState} from 'react';
+import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 
 const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP}) => {
     const [checked, setChecked] = useState(isDone);
@@ -28,6 +29,7 @@ const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP})
                          }
                      })
                      setAllTasks(allTasks);
+                     saveAllCustomTaskInLS(allTasks);
                  }}
             >
                 {

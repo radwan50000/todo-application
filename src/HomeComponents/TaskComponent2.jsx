@@ -4,7 +4,7 @@ import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import close from '../assets/close-bold-svgrepo-com.svg';
 import {useState , useRef} from 'react';
 import CheckBox from "./CheckBox.jsx";
-
+import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 
 const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,objId,setNoOfTasks}) => {
     const [editingMode , setEditingMode] = useState(false);
@@ -12,6 +12,8 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
     const [taskField, setTaskField] = useState(task);
     const [oldField , setOldField] = useState(taskField);
     const container = useRef(null);
+
+
 
 
     return (
@@ -65,7 +67,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                         }
                                     })
                                     setAllTasks(allTasks);
-                                    console.log(allTasks);
+                                    saveAllCustomTaskInLS(allTasks);
                                 }}
                             />
                             <img
@@ -147,6 +149,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                         }
                                     })
                                     setAllTasks(allTasks);
+                                    saveAllCustomTaskInLS(allTasks);
                                     container.current.style.display= 'none';
 
                                 }}
