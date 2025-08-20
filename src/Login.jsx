@@ -38,7 +38,7 @@ const Login = () => {
         }
         getQuote();
 
-    },[]);
+    },[])
 
 
     return (
