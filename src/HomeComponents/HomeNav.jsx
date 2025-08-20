@@ -211,6 +211,7 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
                                 if(confirmSignOutField.current.value.trim() === Cookies.get('password')) {
                                     Cookies.remove('username');
                                     Cookies.remove('password');
+                                    localStorage.clear();
                                     nav('/');
                                 }else {
                                     confirmSignOutField.current.style.borderColor = 'red';

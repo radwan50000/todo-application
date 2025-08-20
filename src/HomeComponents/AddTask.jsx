@@ -17,7 +17,7 @@ import {useRef, useState , useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import TaskComponent from './TaskComponent.jsx';
 import {v4 as uuidv4} from 'uuid';
-import saveTempObjInLS from '../SavingTempObjInLS.js';
+import SaveTempObjInLS from '../SavingTempObjInLS.js';
 
 
 const AddTask = ({setTasks, tasks}) => {
@@ -187,12 +187,14 @@ const AddTask = ({setTasks, tasks}) => {
                                 tempTasks.taskname =  mainTaskName.current.value.trim();
                                 tempTasks.taskicon = document.querySelector('.active-task-img').src;
                                 tempTasks.taskid = uuidv4();
-                                setTasks([...tasks , tempTasks]);
                                 setTempTasks({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
                                 tasksContainer.current.innerHTML = '';
                                 mainTaskName.current.value = '';
+                                setTasks([...tasks , tempTasks]);
+                                SaveTempObjInLS(tempTasks);
+                                console.log(localStorage.getItem('custom-tasks'));
 
-                                saveTempObjInLS(tempTasks);
+
                             }else {
                                 toast('Tasks Name must be filled', {
                                     theme: 'dark',

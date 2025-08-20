@@ -14,6 +14,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
+    const removePageSection = useRef(null);
     const [taskName, setTaskName] = useState('');
     const [taskImg , setTaskImg] = useState(null);
     const [completed , setCompleted] = useState(0);
@@ -113,14 +114,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         hover:bg-red-800 hover:text-gray-300
                         '
                         onClick={() => {
-                            task.forEach((t,i) => {
-                                if(t.taskid === taskId){
-                                    task.splice(i,1);
-                                }
-                            });
-                            setTask(perv => perv.filter(t => t.taskid !== taskId));
-                            SaveAllCustomTasksInLS(task);
-                            addTaskSectionEnable();
+                            removePageSection.current.style.display = 'flex';
                         }}>
                         Remove Page
                     </div>
@@ -256,6 +250,68 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         >
                             Add Task
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                ref={removePageSection}
+                className='w-full h-dvh
+                absolute top-0 left-0
+                items-center justify-center
+                z-95 bg-trans-white hidden
+                '
+            >
+                <div
+                    className='py-16 px-12 bg-gray-bg rounded-md
+                    text-gray-300 flex flex-col gap-8
+                    '
+                >
+                    <div
+                        className='flex flex-row items-center gap-2'>
+                        <h3
+                            className='text-2xl font-black cairo w-fit text-red-800'>
+                            Alert!
+                        </h3>
+                        <p
+                            className='text-2xl font-light cairo w-fit text-gray-300'
+                        >
+                            you are now about to remove this page of tasks , are you sure you want to delete it ?
+                        </p>
+                    </div>
+
+                    <div
+                        className='flex flex-row items-center justify-end gap-4'
+                    >
+                        <div
+                            className='py-2 px-5 border border-gray-300 rounded-lg w-fit
+                        font-bold text-lg cursor-pointer transition duration-250 select-none
+                        hover:bg-gray-300 hover:text-text-dark
+                        '
+                            onClick={() => {
+                                removePageSection.current.style.display = 'none';
+                            }}
+                        >
+                            Cancel
+                        </div>
+                        <div
+                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
+                            font-bold text-lg cursor-pointer transition duration-250 select-none
+                             hover:bg-red-800 hover:text-gray-300
+                        '
+                            onClick={() => {
+                                task.forEach((t,i) => {
+                                    if(t.taskid === taskId){
+                                        task.splice(i,1);
+                                    }
+                                });
+                                setTask(perv => perv.filter(t => t.taskid !== taskId));
+                                SaveAllCustomTasksInLS(task);
+                                addTaskSectionEnable();
+                                removePageSection.current.style.display = 'none';
+                            }}>
+                            Remove
+                        </div>
+
                     </div>
                 </div>
             </div>
