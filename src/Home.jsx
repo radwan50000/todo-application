@@ -13,6 +13,22 @@ const Home = () => {
     const [taskId , setTaskId] = useState('');
 
 
+    const customSectionEnable = () => {
+        setCustomSection(true);
+        setAddTaskSection(false);
+        setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(false);
+    }
+
+    const addTaskSectionEnable = () => {
+        setCustomSection(false);
+        setAddTaskSection(true);
+        setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(false);
+    }
+
     return (
         <>
             <div
@@ -30,9 +46,17 @@ const Home = () => {
                 />
                 {
                     addTaskSection ?
-                        <AddTask setTasks={setManuallyAddedTasks} tasks={manuallyAddedTasks}/> :
+                        <AddTask
+                            setTasks={setManuallyAddedTasks}
+                            tasks={manuallyAddedTasks}/> :
                         customSection ?
-                            <CustomTaskComponent task={manuallyAddedTasks} setTask={setManuallyAddedTasks} taskId={taskId}/>: null
+                            <CustomTaskComponent
+                                task={manuallyAddedTasks}
+                                setTask={setManuallyAddedTasks}
+                                taskId={taskId}
+                                addTaskSectionEnable={addTaskSectionEnable}
+                            />
+                            : null
                 }
             </div>
         </>

@@ -244,14 +244,7 @@ const AddTask = ({setTasks, tasks}) => {
                         </h3>
                         <div className='flex flex-row gap-2'>
                             {
-                                [{
-                                    'flagType': 'green flag',
-                                    'flagImg': greenFlag
-                                },
-                                    {
-                                        'flagType': 'blue flag',
-                                        'flagImg': blueFlag,
-                                    },
+                                [
                                     {
                                         'flagType': 'red flag',
                                         'flagImg': redFlag,
@@ -259,6 +252,14 @@ const AddTask = ({setTasks, tasks}) => {
                                     {
                                         'flagType': 'yellow flag',
                                         'flagImg': yellowFlag
+                                    },
+                                    {
+                                        'flagType': 'green flag',
+                                        'flagImg': greenFlag
+                                    },
+                                    {
+                                        'flagType': 'blue flag',
+                                        'flagImg': blueFlag,
                                     }].map((ele, index) => {
                                     return (
                                         <img

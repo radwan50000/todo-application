@@ -20,11 +20,26 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
     //CTB_Container -> Custom Tasks Button Container
     const CTB_Container = useRef(null);
 
+    const customSectionEnable = () => {
+        setCustomSection(true);
+        setAddTaskSection(false);
+        setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(false);
+    }
+
+    const addTaskSectionEnable = () => {
+        setCustomSection(false);
+        setAddTaskSection(true);
+        setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(false);
+    }
 
 
     useEffect(() => {
 
-        console.log(tasks);
+
 
     },[tasks]);
 
@@ -67,11 +82,7 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
                    <div
                        className={'task-nav-bar'}
                         onClick={() => {
-                            setCustomSection(false);
-                            setAddTaskSection(true);
-                            setSearchSection(false);
-                            setWeeklySection(false);
-                            setTodaySection(false);
+                            addTaskSectionEnable();
                         }}
                    >
                        <img
@@ -132,11 +143,7 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,setWeeklySection,setSe
                                    <div id={task.taskid} key={task.taskid}
                                         className='custom-task-button'
                                         onClick={() => {
-                                            setCustomSection(true);
-                                            setAddTaskSection(false);
-                                            setSearchSection(false);
-                                            setWeeklySection(false);
-                                            setTodaySection(false);
+                                            customSectionEnable();
                                             setTaskId(task.taskid);
                                         }}
                                    >
