@@ -13,6 +13,7 @@ const Login = () => {
     const api_key = 'https://api.quotable.io/random?tags=education|study|success';
     const quote = useRef(null);
     const quote_auth = useRef(null);
+    const [quoteData, setQuoteData] = useState(null);
     const [quoateLoaded , setQuoteLoaded] = useState(false);
 
     const getQuote = async () => {
@@ -26,19 +27,22 @@ const Login = () => {
             .then(data => {
                 if(data !== null)
                     setQuoteLoaded(true);
-                    quote.current.textContent = `“ ${data.content} ”`;
-                    quote_auth.current.textContent = `- ${data.author} -`;
-
+                    setQuoteData(data);
             });
     }
 
     useEffect(() => {
         if(Cookies.get('username') !== undefined){
             nav('/');
+        }else{
+            !quoateLoaded ? getQuote():null;
         }
-        getQuote();
+        if(quoateLoaded){
+            quote.current.textContent = `“ ${quoteData.content} ”`;
+            quote_auth.current.textContent = `- ${quoteData.author} -`;
+        }
 
-    },[])
+    },[quoateLoaded]);
 
 
     return (
