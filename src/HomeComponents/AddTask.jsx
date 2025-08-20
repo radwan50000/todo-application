@@ -30,16 +30,7 @@ const AddTask = ({setTasks, tasks}) => {
     const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
 
 
-    const initTodayLS = () => {
-        if(localStorage.getItem('daily-tasks') === null){
-            const obj = {
-                'projectTitle': 'Daily Tasks',
-                'projectIcon': todayImg,
-                'tasks': [],
-            }
-            localStorage.setItem('daily-tasks',JSON.stringify(obj));
-        }
-    }
+
 
 
     const activeTask = (e,className) => {
@@ -50,9 +41,6 @@ const AddTask = ({setTasks, tasks}) => {
         e.target.classList.add(className);
     }
 
-    useEffect( () => {
-        initTodayLS();
-    },[addedTasks])
 
 
 

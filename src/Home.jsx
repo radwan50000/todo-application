@@ -3,6 +3,7 @@ import AddTask from './HomeComponents/AddTask.jsx';
 import {useState , useEffect } from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
+import todayImg from "./assets/june.png";
 
 const Home = () => {
     const [addTaskSection , setAddTaskSection] = useState(true);
@@ -13,6 +14,17 @@ const Home = () => {
     const [manuallyAddedTasks, setManuallyAddedTasks] = useState(localStorage.getItem('custom-tasks') === null ? []:JSON.parse(localStorage.getItem('custom-tasks')));
     const [taskId , setTaskId] = useState('');
 
+
+    const initTodayLS = () => {
+        if(localStorage.getItem('daily-tasks') === null){
+            const obj = {
+                'projectTitle': 'Daily Tasks',
+                'projectIcon': todayImg,
+                'tasks': [],
+            }
+            localStorage.setItem('daily-tasks',JSON.stringify(obj));
+        }
+    }
 
     const customSectionEnable = () => {
         setCustomSection(true);
@@ -37,6 +49,10 @@ const Home = () => {
         setWeeklySection(false);
         setTodaySection(true);
     }
+
+    useEffect(() => {
+        initTodayLS();
+    },[])
 
     return (
         <>

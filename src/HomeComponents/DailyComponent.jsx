@@ -264,7 +264,7 @@ const DailyComponent = () => {
                             <span
                                 className='text-2xl font-black cairo w-fit text-red-800 px-1 underline'>
                                 Alert!
-                            </span> you are now about to remove this page of tasks , are you sure you want to delete it ?
+                            </span> you are now about to remove all tasks in this page, are you sure you want to delete them ?
                         </p>
                     </div>
 
