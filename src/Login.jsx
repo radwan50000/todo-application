@@ -127,7 +127,7 @@ const Login = () => {
                         <div className='w-8/12 bg-white p-2 box-content
                         rounded-md'>
                             <Lottie animationData={ill_image}
-                                    loop={false}
+                                    loop={true}
                             />
                         </div>
 
