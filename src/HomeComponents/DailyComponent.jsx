@@ -104,6 +104,7 @@ const DailyComponent = () => {
                         font-bold text-lg cursor-pointer transition duration-250 select-none
                         hover:bg-red-800 hover:text-gray-300
                         '
+                        style={{visibility: noOfTasks > 0 ? 'visible' : 'hidden'}}
                         onClick={() => {
                             removePageSection.current.style.display = 'flex';
                         }}>
