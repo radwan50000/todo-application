@@ -16,7 +16,7 @@ const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP})
                      setChecked(!checked)
                      allTasks.forEach((t) => {
                          if(t.taskid === objId){
-                             allTasks.tasks.forEach((j) => {
+                             t.tasks.forEach((j) => {
                                  if(j.id === taskId){
                                      j.done = j.done ? false:true;
                                      setCompleted(perv => j.done ? perv+1:perv-1);

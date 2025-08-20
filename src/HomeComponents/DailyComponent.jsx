@@ -288,14 +288,13 @@ const DailyComponent = () => {
                              hover:bg-red-800 hover:text-gray-300
                         '
                             onClick={() => {
-                                task.forEach((t,i) => {
-                                    if(t.taskid === taskId){
-                                        task.splice(i,1);
-                                    }
-                                });
-                                setTask(perv => perv.filter(t => t.taskid !== taskId));
-                                SaveAllCustomTasksInLS(task);
-                                addTaskSectionEnable();
+                                dailyObj.tasks = [];
+                                setDailyObj(dailyObj);
+                                SaveDailyTasks(dailyObj);
+                                setTasks(dailyObj.tasks);
+                                setNoOfTasks(dailyObj.tasks.length);
+                                setCompleted(0);
+                                console.log(dailyObj);
                                 removePageSection.current.style.display = 'none';
                             }}>
                             Clear All
