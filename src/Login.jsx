@@ -18,21 +18,24 @@ const Login = () => {
     const [quoateLoaded , setQuoteLoaded] = useState(false);
 
     const getQuote = async () => {
-        fetch(api_key)
+        fetch("https://api.quotable.io/random?tags=education|study|success")
             .then(res => {
-                if(res.status === 200  && res.ok === true){
-                    return res;
-                }else{
-                    setFetchingError(true);
+                if (!res.ok) {
+                    throw new Error(`Error: ${res.status}`);
                 }
+                return res.json(); // always return JSON if response is ok
             })
-            .then(res => res.json())
             .then(data => {
-                if(data !== null)
+                if (data) {
                     setQuoteLoaded(true);
                     setQuoteData(data);
+                }
+            })
+            .catch(err => {
+                console.error("Fetch failed:", err)
+                setFetchingError(true);
             });
-    }
+    };
 
     useEffect(() => {
         if(Cookies.get('username') !== undefined){
