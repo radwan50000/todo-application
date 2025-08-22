@@ -57,8 +57,8 @@ const Login = () => {
                 className='w-full h-dvh flex lg:flex-row
                 items-start justify-between overflow-hidden relative max-sm:flex-col sm:flex-col'>
                 <div className=' h-dvh bg-transparent
-                    flex justify-center flex-col
-                    lg:w-5/12 lg:pl-16 lg:pb-32
+                    flex flex-col
+                    lg:w-5/12 lg:pl-16 lg:pb-32 lg:justify-center
                     max-sm:w-12/12 sm:w-12/12 max-sm:px-4 sm:px-4
                     max-sm:py-8 sm:py-8
                     max-sm:justify-start sm:justify-start
@@ -146,13 +146,13 @@ const Login = () => {
 
                         {
                             fetchingError ?
-                                <span
-                                    className='edu-font text-white max-w-8/12 text-center mt-10
-                                    lg:text-xl
-                                    max-sm:text-sm sm:text-sm
-                                    '>
-                                        Sorry Error happens
-                                    </span>
+                                <div className='w-10/12 bg-white p-2 box-content
+                                          flex
+                                          rounded-md'>
+                                            <Lottie animationData={ill_image}
+                                                    loop={true}
+                                            />
+                                        </div>
                                 :
                             quoateLoaded ?
                             <div

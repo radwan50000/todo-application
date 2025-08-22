@@ -66,8 +66,9 @@
     .login-input-container .input-field{
         @apply outline-none border-3 border-gray-300 rounded-md
             transition duration-250 ease-in-out
-            focus:border-gray-600 w-6/12 px-2 pt-3 pb-1 lg:text-xl
-            max-sm:text-lg sm:text-lg max-sm:w-11/12 sm:w-11/12;
+            focus:border-gray-600 px-2 pt-3 pb-1 lg:text-xl
+            lg:w-6/12
+            max-sm:text-lg sm:text-lg max-sm:w-12/12 sm:w-12/12;
     }
 
     .signIn-button{
