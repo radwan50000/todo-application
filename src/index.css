@@ -7,6 +7,10 @@
             "slnt" 0;
 }
 
+*:not(input,p){
+    @apply select-none;
+}
+
 .cairo{
     font-family: 'Cairo', cursive !important;
 }
@@ -44,9 +48,12 @@
 
     .wave{
         @apply rotate-270
-        absolute left-0 top-0 w-auto h-dvh
-        select-none
-        translate-x-[-50%] z-[-1];
+        absolute left-50 top-0 h-dvh
+        select-none bg-cover w-dvw
+        translate-x-[-25%] z-[-1]
+        lg:block
+        max-sm:hidden sm:hidden
+        ;
     }
 
     .login-input-container{
@@ -59,15 +66,23 @@
     .login-input-container .input-field{
         @apply outline-none border-3 border-gray-300 rounded-md
             transition duration-250 ease-in-out
-            focus:border-gray-600
-        w-6/12 px-2 pt-3 pb-1 text-xl;
+            focus:border-gray-600 w-6/12 px-2 pt-3 pb-1 lg:text-xl
+            max-sm:text-lg sm:text-lg max-sm:w-11/12 sm:w-11/12;
+    }
+
+    .signIn-button{
+        @apply py-2 font-black text-white
+            text-xl flex items-center justify-center bg-black
+            rounded-md my-4 hover:bg-gray-700 transition ease-in-out duration-300
+            cursor-pointer select-none
+            lg:w-6/12
+            max-sm:w-12/12 sm:w-12/12;
     }
     .task-nav-bar{
         @apply flex flex-row gap-5 text-gray-300 px-2
             items-center text-xl font-bold select-none hover:opacity-70
             hover:bg-gray-bg-dark rounded-md
-            cursor-pointer w-11/12 transition duration-350 ease-in-out
-            py-4;
+            cursor-pointer w-11/12 transition duration-350 ease-in-out py-4;
     }
     .task-nav-bar:first-child img{
         @apply w-10;

@@ -63,7 +63,7 @@ const AddTask = ({setTasks, tasks}) => {
                         ref={mainTaskName}
                         />
                     <h3
-                        className='text-xl font-medium cairo text-red-800'>
+                        className='text-xl font-medium cairo text-red-800 select-none'>
                         * required field
                     </h3>
                 </div>
@@ -232,7 +232,7 @@ const AddTask = ({setTasks, tasks}) => {
                             ref={ST_toAdd}
                         />
                         <h3
-                            className='text-xl font-medium cairo text-red-800'>
+                            className='text-xl font-medium cairo text-red-800 select-none'>
                             * required field
                         </h3>
                     </div>

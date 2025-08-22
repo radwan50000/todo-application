@@ -4,10 +4,8 @@ import redFlag from "../assets/redFlag.png";
 import yellowFlag from "../assets/yellowFlag.png";
 import greenFlag from "../assets/greenFlag.png";
 import blueFlag from "../assets/blueFlag.png";
-import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
-import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import SaveDailyTasks from "./SaveDailyTasks.js";
 
 
@@ -51,7 +49,7 @@ const DailyComponent = () => {
                         w-[90%]'
                 >
                     <div
-                        className='flex flex-row items-center justify-between gap-4'
+                        className='flex flex-row items-center justify-between gap-4 select-none'
                     >
                         <img
                             src={projectImg}
@@ -66,7 +64,7 @@ const DailyComponent = () => {
                         </h1>
                     </div>
                     <span
-                        className='text-3xl cairo'
+                        className='text-3xl cairo select-none'
                     >
                         {completed} / {noOfTasks}
                     </span>

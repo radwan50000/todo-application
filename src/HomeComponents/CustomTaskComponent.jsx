@@ -58,7 +58,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         w-[90%]'
                 >
                     <div
-                        className='flex flex-row items-center justify-between gap-4'
+                        className='flex flex-row items-center justify-between gap-4 select-none'
                     >
                         <img
                             src={taskImg}
@@ -73,7 +73,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         </h1>
                     </div>
                     <span
-                        className='text-3xl cairo'
+                        className='text-3xl cairo select-none'
                     >
                         {completed} / {noOfTasks}
                     </span>
@@ -157,7 +157,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                             ref={ST_toAdd}
                         />
                         <h3
-                            className='text-xl font-medium cairo text-red-800'>
+                            className='text-xl font-medium cairo text-red-800 select-none'>
                             * required field
                         </h3>
                     </div>

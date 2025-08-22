@@ -48,11 +48,15 @@ const Login = () => {
     return (
         <>
             <div
-                className='w-full h-dvh flex flex-row
-                items-start justify-between overflow-hidden'>
-                <div className='w-5/12 h-dvh bg-transparent
-                    pl-16 pb-32
-                    flex justify-center flex-col'>
+                className='w-full h-dvh flex lg:flex-row
+                items-start justify-between overflow-hidden relative max-sm:flex-col sm:flex-col'>
+                <div className=' h-dvh bg-transparent
+                    flex justify-center flex-col
+                    lg:w-5/12 lg:pl-16 lg:pb-32
+                    max-sm:w-12/12 sm:w-12/12 max-sm:px-4 sm:px-4
+                    max-sm:py-8 sm:py-8
+                    max-sm:justify-start sm:justify-start
+                    '>
                     <form>
                         <h1 className='text-7xl font-black mb-8'>
                             Sign In
@@ -90,10 +94,7 @@ const Login = () => {
                             />
                         </div>
                         <div
-                            className='w-6/12 py-2 font-black text-white
-                        text-xl flex items-center justify-center bg-black
-                        rounded-md my-4 hover:bg-gray-700 transition ease-in-out duration-300
-                        cursor-pointer select-none'
+                            className='signIn-button'
                             onClick={() => {
                                 if(
                                     userName.current.value.trim().length > 0
@@ -117,8 +118,11 @@ const Login = () => {
                         </div>
                     </form>
                 </div>
-                <div className='w-7/12 h-dvh bg-primary-blue
-                    relative flex items-center justify-center'>
+                <div className='h-dvh bg-primary-blue
+                       flex items-center justify-center
+                       lg:w-7/12
+                       max-sm:w-full sm:w-full
+                        '>
                     <img
                         src={wave}
                         alt={'wave image'}
@@ -127,6 +131,7 @@ const Login = () => {
                     <span
                         className='flex flex-col gap-4 w-fit items-center'>
                         <div className='w-8/12 bg-white p-2 box-content
+                         max-sm:hidden sm:hidden lg:flex
                         rounded-md'>
                             <Lottie animationData={ill_image}
                                     loop={true}
@@ -139,11 +144,17 @@ const Login = () => {
                                 className='flex flex-col gap-4 w-fit items-center'
                             >
                             <span
-                                className={'edu-font text-white max-w-8/12 text-center text-xl mt-10'}>
-                                <span className={'italic edu-font font-light'} ref={quote}></span>
+                                className='edu-font text-white max-w-8/12 text-center
+                                    lg:text-xl lg:mt-10
+                                    max-sm:text-sm sm:text-sm max-sm:mt-2 sm:mt-2
+                                '>
+                                <span className='italic edu-font font-light' ref={quote}></span>
                             </span>
                                 <span
-                                    className={' text-white w-fit text-sm'}
+                                    className=' text-white w-fit
+                                        lg:text-sm
+                                        max-sm:text-[0.7rem] sm:text-[0.7rem]
+                                        '
                                 >
                                 <span
                                     className={'italic'}

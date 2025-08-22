@@ -49,7 +49,7 @@ const WeeklyComponent = () => {
                         w-[90%]'
                 >
                     <div
-                        className='flex flex-row items-center justify-between gap-4'
+                        className='flex flex-row items-center justify-between gap-4 select-none'
                     >
                         <img
                             src={projectImg}
@@ -64,7 +64,7 @@ const WeeklyComponent = () => {
                         </h1>
                     </div>
                     <span
-                        className='text-3xl cairo'
+                        className='text-3xl cairo select-none'
                     >
                         {completed} / {noOfTasks}
                     </span>
