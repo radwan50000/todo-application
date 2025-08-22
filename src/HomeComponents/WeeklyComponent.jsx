@@ -4,19 +4,17 @@ import redFlag from "../assets/redFlag.png";
 import yellowFlag from "../assets/yellowFlag.png";
 import greenFlag from "../assets/greenFlag.png";
 import blueFlag from "../assets/blueFlag.png";
-import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
-import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
-import SaveDailyTasks from "./SaveDailyTasks.js";
+import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
 
 
-const DailyComponent = () => {
+const WeeklyComponent = () => {
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
     const removePageSection = useRef(null);
-    const [dailyObj , setDailyObj] = useState(JSON.parse(localStorage.getItem('daily-tasks')));
+    const [dailyObj , setDailyObj] = useState(JSON.parse(localStorage.getItem('weekly-tasks')));
     const [projectName, setProjectName] = useState('');
     const [projectImg , setProjectImg] = useState(null);
     const [completed , setCompleted] = useState(0);
@@ -56,7 +54,7 @@ const DailyComponent = () => {
                         <img
                             src={projectImg}
                             alt='task image'
-                            className='w-12'
+                            className='w-12 invert-70'
                         />
                         <h1
                             className='text-5xl font-semibold text-gray-300 cairo'
@@ -226,7 +224,7 @@ const DailyComponent = () => {
                                     setNoOfTasks(dailyObj.tasks.length);
 
 
-                                    SaveDailyTasks(dailyObj);
+                                    SaveWeeklyTasks(dailyObj);
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
                                 }else {
@@ -291,7 +289,7 @@ const DailyComponent = () => {
                             onClick={() => {
                                 dailyObj.tasks = [];
                                 setDailyObj(dailyObj);
-                                SaveDailyTasks(dailyObj);
+                                SaveWeeklyTasks(dailyObj);
                                 setTasks(dailyObj.tasks);
                                 setNoOfTasks(dailyObj.tasks.length);
                                 setCompleted(0);
@@ -309,4 +307,4 @@ const DailyComponent = () => {
     )
 }
 
-export default DailyComponent;
+export default WeeklyComponent;

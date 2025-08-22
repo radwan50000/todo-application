@@ -12,7 +12,7 @@ import {useRef} from 'react';
 import {useEffect} from 'react';
 
 
-const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,setWeeklySection,setSearchSection,setCustomSection,setTaskId}) => {
+const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,setWeeklySection,setSearchSection,setCustomSection,setTaskId,weeklySectionEnable}) => {
     const nav = useNavigate();
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
@@ -119,7 +119,11 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,set
                        </p>
                    </div>
                    <div
-                       className={'task-nav-bar'}>
+                       className={'task-nav-bar'}
+                        onClick={() => {
+                            weeklySectionEnable();
+                        }}
+                   >
                        <img
                            src={weekImg}
                            alt={'add icon image'}

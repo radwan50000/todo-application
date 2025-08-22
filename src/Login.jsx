@@ -102,11 +102,13 @@ const Login = () => {
                                 ) {
                                     Cookies.set('username',userName.current.value.trim(),{
                                         secure: true,
-                                        sameSite: 'Strict'
+                                        sameSite: 'Strict',
+                                        expires: 36500,
                                     });
                                     Cookies.set('password',password.current.value.trim(),{
                                         secure: true,
                                         sameSite: 'Strict',
+                                        expires: 36500,
                                     });
                                     nav('/');
                                 }

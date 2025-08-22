@@ -12,6 +12,7 @@ const Loading = () => {
             }else{
                 nav('/Login');
             }
+            console.log(Cookies.get());
         },1000
     )
 

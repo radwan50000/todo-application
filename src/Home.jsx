@@ -4,6 +4,8 @@ import {useState , useEffect } from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
 import todayImg from "./assets/june.png";
+import weekImg from "./assets/calendar.png";
+import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 
 const Home = () => {
     const [addTaskSection , setAddTaskSection] = useState(true);
@@ -26,11 +28,30 @@ const Home = () => {
         }
     }
 
+    const initWeeklyLS = () => {
+        if(localStorage.getItem('weekly-tasks') === null){
+            const obj = {
+                'projectTitle': 'Weekly Tasks',
+                'projectIcon': weekImg,
+                'tasks': [],
+            }
+            localStorage.setItem('weekly-tasks',JSON.stringify(obj));
+        }
+    }
+
     const customSectionEnable = () => {
         setCustomSection(true);
         setAddTaskSection(false);
         setSearchSection(false);
         setWeeklySection(false);
+        setTodaySection(false);
+    }
+
+    const weeklySectionEnable = () => {
+        setCustomSection(false);
+        setAddTaskSection(false);
+        setSearchSection(false);
+        setWeeklySection(true);
         setTodaySection(false);
     }
 
@@ -52,6 +73,7 @@ const Home = () => {
 
     useEffect(() => {
         initTodayLS();
+        initWeeklyLS();
     },[])
 
     return (
@@ -69,6 +91,7 @@ const Home = () => {
                     setAddTaskSection={setAddTaskSection}
                     setTaskId={setTaskId}
                     dailySectionEnable={dailySectionEnable}
+                    weeklySectionEnable={weeklySectionEnable}
                 />
                 {
                     addTaskSection ?
@@ -83,9 +106,9 @@ const Home = () => {
                                 addTaskSectionEnable={addTaskSectionEnable}
                             />
                         :todaySection ?
-                            <DailyComponent
-
-                            />
+                            <DailyComponent/>
+                        :weeklySection ?
+                            <WeeklyComponent/>
                         : null
                 }
             </div>

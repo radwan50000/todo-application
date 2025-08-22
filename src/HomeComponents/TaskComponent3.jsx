@@ -3,8 +3,9 @@ import edit from '../assets/edit-svgrepo-com.svg';
 import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import close from '../assets/close-bold-svgrepo-com.svg';
 import {useState , useRef} from 'react';
-import CheckBox from "./CheckBox.jsx";
+import CheckBox2 from "./CheckBox2.jsx";
 import SaveDailyTasks from "./SaveDailyTasks.js";
+import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
 
 const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,setNoOfTasks}) => {
     const [editingMode , setEditingMode] = useState(false);
@@ -60,7 +61,7 @@ const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                         }
                                     })
                                     setAllTasks(allTasks);
-                                    SaveDailyTasks(allTasks);
+                                    allTasks.projectTitle === 'Daily Tasks' ? SaveDailyTasks(allTasks):SaveWeeklyTasks(allTasks);
                                 }}
                             />
                             <img
@@ -85,7 +86,7 @@ const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                         <div
                             className='flex flex-row gap-4 w-8/12'
                         >
-                            <CheckBox
+                            <CheckBox2
                                 isDone={isDone}
                                 setCompleted={setCompleted}
                                 allTasks={allTasks}
@@ -136,7 +137,7 @@ const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                         }
                                     })
                                     setAllTasks(allTasks);
-                                    SaveDailyTasks(allTasks);
+                                    allTasks.projectTitle === 'Daily Tasks' ? SaveDailyTasks(allTasks):SaveWeeklyTasks(allTasks);
                                     container.current.style.display= 'none';
 
                                 }}
