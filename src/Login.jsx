@@ -14,6 +14,7 @@ const Login = () => {
     const quote = useRef(null);
     const quote_auth = useRef(null);
     const [quoteData, setQuoteData] = useState(null);
+    const [fetchingError , setFetchingError] = useState(false);
     const [quoateLoaded , setQuoteLoaded] = useState(false);
 
     const getQuote = async () => {
@@ -21,6 +22,8 @@ const Login = () => {
             .then(res => {
                 if(res.status === 200  && res.ok === true){
                     return res;
+                }else{
+                    setFetchingError(true);
                 }
             })
             .then(res => res.json())
@@ -139,6 +142,15 @@ const Login = () => {
                         </div>
 
                         {
+                            fetchingError ?
+                                <span
+                                    className='edu-font text-white max-w-8/12 text-center mt-10
+                                    lg:text-xl
+                                    max-sm:text-sm sm:text-sm
+                                    '>
+                                        Sorry Error happens
+                                    </span>
+                                :
                             quoateLoaded ?
                             <div
                                 className='flex flex-col gap-4 w-fit items-center'
