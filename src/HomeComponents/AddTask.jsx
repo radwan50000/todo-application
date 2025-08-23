@@ -13,6 +13,7 @@ import greenFlag from '../assets/greenFlag.png';
 import redFlag from '../assets/redFlag.png';
 import blueFlag from '../assets/blueFlag.png';
 import gymImg from '../assets/dumbbell.png';
+import menuImg from '../assets/menu-icon.svg';
 import {useRef, useState} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import TaskComponent from './TaskComponent.jsx';
@@ -20,7 +21,13 @@ import {v4 as uuidv4} from 'uuid';
 import SaveTempObjInLS from '../SavingTempObjInLS.js';
 
 
-const AddTask = ({setTasks, tasks}) => {
+const AddTask = (
+    {
+        setTasks,
+        tasks,
+        navMenuOpened,
+        setNavMenuOpened
+    }) => {
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
@@ -49,28 +56,63 @@ const AddTask = ({setTasks, tasks}) => {
                 className='right-component-style
                 '
             >
+                <span
+                    className='absolute top-5 right-5 cursor-pointer
+                    transition duration-250 ease-in-out
+                    hover:invert-70
+                    xl:hidden
+                    max-sm:inline-block sm:inline-block
+                    '
+                    onClick={() => {
+                        setNavMenuOpened(!navMenuOpened);
+
+                    }}
+                    >
+                    <img
+                        src={menuImg}
+                        className='w-5'
+                        />
+                </span>
                 <div
-                    className='flex flex-row items-center gap-10'>
+                    className='flex flex-row items-center
+                    xl:gap-10
+                    max-sm:gap-3 sm:gap-3
+                    '>
                     <h3
-                        className='text-xl font-light cairo'>
+                        className='font-light cairo
+                        xl:text-xl
+                        max-sm:text-sm sm:text-sm
+                        '>
                         Tasks Name
                     </h3>
                     <input
                         type='text'
                         placeholder=''
                         className='border border-gray-300 rounded-md
-                             p-2 outline-none text-xl'
+                            outline-none
+                            xl:text-xl xl:p-2
+                            max-sm:text-sm sm:text-sm max-sm:p-1 sm:p-1
+                        '
                         ref={mainTaskName}
                         />
                     <h3
-                        className='text-xl font-medium cairo text-red-800 select-none'>
+                        className='font-medium cairo text-red-800 select-none
+                        xl:text-xl
+                        max-sm:text-sm sm:text-sm
+                        '>
                         * required field
                     </h3>
                 </div>
                 <div
-                    className='flex flex-row items-center gap-13'>
+                    className='flex flex-row items-center
+                    xl:gap-13
+                    max-sm:gap-3 sm:gap-3
+                    '>
                     <h3
-                        className='text-xl font-light cairo'>
+                        className='font-light cairo
+                        xl:text-xl
+                        max-sm:text-sm sm:text-sm max-sm:w-3/12 sm:w-3/12
+                        '>
                         Task Icon
                     </h3>
                     <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar'>

@@ -1,6 +1,6 @@
 import HomeNav from './HomeComponents/HomeNav.jsx';
 import AddTask from './HomeComponents/AddTask.jsx';
-import {useState , useEffect } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
 import todayImg from "./assets/june.png";
@@ -15,6 +15,8 @@ const Home = () => {
     const [customSection , setCustomSection] = useState(false);
     const [manuallyAddedTasks, setManuallyAddedTasks] = useState(localStorage.getItem('custom-tasks') === null ? []:JSON.parse(localStorage.getItem('custom-tasks')));
     const [taskId , setTaskId] = useState('');
+    const [navMenuOpened, setNavMenuOpened] = useState(true);
+    const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
 
 
     const initTodayLS = () => {
@@ -92,12 +94,19 @@ const Home = () => {
                     setTaskId={setTaskId}
                     dailySectionEnable={dailySectionEnable}
                     weeklySectionEnable={weeklySectionEnable}
+                    navMenuOpened={navMenuOpened}
+                    setNavMenuOpened={setNavMenuOpened}
+                    canOpenNavMenu={canOpenNavMenu}
+                    setCanOpenNavMenu={setCanOpenNavMenu}
                 />
                 {
                     addTaskSection ?
                         <AddTask
                             setTasks={setManuallyAddedTasks}
-                            tasks={manuallyAddedTasks}/> :
+                            tasks={manuallyAddedTasks}
+                            navMenuOpened={navMenuOpened}
+                            setNavMenuOpened={setNavMenuOpened}
+                        /> :
                         customSection ?
                             <CustomTaskComponent
                                 task={manuallyAddedTasks}

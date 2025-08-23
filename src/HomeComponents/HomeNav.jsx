@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import userImg from '../assets/user.png';
-import splitView from '../assets/split.png';
+import splitView from '../assets/nav-icon.svg';
 import addImg from '../assets/add.png';
 import searchImg from '../assets/magnifying-glass.png';
 import todayImg from '../assets/june.png';
@@ -8,16 +8,36 @@ import weekImg from '../assets/calendar.png';
 import signOut from '../assets/logout.png';
 import warningImg from '../assets/warning-svgrepo-com.svg';
 import {useNavigate} from 'react-router-dom';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import {useEffect} from 'react';
 
 
-const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,setWeeklySection,setSearchSection,setCustomSection,setTaskId,weeklySectionEnable}) => {
+const HomeNav = (
+    {
+        tasks,
+        setAddTaskSection,
+        setTodaySection,
+        dailySectionEnable,
+        setWeeklySection,
+        setSearchSection,
+        setCustomSection,
+        setTaskId,
+        weeklySectionEnable,
+        navMenuOpened,
+        setNavMenuOpened,
+        canOpenNavMenu,
+        setCanOpenNavMenu
+    }) => {
     const nav = useNavigate();
+    const navMenu = useRef(null);
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
     //CTB_Container -> Custom Tasks Button Container
     const CTB_Container = useRef(null);
+
+    window.addEventListener("resize", () => {
+        window.innerWidth <= 1280 ? setCanOpenNavMenu(true):setCanOpenNavMenu(false);
+    });
 
     const customSectionEnable = () => {
         setCustomSection(true);
@@ -37,7 +57,7 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,set
 
 
     useEffect(() => {
-
+        window.innerWidth <= 1280 ? setCanOpenNavMenu(true):setCanOpenNavMenu(false);
 
 
     },[tasks]);
@@ -48,9 +68,18 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,set
                 className='flex flex-col p-4
                     h-dvh w-[24rem] justify-between
                     overflow-x-hidden overflow-y-scroll no-scrollbar
-                    '>
+                    transition duration-250 ease-in-out
+                    bg-gray-bg
+                    z-50
+                    xl:flex xl:relative
+                    max-sm:absolute max-sm:top-0 max-sm:left-0
+                    sm:absolute sm:top-0 sm:left-0
+                    '
+                    ref={navMenu}
+                style={{transform: canOpenNavMenu ? navMenuOpened ? 'translateX(0%)':'translateX(-100%)':'translateX(0%)'}}
+            >
                <div
-                    className='flex flex-col'>
+                    className='flex flex-col relative'>
                    <div
                        className='flex flex-row items-center mb-8
                     justify-between select-none'>
@@ -74,8 +103,14 @@ const HomeNav = ({tasks,setAddTaskSection,setTodaySection,dailySectionEnable,set
                        <img
                            src={splitView}
                            alt={'split view image'}
-                           className='w-6 invert-100 mr-4 cursor-pointer contrast-100
-                            hover:invert-70 transition duration-350 ease-in-out'
+                           className='w-6 mr-4 cursor-pointer contrast-100
+                            hover:invert-70 transition duration-350 ease-in-out
+                            xl:hidden
+                            max-sm:inline-block sm:inline-block
+                            '
+                           onClick={() => {
+                               setNavMenuOpened(!navMenuOpened);
+                           }}
                        />
                    </div>
                    <div

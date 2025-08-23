@@ -18,12 +18,12 @@ const Login = () => {
     const [quoateLoaded , setQuoteLoaded] = useState(false);
 
     const getQuote = async () => {
-        fetch("https://api.quotable.io/random?tags=education|study|success")
+        fetch(api_key)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`Error: ${res.status}`);
                 }
-                return res.json(); // always return JSON if response is ok
+                return res.json();
             })
             .then(data => {
                 if (data) {

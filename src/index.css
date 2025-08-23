@@ -93,9 +93,12 @@
     }
 
     .task-img{
-        @apply w-10 border-gray-300 border p-2
+        @apply border-gray-300 border p-2
         transition duration-250 ease-in-out
-        rounded-md cursor-pointer hover:bg-trans-white;
+        rounded-md cursor-pointer hover:bg-trans-white
+        xl:w-10
+        max-sm:w-8 sm:w-8
+        ;
     }
     .active-task-img{
         @apply border-green-400!;
@@ -113,9 +116,13 @@
     }
 
     .right-component-style{
-        @apply h-dvh pt-20 pl-8 bg-gray-bg-dark
-        w-[calc(100%-24rem)] overflow-x-hidden overflow-y-scroll
-        text-gray-300 flex items-start flex-col gap-12;
+        @apply h-dvh bg-gray-bg-dark
+         overflow-x-hidden overflow-y-scroll
+        text-gray-300 flex items-start flex-col
+        xl:w-[calc(100%-24rem)] xl:pt-20 xl:pl-8 xl:gap-12
+        max-sm:w-dvw max-sm:pt-8 max-sm:pl-2 max-sm:gap-4
+        sm:w-dvw sm:pt-8 sm:pl-2 sm:gap-4
+        ;
     }
 
 
