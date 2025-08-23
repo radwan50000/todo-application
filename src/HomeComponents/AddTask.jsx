@@ -104,14 +104,14 @@ const AddTask = (
                     </h3>
                 </div>
                 <div
-                    className='flex flex-row items-center
-                    xl:gap-13
+                    className='flex flex-row items-center justify-start
+                    xl:gap-1
                     max-sm:gap-3 sm:gap-3
                     '>
                     <h3
                         className='font-light cairo
-                        xl:text-xl
-                        max-sm:text-sm sm:text-sm max-sm:w-3/12 sm:w-3/12
+                        xl:text-xl xl:w-fit
+                        max-sm:text-sm sm:text-sm max-sm:w-fit sm:w-fit
                         '>
                         Task Icon
                     </h3>
@@ -175,7 +175,10 @@ const AddTask = (
                     </div>
                 </div>
                 <h1
-                    className='text-3xl font-medium cairo'>
+                    className='font-medium cairo
+                    xl:text-3xl
+                    max-sm:text-xl sm:text-xl
+                    '>
                     Tasks
                 </h1>
                 <div
@@ -200,17 +203,12 @@ const AddTask = (
                         )
                     }
 
-
-
                 </div>
                 <div
                     className='flex flex-row items-center justify-end gap-4
                     w-11/12 h-fit'>
                     <div
-                        className='py-2 px-5 border border-gray-300 rounded-lg
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-gray-bg-dark
-                        '
+                        className='buttons'
                         onClick={() => {
                             addTaskContainer.current.style.display = 'flex';
                             ST_toAdd.current.focus();
@@ -218,10 +216,7 @@ const AddTask = (
                         Add Task
                     </div>
                     <div
-                        className='py-2 px-5 border border-gray-300 rounded-lg
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-gray-bg-dark
-                        '
+                        className='buttons'
                         onClick={() => {
                             if(mainTaskName.current.value.trim() !== '') {
                                 tempTasks.taskname =  mainTaskName.current.value.trim();
@@ -284,7 +279,7 @@ const AddTask = (
                             className='text-xl font-light cairo'>
                             Task Priority
                         </h3>
-                        <div className='flex flex-row gap-2'>
+                        <div className='flex flex-row gap-2 w-fit'>
                             {
                                 [
                                     {

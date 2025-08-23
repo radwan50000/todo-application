@@ -85,6 +85,14 @@
             hover:bg-gray-bg-dark rounded-md
             cursor-pointer w-11/12 transition duration-350 ease-in-out py-4;
     }
+    .buttons{
+        @apply py-2 px-5 border border-gray-300 rounded-lg
+        font-bold  cursor-pointer transition duration-250 select-none
+        hover:bg-gray-300 hover:text-gray-bg-dark
+        xl:text-lg
+        max-sm:text-sm sm:text-sm
+        ;
+    }
     .task-nav-bar:first-child img{
         @apply w-10;
     }
@@ -120,8 +128,8 @@
          overflow-x-hidden overflow-y-scroll
         text-gray-300 flex items-start flex-col
         xl:w-[calc(100%-24rem)] xl:pt-20 xl:pl-8 xl:gap-12
-        max-sm:w-dvw max-sm:pt-8 max-sm:pl-2 max-sm:gap-4
-        sm:w-dvw sm:pt-8 sm:pl-2 sm:gap-4
+        max-sm:w-dvw max-sm:pt-12 max-sm:pl-2 max-sm:gap-4
+        sm:w-dvw sm:pt-12 sm:pl-2 sm:gap-4
         ;
     }
 
