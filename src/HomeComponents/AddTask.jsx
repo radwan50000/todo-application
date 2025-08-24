@@ -75,13 +75,13 @@ const AddTask = (
                 </span>
                 <div
                     className='flex flex-row items-center
-                    xl:gap-10
-                    max-sm:gap-3 sm:gap-3
+                    xl:gap-10 xl:w-fit
+                    max-sm:gap-3 sm:gap-3 max-sm:w-full sm:w-full
                     '>
                     <h3
                         className='font-light cairo
                         xl:text-xl
-                        max-sm:text-sm sm:text-sm
+                        max-sm:text-lg sm:text-lg
                         '>
                         Tasks Name
                     </h3>
@@ -90,32 +90,35 @@ const AddTask = (
                         placeholder=''
                         className='border border-gray-300 rounded-md
                             outline-none
-                            xl:text-xl xl:p-2
+                            xl:text-xl xl:p-2 xl:w-fit
                             max-sm:text-sm sm:text-sm max-sm:p-1 sm:p-1
+                            max-sm:w-7/12 sm:w-7/12
                         '
                         ref={mainTaskName}
                         />
                     <h3
                         className='font-medium cairo text-red-800 select-none
                         xl:text-xl
-                        max-sm:text-sm sm:text-sm
+                        max-sm:hidden sm:hidden
                         '>
                         * required field
                     </h3>
                 </div>
                 <div
                     className='flex flex-row items-center justify-start
-                    xl:gap-1
-                    max-sm:gap-3 sm:gap-3
+                    xl:gap-14
+                    max-sm:gap-5 sm:gap-5
                     '>
                     <h3
                         className='font-light cairo
                         xl:text-xl xl:w-fit
-                        max-sm:text-sm sm:text-sm max-sm:w-fit sm:w-fit
+                        max-sm:text-lg sm:text-lg max-sm:w-fit sm:w-fit
                         '>
                         Task Icon
                     </h3>
-                    <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar'>
+                    <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar
+                        max-sm:w-9/12
+                    '>
                         {
                             [
                                 {
@@ -251,32 +254,32 @@ const AddTask = (
                 '
             >
                 <div
-                    className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8  m-8
-                    '
+                    className='addTaskToTasksContainer'
                 >
                     <div
-                        className='flex flex-row items-center gap-10'>
+                        className='enterTaskNameContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='taskTitle cairo'>
                             Task
                         </h3>
                         <input
                             type='text'
                             placeholder=''
-                            className='border border-gray-300 rounded-md w-[35rem]
-                             p-2 outline-none text-xl'
+                            className='taskInputField'
                             ref={ST_toAdd}
                         />
                         <h3
-                            className='text-xl font-medium cairo text-red-800 select-none'>
+                            className='text-xl font-medium cairo text-red-800 select-none
+                            xl:inline-block
+                            max-sm:hidden sm:hidden
+                            '>
                             * required field
                         </h3>
                     </div>
                     <div
-                        className='flex flex-row items-center gap-13'>
+                        className='enterTaskPriorityContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='priorityTitle cairo'>
                             Task Priority
                         </h3>
                         <div className='flex flex-row gap-2 w-fit'>
@@ -316,10 +319,7 @@ const AddTask = (
                         className='flex flex-row items-center justify-end gap-4'
                         >
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='cancelTaskButton'
                             onClick={() => {
                                 addTaskContainer.current.style.display = 'none';
                                 ST_toAdd.current.value = ''
@@ -327,10 +327,7 @@ const AddTask = (
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-green-400 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-green-400 hover:text-gray-300
-                        '
+                            className='addTaskButton'
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
                                     const uniqueID = uuidv4();
