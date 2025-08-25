@@ -1,4 +1,4 @@
-import rubbishImg from '../assets/delete.png';
+import rubbishImg from '../assets/rubbish-img.svg';
 import edit from '../assets/edit-svgrepo-com.svg';
 import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import close from '../assets/close-bold-svgrepo-com.svg';
@@ -42,9 +42,7 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                             <img
                                 src={done}
                                 alt={'edit image'}
-                                className='w-4 h-fit p-2 box-content border border-green-400 rounded-sm
-                    transition duration-250 ease-in-out select-none
-                    cursor-pointer hover:bg-green-400'
+                                className='done-edit-buttons-TC'
                                 onClick={() => {
                                     tempTasks.tasks = tempTasks.tasks.map((t) => {
                                         if(t.id !== id) return t;
@@ -62,9 +60,7 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                             <img
                                 src={close}
                                 alt={'delete image'}
-                                className='w-4 h-fit p-2 box-content border border-red-800 rounded-sm
-                    transition duration-250 ease-in-out select-none
-                    cursor-pointer hover:bg-red-800'
+                                className='CD-btns-TC'
                                 onClick={() => {
                                     setTaskField(oldField);
                                     setEditingMode(false)
@@ -96,9 +92,7 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                             <img
                                 src={edit}
                                 alt={'edit image'}
-                                className='w-4 h-fit p-2 box-content border border-green-400 rounded-sm
-                                transition duration-250 ease-in-out select-none
-                                cursor-pointer hover:bg-green-400'
+                                className='done-edit-buttons-TC'
                                 onClick={() => {
                                     setEditingMode(true);
                                 }}
@@ -106,10 +100,8 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                             <img
                                 src={rubbishImg}
                                 alt={'delete image'}
-                                className='w-4 h-fit p-2 box-content border border-cyan-500 rounded-sm invert-100
-                                    transition duration-250 ease-in-out select-none
-                                    cursor-pointer hover:bg-cyan-500'
-                                onClick={(e) => {
+                                className='CD-btns-TC'
+                                onClick={() => {
                                     tempTasks.tasks = tempTasks.tasks.filter((task) => task.id !== id);
                                     setTempTasks(tempTasks);
                                     console.log(tempTasks);
