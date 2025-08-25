@@ -8,9 +8,19 @@ import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
 import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
+import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 
 
-const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
+const CustomTaskComponent = (
+        {
+            task,
+            setTask,
+            taskId,
+            addTaskSectionEnable,
+            setNavMenuOpened,
+            navMenuOpened
+        }
+    ) => {
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
@@ -53,6 +63,11 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
     return (
         <>
             <div className='right-component-style no-scrollbar'>
+
+                <MenuCloseNavButton
+                    setNavMenuOpened={setNavMenuOpened}
+                    navMenuOpened={navMenuOpened}
+                />
                 <div
                     className='flex flex-row items-center justify-between gap-4
                         w-[90%]'
@@ -105,23 +120,17 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                     }
                 </div>
                 <div
-                    className='flex w-11/12  h-fit items-center justify-between'
+                    className='add-remove-buttons-container'
                     >
                     <div
-                        className='py-2 px-5 border border-red-800 rounded-lg text-red-800
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-red-800 hover:text-gray-300
-                        '
+                        className='danger-buttons'
                         onClick={() => {
                             removePageSection.current.style.display = 'flex';
                         }}>
                         Remove Page
                     </div>
                     <div
-                        className='py-2 px-5 border border-gray-300 rounded-lg
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-gray-bg-dark
-                        '
+                        className='buttons'
                         onClick={() => {
                             addTaskContainer.current.style.display = 'flex';
                             ST_toAdd.current.focus();
@@ -139,35 +148,35 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                 '
             >
                 <div
-                    className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8
-                    '
+                    className='addTaskToTasksContainer'
                 >
                     <div
-                        className='flex flex-row items-center gap-10'>
+                        className='enterTaskNameContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='taskTitle cairo'>
                             Task
                         </h3>
                         <input
                             type='text'
                             placeholder=''
-                            className='border border-gray-300 rounded-md w-[35rem]
-                             p-2 outline-none text-xl'
+                            className='taskInputField'
                             ref={ST_toAdd}
                         />
                         <h3
-                            className='text-xl font-medium cairo text-red-800 select-none'>
+                            className='text-xl font-medium cairo text-red-800 select-none
+                            xl:inline-block
+                            max-sm:hidden sm:hidden
+                            '>
                             * required field
                         </h3>
                     </div>
                     <div
-                        className='flex flex-row items-center gap-13'>
+                        className='enterTaskPriorityContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='priorityTitle cairo'>
                             Task Priority
                         </h3>
-                        <div className='flex flex-row gap-2'>
+                        <div className='flex flex-row gap-2 w-fit'>
                             {
                                 [
                                     {
@@ -204,10 +213,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         className='flex flex-row items-center justify-end gap-4'
                     >
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='danger-buttons'
                             onClick={() => {
                                 addTaskContainer.current.style.display = 'none';
                                 ST_toAdd.current.value = ''
@@ -215,10 +221,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-green-400 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-green-400 hover:text-gray-300
-                        '
+                            className='addTaskButton'
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
                                     const uniqueID = uuidv4();
@@ -284,10 +287,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                         className='flex flex-row items-center justify-end gap-4'
                     >
                         <div
-                            className='py-2 px-5 border border-gray-300 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-text-dark
-                        '
+                            className='buttons'
                             onClick={() => {
                                 removePageSection.current.style.display = 'none';
                             }}
@@ -295,10 +295,7 @@ const CustomTaskComponent = ({task,setTask,taskId,addTaskSectionEnable}) => {
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                            font-bold text-lg cursor-pointer transition duration-250 select-none
-                             hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='danger-buttons'
                             onClick={() => {
                                 task.forEach((t,i) => {
                                     if(t.taskid === taskId){

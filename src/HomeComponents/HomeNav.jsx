@@ -55,10 +55,28 @@ const HomeNav = (
         setTodaySection(false);
     }
 
+    const clostNavMenuWhenPressOnTask = () => {
+        document.querySelectorAll('.task-nav-bar').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                if(canOpenNavMenu) {
+                    setNavMenuOpened(false);
+                }
+            })
+        })
+
+        document.querySelectorAll('.custom-task-button').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                if(canOpenNavMenu) {
+                    setNavMenuOpened(false);
+                }
+            })
+        })
+    }
 
     useEffect(() => {
         window.innerWidth <= 1280 ? setCanOpenNavMenu(true):setCanOpenNavMenu(false);
-
+        
+        clostNavMenuWhenPressOnTask();
 
     },[tasks]);
 

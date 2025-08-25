@@ -16,23 +16,21 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                 editingMode ?
                     <div
                         id={id}
-                        className='flex flex-row items-start justify-between text-xl w-11/12 h-fit flex-wrap
-                     break-words relative  rounded-md p-3'
+                        className='TC-container'
                     >
                         <div
-                            className='flex flex-row gap-4 w-8/12 '
+                            className='left-side-TC'
                         >
                             <img
                                 src={flag}
                                 alt={'redFlag flag'}
-                                className='w-4 h-fit p-1 box-content mt-[3px]'
+                                className='flag-img-TC'
                             />
                             <input
                                 type={'text'}
                                 value={taskField}
-                                style={{width: 'calc(85% - 4rem)',height: 'auto'}}
                                 autoFocus={true}
-                                className='text-xl outline-none'
+                                className='input-field-TC'
                                 onChange={(e) => {
                                     setTaskField(e.target.value);
                                 }}
@@ -77,19 +75,18 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                     :
                     <div
                         id={id}
-                        className='flex flex-row items-start justify-between text-xl w-11/12 h-fit flex-wrap
-                     break-words relative  rounded-md p-3'
+                        className='TC-container'
                     >
                         <div
-                            className='flex flex-row gap-4 w-8/12 '
+                            className='left-side-TC'
                         >
                             <img
                                 src={flag}
                                 alt={'redFlag flag'}
-                                className='w-4 h-fit p-1 box-content mt-[3px]'
+                                className='flag-img-TC'
                             />
-                            <p style={{width: 'calc(85% - 4rem)',height: 'auto'}}
-                               className='text-xl'>
+                            <p
+                                className='text-TC'>
                                 {taskField}
                             </p>
                         </div>

@@ -7,9 +7,15 @@ import blueFlag from "../assets/blueFlag.png";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
 import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
+import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 
 
-const WeeklyComponent = () => {
+const WeeklyComponent = (
+        {
+            setNavMenuOpened,
+            navMenuOpened
+        }
+    ) => {
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
@@ -44,6 +50,10 @@ const WeeklyComponent = () => {
     return (
         <>
             <div className='right-component-style no-scrollbar'>
+                <MenuCloseNavButton
+                    setNavMenuOpened={setNavMenuOpened}
+                    navMenuOpened={navMenuOpened}
+                />
                 <div
                     className='flex flex-row items-center justify-between gap-4
                         w-[90%]'
@@ -95,13 +105,10 @@ const WeeklyComponent = () => {
                     }
                 </div>
                 <div
-                    className='flex w-11/12  h-fit items-center justify-between'
+                    className='add-remove-buttons-container'
                 >
                     <div
-                        className='py-2 px-5 border border-red-800 rounded-lg text-red-800
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-red-800 hover:text-gray-300
-                        '
+                        className='danger-buttons'
                         style={{visibility: noOfTasks > 0 ? 'visible' : 'hidden'}}
                         onClick={() => {
                             removePageSection.current.style.display = 'flex';
@@ -109,10 +116,7 @@ const WeeklyComponent = () => {
                         Clear All
                     </div>
                     <div
-                        className='py-2 px-5 border border-gray-300 rounded-lg
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-gray-bg-dark
-                        '
+                        className='buttons'
                         onClick={() => {
                             addTaskContainer.current.style.display = 'flex';
                             ST_toAdd.current.focus();
@@ -195,10 +199,7 @@ const WeeklyComponent = () => {
                         className='flex flex-row items-center justify-end gap-4'
                     >
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='danger-buttons'
                             onClick={() => {
                                 addTaskContainer.current.style.display = 'none';
                                 ST_toAdd.current.value = ''
@@ -206,10 +207,7 @@ const WeeklyComponent = () => {
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-green-400 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-green-400 hover:text-gray-300
-                        '
+                            className='addTaskButton'
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
                                     const uniqueID = uuidv4();
@@ -271,10 +269,7 @@ const WeeklyComponent = () => {
                         className='flex flex-row items-center justify-end gap-4'
                     >
                         <div
-                            className='py-2 px-5 border border-gray-300 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-text-dark
-                        '
+                            className='buttons'
                             onClick={() => {
                                 removePageSection.current.style.display = 'none';
                             }}
@@ -282,10 +277,7 @@ const WeeklyComponent = () => {
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                            font-bold text-lg cursor-pointer transition duration-250 select-none
-                             hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='danger-buttons'
                             onClick={() => {
                                 dailyObj.tasks = [];
                                 setDailyObj(dailyObj);

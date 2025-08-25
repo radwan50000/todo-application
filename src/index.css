@@ -88,6 +88,7 @@
             max-sm:text-lg sm:text-lg max-sm:gap-4 sm:gap-4
         ;
     }
+
     .buttons{
         @apply py-2 px-5 border border-gray-300 rounded-lg
         font-bold  cursor-pointer transition duration-250 select-none
@@ -96,6 +97,23 @@
         max-sm:text-sm sm:text-sm
         ;
     }
+
+    .danger-buttons{
+        @apply py-2 px-5 border border-red-800 rounded-lg w-fit text-red-800
+        font-bold cursor-pointer transition duration-250 select-none
+        hover:bg-red-800 hover:text-gray-300
+        xl:text-lg
+        max-sm:text-sm sm:text-sm;
+    }
+
+    .add-remove-buttons-container{
+        @apply flex h-fit items-center justify-between
+        p-2
+        xl:w-11/12
+        max-sm:w-12/12 sm:w-12/12;
+
+    }
+
     .task-nav-bar:first-child img{
         @apply w-10;
     }
@@ -190,6 +208,52 @@
         @apply
         xl:font-light xl:text-xl
         max-sm:text-lg sm:text-lg max-sm:font-medium sm:font-medium;
+    }
+
+
+    /*  This is Task Component Styles  */
+
+    /* Task Component default   */
+
+    .flag-img-TC{
+        @apply w-4 h-fit p-1 box-content mt-[3px];
+    }
+
+    .input-field-TC{
+        @apply  outline-none h-auto
+        xl:text-xl xl:w-[calc(85%-4rem)]
+        max-sm:w-11/12 sm:w-11/12
+        max-sm:text-lg sm:text-lg;
+    }
+
+    .text-TC{
+        @apply text-xl  h-auto
+        xl:text-xl xl:w-[calc(85%-4rem)]
+        max-sm:w-11/12 sm:w-11/12
+        max-sm:text-lg sm:text-lg;
+    }
+
+    .left-side-TC{
+        @apply flex flex-row gap-4
+        xl:w-8/12
+        max-sm:w-11/12 sm:w-11/12
+        ;
+    }
+
+    .container-of-TC-container{
+        @apply w-11/12 h-[55%] border border-gray-300 rounded-md
+        overflow-x-hidden overflow-y-scroll
+        flex flex-col gap-2 items-start
+        xl:p-8
+        max-sm:p-2 sm:p-2
+        ;
+    }
+
+    .TC-container{
+        @apply flex  items-start justify-between text-xl w-11/12 h-fit flex-wrap
+        break-words relative  rounded-md p-3 gap-4
+        xl:flex-row
+        max-sm:flex-col sm:flex-col;
     }
 
 

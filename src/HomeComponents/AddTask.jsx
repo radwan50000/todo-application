@@ -19,6 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import TaskComponent from './TaskComponent.jsx';
 import {v4 as uuidv4} from 'uuid';
 import SaveTempObjInLS from '../SavingTempObjInLS.js';
+import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 
 
 const AddTask = (
@@ -56,23 +57,10 @@ const AddTask = (
                 className='right-component-style
                 '
             >
-                <span
-                    className='absolute top-5 right-5 cursor-pointer
-                    transition duration-250 ease-in-out
-                    hover:invert-70
-                    xl:hidden
-                    max-sm:inline-block sm:inline-block
-                    '
-                    onClick={() => {
-                        setNavMenuOpened(!navMenuOpened);
-
-                    }}
-                    >
-                    <img
-                        src={menuImg}
-                        className='w-5'
-                        />
-                </span>
+                <MenuCloseNavButton
+                    setNavMenuOpened={setNavMenuOpened}
+                    navMenuOpened={navMenuOpened}
+                />
                 <div
                     className='flex flex-row items-center
                     xl:gap-10 xl:w-fit
@@ -185,10 +173,7 @@ const AddTask = (
                     Tasks
                 </h1>
                 <div
-                    className='w-11/12 h-[55%] border border-gray-300 rounded-md
-                    overflow-x-hidden overflow-y-scroll no-scrollbar p-8
-                    flex flex-col gap-2 items-start
-                    '
+                    className='container-of-TC-container no-scrollbar'
                     ref={tasksContainer}>
 
                     {
