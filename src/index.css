@@ -45,8 +45,8 @@
 @layer components {
 
     /*Task Container Loaded In*/
-    .T-C-loadedIn{
-        @apply w-[95%] mx-auto h-[65%] border-t border-t-gray-300
+    .T-C-loadedIn {
+        @apply w-[95%] mx-auto h-[95%] border-t border-t-gray-300
         overflow-x-hidden overflow-y-scroll
         flex flex-col gap-2 items-start
         xl:p-8
@@ -55,7 +55,7 @@
         ;
     }
 
-    .check-box-1{
+    .check-box-1 {
         @apply w-6 h-6 rounded-md bg-transparent
         border-green-300 border select-none
         transition duration-250 ease-in-out
@@ -64,6 +64,10 @@
         max-sm:w-5 max-sm:h-5 sm:w-5 sm:h-5
         ;
 
+    }
+
+    .C-H-o-Component{
+        @apply flex flex-col w-full h-[85%] gap-4;
     }
 
     .H-o-Component{
@@ -78,7 +82,7 @@
         @apply flex flex-row items-center
         xl:w-[90%] xl:gap-4
         justify-start
-        max-sm:w-[85%] sm:w-[85%]
+        max-sm:w-[80%] sm:w-[80%]
         max-sm:gap-2 sm:gap-2
         ;
     }
@@ -98,8 +102,8 @@
     .r-H-o-Component{
         @apply select-none
         xl:text-3xl xl:w-[10%]
-        max-sm:text-xl sm:text-xl
-        max-sm:w-[15%] sm:w-[15%]
+        max-sm:text-lg sm:text-lg
+        max-sm:w-[20%] sm:w-[20%]
     }
 
     .TC-buttons-container{

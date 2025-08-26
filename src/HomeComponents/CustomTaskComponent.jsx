@@ -69,50 +69,54 @@ const CustomTaskComponent = (
                     navMenuOpened={navMenuOpened}
                 />
                 <div
-                    className='H-o-Component'
+                    className='C-H-o-Component'
                 >
                     <div
-                        className='l-H-o-Component'
+                        className='H-o-Component'
                     >
-                        <img
-                            src={taskImg}
-                            alt='task image'
-                        />
-                        <h1
-                            className='cairo'
-                            ref={header}
+                        <div
+                            className='l-H-o-Component'
                         >
-                            {taskName}
-                        </h1>
-                    </div>
-                    <span
-                        className='r-H-o-Component cairo'
-                    >
+                            <img
+                                src={taskImg}
+                                alt='task image'
+                            />
+                            <h1
+                                className='cairo'
+                                ref={header}
+                            >
+                                {taskName}
+                            </h1>
+                        </div>
+                        <span
+                            className='r-H-o-Component cairo'
+                        >
                         {completed} / {noOfTasks}
                     </span>
-                </div>
-                <div
-                    className='T-C-loadedIn no-scrollbar'
+                    </div>
+                    <div
+                        className='T-C-loadedIn no-scrollbar'
                     >
-                    {
-                        miniTasks.map((t) => {
-                            return (
-                                <TaskComponent2
-                                    setCompleted={setCompleted}
-                                    allTasks={task}
-                                    setAllTasks={setTask}
-                                    key={t.id}
-                                    taskId={t.id}
-                                    objId={taskId}
-                                    flag={t.priority}
-                                    task={t.task}
-                                    isDone={t.done}
-                                    setNoOfTasks={setNoOfTasks}
-                                    noOfTasks={noOfTasks}
-                                />
-                            )
-                        })
-                    }
+                        {
+                            miniTasks.map((t) => {
+                                return (
+                                    <TaskComponent2
+                                        setCompleted={setCompleted}
+                                        allTasks={task}
+                                        setAllTasks={setTask}
+                                        key={t.id}
+                                        taskId={t.id}
+                                        objId={taskId}
+                                        flag={t.priority}
+                                        task={t.task}
+                                        isDone={t.done}
+                                        setNoOfTasks={setNoOfTasks}
+                                        noOfTasks={noOfTasks}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
                 <div
                     className='add-remove-buttons-container'

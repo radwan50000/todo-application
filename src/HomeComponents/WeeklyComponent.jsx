@@ -56,50 +56,52 @@ const WeeklyComponent = (
                     setNavMenuOpened={setNavMenuOpened}
                     navMenuOpened={navMenuOpened}
                 />
-                <div
-                    className='H-o-Component'
-                >
+                <div className='C-H-o-Component'>
                     <div
-                        className='l-H-o-Component'
+                        className='H-o-Component'
                     >
-                        <img
-                            src={projectImg}
-                            alt='task image'
-                        />
-                        <h1
-                            className='cairo'
-                            ref={header}
+                        <div
+                            className='l-H-o-Component'
                         >
-                            {projectName}
-                        </h1>
-                    </div>
-                    <span
-                        className='r-H-o-Component cairo'
-                    >
+                            <img
+                                src={projectImg}
+                                alt='task image'
+                            />
+                            <h1
+                                className='cairo'
+                                ref={header}
+                            >
+                                {projectName}
+                            </h1>
+                        </div>
+                        <span
+                            className='r-H-o-Component cairo'
+                        >
                         {completed} / {noOfTasks}
                     </span>
-                </div>
-                <div
-                    className='T-C-loadedIn no-scrollbar'
-                >
-                    {
-                        tasks.map((t) => {
-                            return (
-                                <TaskComponent3
-                                    setCompleted={setCompleted}
-                                    allTasks={dailyObj}
-                                    setAllTasks={setDailyObj}
-                                    key={t.id}
-                                    taskId={t.id}
-                                    flag={t.priority}
-                                    task={t.task}
-                                    isDone={t.done}
-                                    setNoOfTasks={setNoOfTasks}
-                                    noOfTasks={noOfTasks}
-                                />
-                            )
-                        })
-                    }
+                    </div>
+                    <div
+                        className='T-C-loadedIn no-scrollbar'
+                    >
+                        {
+                            tasks.map((t) => {
+                                return (
+                                    <TaskComponent3
+                                        setCompleted={setCompleted}
+                                        allTasks={dailyObj}
+                                        setAllTasks={setDailyObj}
+                                        key={t.id}
+                                        taskId={t.id}
+                                        flag={t.priority}
+                                        task={t.task}
+                                        isDone={t.done}
+                                        setNoOfTasks={setNoOfTasks}
+                                        noOfTasks={noOfTasks}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
                 <div
                     className='add-remove-buttons-container'
