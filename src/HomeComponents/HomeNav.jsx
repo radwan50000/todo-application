@@ -237,14 +237,13 @@ const HomeNav = (
                 </div>
             </div>
             <div
-                className='flex w-full h-dvh items-center justify-center
+                className='w-full h-dvh items-center justify-center
                         absolute bg-trans-white z-95 hidden'
                 ref={confirmSignOutContainer}>
                 <div
-                    className='w-6/12 h-fit pb-8 bg-white rounded-md overflow-hidden
-                        relative flex flex-col items-center'>
+                    className='sign-out-container'>
                     <div
-                        className='flex items-center justify-center w-full py-4 h-fit bg-[#ffb703]'
+                        className='warning-container'
                     >
                         <img
                             src={warningImg}
@@ -253,20 +252,17 @@ const HomeNav = (
                             />
                     </div>
                     <p
-                        className='text-text-dark text-2xl my-8 font-medium px-9'>
+                        className='text-warning'>
                         by sign out all data will be loss and deleted forever . you will can't retrieve it again , make sure that you don't have any important or sensitive data to loss here . <br/> To confirm sign out please enter your password :
                     </p>
                     <input
                         type='password'
                         placeholder=''
-                        className='w-8/12 outline-none border-3 border-black rounded-md p-2
-                        text-5xl text-center'
+                        className=''
                         ref={confirmSignOutField}
                         />
                     <div
-                        className='w-8/12 border-red-800 border-4 py-4 text-4xl
-                            mt-4 text-red-800 rounded-md font-black cairo flex items-center justify-center
-                            cursor-pointer transition duration-350 ease-out select-none hover:bg-red-800 hover:text-white'
+                        className='sign-out-button cairo'
                             onClick={() => {
                                 if(confirmSignOutField.current.value.trim() === Cookies.get('password')) {
                                     Cookies.remove('username');
