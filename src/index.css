@@ -68,7 +68,38 @@
 
     .H-o-Component{
         @apply flex flex-row items-center justify-between gap-4
-        w-[90%];
+        mx-auto
+        xl:w-[90%]
+        max-sm:w-[95%] sm:w-[95%]
+        ;
+    }
+
+    .l-H-o-Component{
+        @apply flex flex-row items-center
+        xl:w-[90%] xl:gap-4
+        justify-start
+        max-sm:w-[85%] sm:w-[85%]
+        max-sm:gap-2 sm:gap-2
+        ;
+    }
+
+    .l-H-o-Component img{
+        @apply xl:w-12
+        max-sm:w-7 sm:w-7;
+    }
+
+    .l-H-o-Component h1{
+        @apply font-semibold text-gray-300
+        xl:text-5xl
+        max-sm:text-3xl
+        ;
+    }
+
+    .r-H-o-Component{
+        @apply select-none
+        xl:text-3xl xl:w-[10%]
+        max-sm:text-xl sm:text-xl
+        max-sm:w-[15%] sm:w-[15%]
     }
 
     .TC-buttons-container{

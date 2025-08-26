@@ -32,6 +32,7 @@ const AddTask = (
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
+    const [projectName , setProjectName] = useState('');
     const mainTaskName = useRef(null);
     const [addedTasks, setAddedTasks] = useState([]);
     const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
@@ -71,11 +72,12 @@ const AddTask = (
                         xl:text-xl
                         max-sm:text-lg sm:text-lg
                         '>
-                        Tasks Name
+                        Project Name
                     </h3>
                     <input
                         type='text'
                         placeholder=''
+                        value={projectName}
                         className='border border-gray-300 rounded-md
                             outline-none
                             xl:text-xl xl:p-2 xl:w-fit
@@ -83,6 +85,11 @@ const AddTask = (
                             max-sm:w-7/12 sm:w-7/12
                         '
                         ref={mainTaskName}
+                        onChange={(e) => {
+                            if(e.target.value.length < 15) {
+                                setProjectName(e.target.value);
+                            }
+                        }}
                         />
                     <h3
                         className='font-medium cairo text-red-800 select-none
@@ -213,6 +220,7 @@ const AddTask = (
                                 setTempTasks({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
                                 tasksContainer.current.innerHTML = '';
                                 mainTaskName.current.value = '';
+                                setProjectName('');
                                 setTasks([...tasks , tempTasks]);
                                 SaveTempObjInLS(tempTasks);
                                 console.log(localStorage.getItem('custom-tasks'));

@@ -72,22 +72,21 @@ const CustomTaskComponent = (
                     className='H-o-Component'
                 >
                     <div
-                        className='flex flex-row items-center justify-between gap-4 select-none'
+                        className='l-H-o-Component'
                     >
                         <img
                             src={taskImg}
                             alt='task image'
-                            className='w-12'
                         />
                         <h1
-                            className='text-5xl font-semibold text-gray-300 cairo'
+                            className='cairo'
                             ref={header}
                         >
                             {taskName}
                         </h1>
                     </div>
                     <span
-                        className='text-3xl cairo select-none'
+                        className='r-H-o-Component cairo'
                     >
                         {completed} / {noOfTasks}
                     </span>
