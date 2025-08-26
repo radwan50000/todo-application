@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
 import todayImg from "./assets/june.png";
-import weekImg from "./assets/calendar.png";
+import weekImg from "./assets/date-svgrepo-com.svg";
 import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 
 const Home = () => {

@@ -57,35 +57,30 @@ const WeeklyComponent = (
                     navMenuOpened={navMenuOpened}
                 />
                 <div
-                    className='flex flex-row items-center justify-between gap-4
-                        w-[90%]'
+                    className='H-o-Component'
                 >
                     <div
-                        className='flex flex-row items-center justify-between gap-4 select-none'
+                        className='l-H-o-Component'
                     >
                         <img
                             src={projectImg}
                             alt='task image'
-                            className='w-12 invert-70'
                         />
                         <h1
-                            className='text-5xl font-semibold text-gray-300 cairo'
+                            className='cairo'
                             ref={header}
                         >
                             {projectName}
                         </h1>
                     </div>
                     <span
-                        className='text-3xl cairo select-none'
+                        className='r-H-o-Component cairo'
                     >
                         {completed} / {noOfTasks}
                     </span>
                 </div>
                 <div
-                    className='w-11/12 h-[65%] border border-t-gray-300 border-b-0 border-l-0 border-r-0
-                    overflow-x-hidden overflow-y-scroll no-scrollbar p-8
-                    flex flex-col gap-2 items-start mt-20
-                    '
+                    className='T-C-loadedIn no-scrollbar'
                 >
                     {
                         tasks.map((t) => {
