@@ -6,11 +6,7 @@ const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP})
     const [checked, setChecked] = useState(isDone);
     return (
         <>
-            <div className='w-6 h-6 rounded-md bg-transparent
-                    border-green-300 border select-none
-                    transition duration-250 ease-in-out
-                    p-[2px] cursor-pointer mt-1
-                '
+            <div className='check-box-1'
                  data-checked={checked}
                  onClick={() => {
                      setChecked(!checked)

@@ -8,6 +8,8 @@ import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
 import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
+import SaveDailyTasks from "./SaveDailyTasks.js";
+import saveWeeklyTasks from "./SaveWeeklyTasks.jsx";
 
 
 const WeeklyComponent = (
@@ -134,35 +136,35 @@ const WeeklyComponent = (
                 '
             >
                 <div
-                    className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8
-                    '
+                    className='addTaskToTasksContainer'
                 >
                     <div
-                        className='flex flex-row items-center gap-10'>
+                        className='enterTaskNameContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='taskTitle cairo'>
                             Task
                         </h3>
                         <input
                             type='text'
                             placeholder=''
-                            className='border border-gray-300 rounded-md w-[35rem]
-                             p-2 outline-none text-xl'
+                            className='taskInputField'
                             ref={ST_toAdd}
                         />
                         <h3
-                            className='text-xl font-medium cairo text-red-800'>
+                            className='text-xl font-medium cairo text-red-800 select-none
+                            xl:inline-block
+                            max-sm:hidden sm:hidden
+                            '>
                             * required field
                         </h3>
                     </div>
                     <div
-                        className='flex flex-row items-center gap-13'>
+                        className='enterTaskPriorityContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='priorityTitle cairo'>
                             Task Priority
                         </h3>
-                        <div className='flex flex-row gap-2'>
+                        <div className='flex flex-row gap-2 w-fit'>
                             {
                                 [
                                     {
@@ -220,9 +222,7 @@ const WeeklyComponent = (
                                     dailyObj.tasks.push(obj);
                                     setTasks(dailyObj.tasks);
                                     setNoOfTasks(dailyObj.tasks.length);
-
-
-                                    SaveWeeklyTasks(dailyObj);
+                                    saveWeeklyTasks(dailyObj);
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
                                 }else {

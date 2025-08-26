@@ -81,10 +81,7 @@ const DailyComponent = (
                     </span>
                 </div>
                 <div
-                    className='w-11/12 h-[65%] border border-t-gray-300 border-b-0 border-l-0 border-r-0
-                    overflow-x-hidden overflow-y-scroll no-scrollbar p-8
-                    flex flex-col gap-2 items-start mt-20
-                    '
+                    className='T-C-loadedIn no-scrollbar'
                 >
                     {
                         tasks.map((t) => {
@@ -135,35 +132,35 @@ const DailyComponent = (
                 '
             >
                 <div
-                    className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8
-                    '
+                    className='addTaskToTasksContainer'
                 >
                     <div
-                        className='flex flex-row items-center gap-10'>
+                        className='enterTaskNameContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='taskTitle cairo'>
                             Task
                         </h3>
                         <input
                             type='text'
                             placeholder=''
-                            className='border border-gray-300 rounded-md w-[35rem]
-                             p-2 outline-none text-xl'
+                            className='taskInputField'
                             ref={ST_toAdd}
                         />
                         <h3
-                            className='text-xl font-medium cairo text-red-800'>
+                            className='text-xl font-medium cairo text-red-800 select-none
+                            xl:inline-block
+                            max-sm:hidden sm:hidden
+                            '>
                             * required field
                         </h3>
                     </div>
                     <div
-                        className='flex flex-row items-center gap-13'>
+                        className='enterTaskPriorityContainer'>
                         <h3
-                            className='text-xl font-light cairo'>
+                            className='priorityTitle cairo'>
                             Task Priority
                         </h3>
-                        <div className='flex flex-row gap-2'>
+                        <div className='flex flex-row gap-2 w-fit'>
                             {
                                 [
                                     {
@@ -200,10 +197,7 @@ const DailyComponent = (
                         className='flex flex-row items-center justify-end gap-4'
                     >
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='danger-buttons'
                             onClick={() => {
                                 addTaskContainer.current.style.display = 'none';
                                 ST_toAdd.current.value = ''
@@ -211,10 +205,7 @@ const DailyComponent = (
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-green-400 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-green-400 hover:text-gray-300
-                        '
+                            className='addTaskButton'
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
                                     const uniqueID = uuidv4();
@@ -276,10 +267,7 @@ const DailyComponent = (
                         className='flex flex-row items-center justify-end gap-4'
                     >
                         <div
-                            className='py-2 px-5 border border-gray-300 rounded-lg w-fit
-                        font-bold text-lg cursor-pointer transition duration-250 select-none
-                        hover:bg-gray-300 hover:text-text-dark
-                        '
+                            className='buttons'
                             onClick={() => {
                                 removePageSection.current.style.display = 'none';
                             }}
@@ -287,10 +275,7 @@ const DailyComponent = (
                             Cancel
                         </div>
                         <div
-                            className='py-2 px-5 border border-red-800 rounded-lg w-fit
-                            font-bold text-lg cursor-pointer transition duration-250 select-none
-                             hover:bg-red-800 hover:text-gray-300
-                        '
+                            className='danger-buttons'
                             onClick={() => {
                                 dailyObj.tasks = [];
                                 setDailyObj(dailyObj);

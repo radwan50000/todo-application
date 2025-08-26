@@ -37,7 +37,7 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                             />
                         </div>
                         <div
-                            className='flex flex-row gap-4'
+                            className='TC-buttons-container'
                         >
                             <img
                                 src={done}
@@ -53,7 +53,6 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                                     });
                                     setTempTasks(tempTasks);
                                     setOldField(taskField);
-                                    console.log(tempTasks.tasks);
                                     setEditingMode(false);
                                 }}
                             />
@@ -87,7 +86,7 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                             </p>
                         </div>
                         <div
-                            className='flex flex-row gap-4'
+                            className='TC-buttons-container'
                         >
                             <img
                                 src={edit}
@@ -104,8 +103,6 @@ const TaskComponent = ({task,id,flag,tempTasks , setTempTasks}) => {
                                 onClick={() => {
                                     tempTasks.tasks = tempTasks.tasks.filter((task) => task.id !== id);
                                     setTempTasks(tempTasks);
-                                    console.log(tempTasks);
-                                    console.log(id);
                                     container.current.remove();
                                 }}
                             />

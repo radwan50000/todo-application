@@ -1,4 +1,4 @@
-import rubbishImg from '../assets/delete.png';
+import rubbishImg from '../assets/rubbish-img.svg';
 import edit from '../assets/edit-svgrepo-com.svg';
 import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import close from '../assets/close-bold-svgrepo-com.svg';
@@ -22,37 +22,33 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                 editingMode ?
                     <div
                         id={taskId}
-                        className='flex flex-row items-start justify-between text-xl w-11/12 h-fit flex-wrap
-                     break-words relative  rounded-md p-3'
+                        className='TC-container'
                     >
                         <div
-                            className='flex flex-row gap-4 w-8/12 '
+                            className='left-side-TC2'
                         >
                             <img
                                 src={flag}
-                                alt={'redFlag flag'}
-                                className='w-4 h-fit p-1 box-content mt-[3px]'
+                                alt={'flag image'}
+                                className='flag-img-TC'
                             />
                             <input
                                 type={'text'}
                                 value={taskField}
-                                style={{width: 'calc(85% - 4rem)',height: 'auto'}}
                                 autoFocus={true}
-                                className='text-xl outline-none'
+                                className='input-field-TC2'
                                 onChange={(e) => {
                                     setTaskField(e.target.value);
                                 }}
                             />
                         </div>
                         <div
-                            className='flex flex-row gap-4'
+                            className='TC-buttons-container'
                         >
                             <img
                                 src={done}
                                 alt={'edit image'}
-                                className='w-4 h-fit p-2 box-content border border-green-400 rounded-sm
-                                    transition duration-250 ease-in-out select-none
-                                    cursor-pointer hover:bg-green-400'
+                                className='done-edit-buttons-TC'
                                 onClick={() => {
                                     allTasks.forEach((t) => {
                                         if(t.taskid == objId){
@@ -73,9 +69,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                             <img
                                 src={close}
                                 alt={'delete image'}
-                                className='w-4 h-fit p-2 box-content border border-red-800 rounded-sm
-                    transition duration-250 ease-in-out select-none
-                    cursor-pointer hover:bg-red-800'
+                                className='CD-btns-TC'
                                 onClick={() => {
                                     setTaskField(oldField);
                                     setEditingMode(false);
@@ -86,11 +80,10 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                     :
                     <div
                         id={taskId}
-                        className='flex flex-row items-start justify-between text-xl w-11/12 h-fit flex-wrap
-                     break-words relative  rounded-md p-3'
+                        className='TC-container'
                     >
                         <div
-                            className='flex flex-row gap-4 w-8/12'
+                            className='left-side-TC2'
                         >
                             <CheckBox
                                 isDone={isDone}
@@ -104,25 +97,22 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                             <img
                                 src={flag}
                                 alt={'redFlag flag'}
-                                className='w-4 h-fit p-1 box-content mt-[3px]'
+                                className='flag-img-TC'
                             />
-                            <p style={{width: 'calc(85% - 4rem)',height: 'auto',textDecoration: isDone ? 'line-through' : 'none'}}
-                               className='text-xl'
-
+                            <p style={{textDecoration: isDone ? 'line-through' : 'none'}}
+                               className='text-TC2'
                                 ref={taskP}
                             >
                                 {taskField}
                             </p>
                         </div>
                         <div
-                            className='flex flex-row gap-4'
+                            className='TC-buttons-container'
                         >
                             <img
                                 src={edit}
                                 alt={'edit image'}
-                                className='w-4 h-fit p-2 box-content border border-green-400 rounded-sm
-                    transition duration-250 ease-in-out select-none
-                    cursor-pointer hover:bg-green-400'
+                                className='done-edit-buttons-TC'
                                 onClick={() => {
                                     setEditingMode(true);
                                 }}
@@ -130,9 +120,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                             <img
                                 src={rubbishImg}
                                 alt={'delete image'}
-                                className='w-4 h-fit p-2 box-content border border-cyan-500 rounded-sm invert-100
-                                    transition duration-250 ease-in-out select-none
-                                    cursor-pointer hover:bg-cyan-500'
+                                className='CD-btns-TC'
                                 onClick={() => {
                                     allTasks.forEach((t) => {
                                         if(t.taskid == objId){

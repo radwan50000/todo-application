@@ -44,6 +44,40 @@
 
 @layer components {
 
+    /*Task Container Loaded In*/
+    .T-C-loadedIn{
+        @apply w-[95%] mx-auto h-[65%] border-t border-t-gray-300
+        overflow-x-hidden overflow-y-scroll
+        flex flex-col gap-2 items-start
+        xl:p-8
+        max-sm:pt-2
+        sm:pt-2
+        ;
+    }
+
+    .check-box-1{
+        @apply w-6 h-6 rounded-md bg-transparent
+        border-green-300 border select-none
+        transition duration-250 ease-in-out
+        p-[2px] cursor-pointer mt-1
+        xl:w-6 xl:h-6
+        max-sm:w-5 max-sm:h-5 sm:w-5 sm:h-5
+        ;
+
+    }
+
+    .H-o-Component{
+        @apply flex flex-row items-center justify-between gap-4
+        w-[90%];
+    }
+
+    .TC-buttons-container{
+        @apply flex flex-row gap-4
+        xl:w-fit
+        max-sm:w-full sm:w-full
+        max-sm:justify-end sm:justify-end
+
+    }
 
 
     .wave{
@@ -226,6 +260,13 @@
         max-sm:text-lg sm:text-lg;
     }
 
+    .input-field-TC2{
+        @apply  outline-none h-auto
+        xl:text-xl xl:w-[calc(85%-4rem)]
+        max-sm:w-11/12 sm:w-11/12
+        max-sm:text-lg sm:text-lg;
+    }
+
     .text-TC{
         @apply text-xl  h-auto
         xl:text-xl xl:w-[calc(85%-4rem)]
@@ -233,10 +274,25 @@
         max-sm:text-lg sm:text-lg;
     }
 
+    .text-TC2{
+        @apply text-xl  h-auto
+        xl:text-xl xl:w-[calc(85%-4rem)]
+        max-sm:w-10/12 sm:w-10/12
+        max-sm:text-lg sm:text-lg;
+    }
+
     .left-side-TC{
         @apply flex flex-row gap-4
         xl:w-8/12
         max-sm:w-11/12 sm:w-11/12
+        ;
+    }
+
+    .left-side-TC2{
+        @apply flex flex-row
+        xl:w-8/12 xl:gap-4
+        max-sm:gap-2 sm:gap-2
+        max-sm:w-12/12 sm:w-12/12
         ;
     }
 
@@ -266,9 +322,13 @@
     }
 
     .TC-container{
-        @apply flex  items-start justify-between text-xl w-11/12 h-fit flex-wrap
-        break-words relative  rounded-md p-3 gap-4
-        xl:flex-row
+        @apply flex  items-start justify-between text-xl  h-fit flex-wrap
+        break-words relative  rounded-md
+        xl:flex-row xl:w-11/12
+        xl:p-3 xl:gap-4
+        max-sm:gap-2 sm:gap-2
+        max-sm:p-0 sm:p-0
+        max-sm:w-12/12 sm:w-12/12
         max-sm:flex-col sm:flex-col;
     }
 
