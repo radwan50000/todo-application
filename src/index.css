@@ -214,7 +214,7 @@
     .right-component-style{
         @apply h-dvh bg-gray-bg-dark
          overflow-x-hidden overflow-y-scroll
-        text-gray-300 flex items-start flex-col
+        text-gray-300 flex items-start flex-col justify-between
         xl:w-[calc(100%-24rem)] xl:pt-20 xl:pl-8 xl:gap-12
         max-sm:w-dvw max-sm:pt-15 max-sm:pl-2 max-sm:gap-6
         sm:w-dvw sm:pt-15 sm:pl-2 sm:gap-6
