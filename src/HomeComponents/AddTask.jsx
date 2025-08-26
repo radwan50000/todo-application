@@ -62,146 +62,148 @@ const AddTask = (
                     setNavMenuOpened={setNavMenuOpened}
                     navMenuOpened={navMenuOpened}
                 />
-                <div
-                    className='flex flex-row items-center
+                <div className='C-Add-task'>
+                    <div
+                        className='flex flex-row items-center
                     xl:gap-10 xl:w-fit
                     max-sm:gap-3 sm:gap-3 max-sm:w-full sm:w-full
                     '>
-                    <h3
-                        className='font-light cairo
+                        <h3
+                            className='font-light cairo
                         xl:text-xl
                         max-sm:text-lg sm:text-lg
                         '>
-                        Project Name
-                    </h3>
-                    <input
-                        type='text'
-                        placeholder=''
-                        value={projectName}
-                        className='border border-gray-300 rounded-md
+                            Project Name
+                        </h3>
+                        <input
+                            type='text'
+                            placeholder=''
+                            value={projectName}
+                            className='border border-gray-300 rounded-md
                             outline-none
                             xl:text-xl xl:p-2 xl:w-fit
                             max-sm:text-sm sm:text-sm max-sm:p-1 sm:p-1
                             max-sm:w-7/12 sm:w-7/12
                         '
-                        ref={mainTaskName}
-                        onChange={(e) => {
-                            if(e.target.value.length < 15) {
-                                setProjectName(e.target.value);
-                            }
-                        }}
+                            ref={mainTaskName}
+                            onChange={(e) => {
+                                if(e.target.value.length < 15) {
+                                    setProjectName(e.target.value);
+                                }
+                            }}
                         />
-                    <h3
-                        className='font-medium cairo text-red-800 select-none
+                        <h3
+                            className='font-medium cairo text-red-800 select-none
                         xl:text-xl
                         max-sm:hidden sm:hidden
                         '>
-                        * required field
-                    </h3>
-                </div>
-                <div
-                    className='flex flex-row items-center justify-start
+                            * required field
+                        </h3>
+                    </div>
+                    <div
+                        className='flex flex-row items-center justify-start
                     xl:gap-14
                     max-sm:gap-5 sm:gap-5
                     '>
-                    <h3
-                        className='font-light cairo
+                        <h3
+                            className='font-light cairo
                         xl:text-xl xl:w-fit
                         max-sm:text-lg sm:text-lg max-sm:w-fit sm:w-fit
                         '>
-                        Task Icon
-                    </h3>
-                    <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar
+                            Icon
+                        </h3>
+                        <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar
                         max-sm:w-9/12
                     '>
-                        {
-                            [
-                                {
-                                    'taskImg' : houseImg,
-                                    'taskType': 'house'
-                                },
-                                {
-                                    'taskImg' : workImg,
-                                    'taskType': 'work'
-                                },
-                                {
-                                    'taskImg' : familyImg,
-                                    'taskType': 'family'
-                                },
-                                {
-                                    'taskImg' : gymImg,
-                                    'taskType': 'Training'
-                                },
-                                {
-                                'taskImg' : groceryImg,
-                                'taskType': 'grocery'
-                            },
-                                {
-                                'taskImg' : shoppingImg,
-                                'taskType': 'shopping'
-                            },
-                                {
-                                'taskImg' : vacationImg,
-                                'taskType': 'vacation'
-                            },
-                                {
-                                'taskImg' : studyImg,
-                                'taskType': 'study'
-                            },
-                                {
-                                'taskImg' : homeworkImg,
-                                'taskType': 'homework'
-                            },
-                                {
-                                'taskImg' : cookingImg,
-                                'taskType': 'cooking'
-                            },{
-                                'taskImg' : campingImg,
-                                'taskType': 'camping'
-                            }].map((ele, index) => {
-                                return (
-                                    <img
-                                        src={ele.taskImg}
-                                        key={index}
-                                        alt={ele.taskType}
-                                        className= {index > 0 ? 'task-img select-none':'task-img active-task-img select-none'}
-                                        onClick={(e) => activeTask(e,'active-task-img')}
-                                    />
-                                )
-                            })
-                        }
+                            {
+                                [
+                                    {
+                                        'taskImg' : houseImg,
+                                        'taskType': 'house'
+                                    },
+                                    {
+                                        'taskImg' : workImg,
+                                        'taskType': 'work'
+                                    },
+                                    {
+                                        'taskImg' : familyImg,
+                                        'taskType': 'family'
+                                    },
+                                    {
+                                        'taskImg' : gymImg,
+                                        'taskType': 'Training'
+                                    },
+                                    {
+                                        'taskImg' : groceryImg,
+                                        'taskType': 'grocery'
+                                    },
+                                    {
+                                        'taskImg' : shoppingImg,
+                                        'taskType': 'shopping'
+                                    },
+                                    {
+                                        'taskImg' : vacationImg,
+                                        'taskType': 'vacation'
+                                    },
+                                    {
+                                        'taskImg' : studyImg,
+                                        'taskType': 'study'
+                                    },
+                                    {
+                                        'taskImg' : homeworkImg,
+                                        'taskType': 'homework'
+                                    },
+                                    {
+                                        'taskImg' : cookingImg,
+                                        'taskType': 'cooking'
+                                    },{
+                                    'taskImg' : campingImg,
+                                    'taskType': 'camping'
+                                }].map((ele, index) => {
+                                    return (
+                                        <img
+                                            src={ele.taskImg}
+                                            key={index}
+                                            alt={ele.taskType}
+                                            className= {index > 0 ? 'task-img select-none':'task-img active-task-img select-none'}
+                                            onClick={(e) => activeTask(e,'active-task-img')}
+                                        />
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
-                <h1
-                    className='font-medium cairo
+                    <h1
+                        className='font-medium cairo
                     xl:text-3xl
                     max-sm:text-xl sm:text-xl
                     '>
-                    Tasks
-                </h1>
-                <div
-                    className='container-of-TC-container no-scrollbar'
-                    ref={tasksContainer}>
+                        Tasks
+                    </h1>
+                    <div
+                        className='container-of-TC-container no-scrollbar'
+                        ref={tasksContainer}>
 
-                    {
-                        addedTasks.map(t => {
-                                return (
-                                    <TaskComponent
-                                        task={t.task}
-                                        id={t.id}
-                                        flag={t.priority}
-                                        setTempTasks={setTempTasks}
-                                        tempTasks={tempTasks}
-                                        key={t.id}/>
-                                )
-                            }
-                        )
-                    }
+                        {
+                            addedTasks.map(t => {
+                                    return (
+                                        <TaskComponent
+                                            task={t.task}
+                                            id={t.id}
+                                            flag={t.priority}
+                                            setTempTasks={setTempTasks}
+                                            tempTasks={tempTasks}
+                                            key={t.id}/>
+                                    )
+                                }
+                            )
+                        }
 
+                    </div>
                 </div>
                 <div
                     className='flex flex-row items-center justify-end gap-4
-                    w-11/12 h-fit'>
+                    w-12/12 h-fit py-3 px-4'>
                     <div
                         className='buttons'
                         onClick={() => {

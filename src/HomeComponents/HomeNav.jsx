@@ -143,7 +143,7 @@ const HomeNav = (
                        />
                        <p
                            className='text-red-200'>
-                           Add Task
+                           Add Project
                        </p>
                    </div>
                    <div
