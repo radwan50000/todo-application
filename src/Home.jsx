@@ -8,14 +8,14 @@ import weekImg from "./assets/date-svgrepo-com.svg";
 import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 
 const Home = () => {
-    const [addTaskSection , setAddTaskSection] = useState(true);
+    const [addTaskSection , setAddTaskSection] = useState(false);
     const [searchSection , setSearchSection] = useState(false);
-    const [todaySection , setTodaySection] = useState(false);
+    const [todaySection , setTodaySection] = useState(true);
     const [weeklySection , setWeeklySection] = useState(false);
     const [customSection , setCustomSection] = useState(false);
     const [manuallyAddedTasks, setManuallyAddedTasks] = useState(localStorage.getItem('custom-tasks') === null ? []:JSON.parse(localStorage.getItem('custom-tasks')));
     const [taskId , setTaskId] = useState('');
-    const [navMenuOpened, setNavMenuOpened] = useState(true);
+    const [navMenuOpened, setNavMenuOpened] = useState(false);
     const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
 
 
