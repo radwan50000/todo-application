@@ -76,7 +76,7 @@ const Home = () => {
         hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL});
         hammer.get("pan").set({
             direction: Hammer.DIRECTION_HORIZONTAL,
-            threshold: 200,
+            threshold: 350,
             pointers: 1
         });
 
