@@ -74,7 +74,6 @@ const Home = () => {
         initWeeklyLS();
         const hammer = new Hammer(PageContainer.current);
         hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL,
-            threshold: 10, // lower threshold = more sensitive
             velocity: 0.3
         });
         hammer.on('swipeleft',() => {
@@ -93,7 +92,6 @@ const Home = () => {
             if(canOpenNavMenu){
                 setNavMenuOpened(false);
             }
-            console.log("moving")
         })
 
         hammer.on('panright',() => {
