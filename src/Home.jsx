@@ -74,21 +74,14 @@ const Home = () => {
         initWeeklyLS();
         const hammer = new Hammer(PageContainer.current);
         hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL});
-        hammer.get("pan").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+        hammer.get("pan").set({
+            direction: Hammer.DIRECTION_HORIZONTAL,
+            threshold: 5,
+            pointers: 1
+        });
 
-        // hammer.on('swipeleft', () => {
-        //     if (canOpenNavMenu) {
-        //         setNavMenuOpened(false);
-        //     }
-        // })
-        //
-        // hammer.on('swiperight', () => {
-        //     if (canOpenNavMenu) {
-        //         setNavMenuOpened(true);
-        //     }
-        // })
-
-        hammer.on('panleft',() => {
+        hammer.on('panleft',(e) => {
+            console.log(e.type);
             if(canOpenNavMenu){
                 setNavMenuOpened(false);
             }
