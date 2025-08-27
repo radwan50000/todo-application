@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import userImg from '../assets/user.png';
+import userImg from '../assets/student.gif';
 import splitView from '../assets/nav-icon.svg';
 import addImg from '../assets/add.png';
 import searchImg from '../assets/magnifying-glass.png';
@@ -107,9 +107,7 @@ const HomeNav = (
                            <img
                                src={userImg}
                                alt='user image'
-                               className='w-5  rounded-full
-                        border-4 border-pink-500 invert-100 p-2
-                        box-content'
+                               className='w-11 rounded-md border-2 border-white'
                            />
                            <p
                                className='text-white cairo font-bold text-2xl'>
