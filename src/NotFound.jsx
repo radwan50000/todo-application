@@ -11,7 +11,12 @@ const NotFound = () => {
                 className='w-full h-dvh bg-gray-bg-dark flex items-center justify-center
                     flex-col gap-8'>
                 <div
-                    className='w-4/12 p-16 bg-white rounded-full'
+                    className='bg-white
+                    xl:p-16 xl:w-4/12 xl:rounded-full
+                    max-sm:rounded-xl sm:rounded-xl
+                    max-sm:w-8/12 sm:w-8/12
+                    max-sm:p-4 sm:p-4
+                    '
                     >
                     <Lottie animationData={_404}
                             loop={true}
@@ -26,7 +31,7 @@ const NotFound = () => {
                             nav('/');
                         }}
                     >
-                    return to home
+                    Home Page
                 </div>
             </div>
         </>
