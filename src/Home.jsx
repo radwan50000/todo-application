@@ -73,9 +73,7 @@ const Home = () => {
         initTodayLS();
         initWeeklyLS();
         const hammer = new Hammer(PageContainer.current);
-        hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL,
-            velocity: 0.3
-        });
+        hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL});
         hammer.on('swipeleft',() => {
             if(canOpenNavMenu){
                 setNavMenuOpened(false);
