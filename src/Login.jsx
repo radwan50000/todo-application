@@ -65,7 +65,7 @@ const Login = () => {
                     '>
                     <form>
                         <h1 className='text-7xl font-black mb-8'>
-                            Sign In
+                            Sign Up
                         </h1>
                         <div
                             className='login-input-container'
