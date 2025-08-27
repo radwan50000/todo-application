@@ -5,6 +5,7 @@ import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
 import todayImg from "./assets/june.png";
 import weekImg from "./assets/date-svgrepo-com.svg";
+import Hammer from 'hammerjs';
 import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 
 const Home = () => {
@@ -17,6 +18,8 @@ const Home = () => {
     const [taskId , setTaskId] = useState('');
     const [navMenuOpened, setNavMenuOpened] = useState(false);
     const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
+
+
 
 
     const initTodayLS = () => {
@@ -68,6 +71,19 @@ const Home = () => {
     useEffect(() => {
         initTodayLS();
         initWeeklyLS();
+        const hammer = new Hammer(document.body);
+
+        hammer.on('swipeleft',() => {
+            if(canOpenNavMenu){
+                setNavMenuOpened(false);
+            }
+        })
+
+        hammer.on('swiperight',() => {
+            if(canOpenNavMenu){
+                setNavMenuOpened(true);
+            }
+        })
     },[])
 
     return (
