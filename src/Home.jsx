@@ -81,7 +81,6 @@ const Home = () => {
         });
 
         hammer.on('panleft',(e) => {
-            console.log(e.type);
             if(canOpenNavMenu){
                 setNavMenuOpened(false);
             }
