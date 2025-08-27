@@ -1,6 +1,6 @@
 import HomeNav from './HomeComponents/HomeNav.jsx';
 import AddTask from './HomeComponents/AddTask.jsx';
-import {useState, useEffect} from 'react';
+import {useState, useEffect,useRef} from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
 import todayImg from "./assets/june.png";
@@ -9,6 +9,7 @@ import Hammer from 'hammerjs';
 import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 
 const Home = () => {
+    const PageContainer = useRef(null);
     const [addTaskSection , setAddTaskSection] = useState(false);
     const [searchSection , setSearchSection] = useState(false);
     const [todaySection , setTodaySection] = useState(true);
@@ -71,8 +72,11 @@ const Home = () => {
     useEffect(() => {
         initTodayLS();
         initWeeklyLS();
-        const hammer = new Hammer(document.body);
-        hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+        const hammer = new Hammer(PageContainer.current);
+        hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL,
+            threshold: 10, // lower threshold = more sensitive
+            velocity: 0.3
+        });
         hammer.on('swipeleft',() => {
             if(canOpenNavMenu){
                 setNavMenuOpened(false);
@@ -84,6 +88,19 @@ const Home = () => {
                 setNavMenuOpened(true);
             }
         })
+
+        hammer.on('panleft',() => {
+            if(canOpenNavMenu){
+                setNavMenuOpened(false);
+            }
+            console.log("moving")
+        })
+
+        hammer.on('panright',() => {
+            if(canOpenNavMenu){
+                setNavMenuOpened(true);
+            }
+        })
     },[])
 
     return (
@@ -91,7 +108,9 @@ const Home = () => {
             <div
                 className='flex flex-row items-start
                     bg-gray-bg w-full h-dvh
-                    '>
+                    '
+                ref={PageContainer}
+            >
                 <HomeNav
                     tasks={manuallyAddedTasks}
                     setCustomSection={setCustomSection}

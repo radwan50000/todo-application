@@ -11,6 +11,10 @@
     @apply select-none;
 }
 
+body{
+    touch-action: pan-y;
+}
+
 .cairo{
     font-family: 'Cairo', cursive !important;
 }
@@ -100,7 +104,7 @@
     .l-H-o-Component h1{
         @apply font-semibold text-gray-300
         xl:text-5xl
-        max-sm:text-3xl
+        max-sm:text-3xl sm:text-3xl
         ;
     }
 
