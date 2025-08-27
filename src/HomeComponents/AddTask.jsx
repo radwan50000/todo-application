@@ -1,25 +1,10 @@
-import campingImg from '../assets/camping-tent.png';
-import familyImg from '../assets/family.png';
-import groceryImg from '../assets/grocery-cart.png';
-import houseImg from '../assets/house.png';
-import shoppingImg from '../assets/online-shopping.png';
-import workImg from '../assets/suitcase.png';
-import vacationImg from '../assets/sunbathing.png';
-import homeworkImg from '../assets/homework.png';
-import studyImg from '../assets/study.png';
-import cookingImg from '../assets/bake.png';
-import yellowFlag from '../assets/yellowFlag.png';
-import greenFlag from '../assets/greenFlag.png';
-import redFlag from '../assets/redFlag.png';
-import blueFlag from '../assets/blueFlag.png';
-import gymImg from '../assets/dumbbell.png';
-import menuImg from '../assets/menu-icon.svg';
 import {useRef, useState} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import TaskComponent from './TaskComponent.jsx';
 import {v4 as uuidv4} from 'uuid';
 import SaveTempObjInLS from '../SavingTempObjInLS.js';
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
+import {projectIcons,flagsData} from '../Data.js';
 
 
 const AddTask = (
@@ -116,50 +101,7 @@ const AddTask = (
                         max-sm:w-9/12
                     '>
                             {
-                                [
-                                    {
-                                        'taskImg' : houseImg,
-                                        'taskType': 'house'
-                                    },
-                                    {
-                                        'taskImg' : workImg,
-                                        'taskType': 'work'
-                                    },
-                                    {
-                                        'taskImg' : familyImg,
-                                        'taskType': 'family'
-                                    },
-                                    {
-                                        'taskImg' : gymImg,
-                                        'taskType': 'Training'
-                                    },
-                                    {
-                                        'taskImg' : groceryImg,
-                                        'taskType': 'grocery'
-                                    },
-                                    {
-                                        'taskImg' : shoppingImg,
-                                        'taskType': 'shopping'
-                                    },
-                                    {
-                                        'taskImg' : vacationImg,
-                                        'taskType': 'vacation'
-                                    },
-                                    {
-                                        'taskImg' : studyImg,
-                                        'taskType': 'study'
-                                    },
-                                    {
-                                        'taskImg' : homeworkImg,
-                                        'taskType': 'homework'
-                                    },
-                                    {
-                                        'taskImg' : cookingImg,
-                                        'taskType': 'cooking'
-                                    },{
-                                    'taskImg' : campingImg,
-                                    'taskType': 'camping'
-                                }].map((ele, index) => {
+                                projectIcons.map((ele, index) => {
                                     return (
                                         <img
                                             src={ele.taskImg}
@@ -229,7 +171,7 @@ const AddTask = (
 
 
                             }else {
-                                toast('Tasks Name must be filled', {
+                                toast('Project Name must be filled', {
                                     theme: 'dark',
                                     closeOnClick: true,
                                     type: 'error',
@@ -279,23 +221,7 @@ const AddTask = (
                         </h3>
                         <div className='flex flex-row gap-2 w-fit'>
                             {
-                                [
-                                    {
-                                        'flagType': 'red flag',
-                                        'flagImg': redFlag,
-                                    },
-                                    {
-                                        'flagType': 'yellow flag',
-                                        'flagImg': yellowFlag
-                                    },
-                                    {
-                                        'flagType': 'green flag',
-                                        'flagImg': greenFlag
-                                    },
-                                    {
-                                        'flagType': 'blue flag',
-                                        'flagImg': blueFlag,
-                                    }].map((ele, index) => {
+                                flagsData.map((ele, index) => {
                                     return (
                                         <img
                                             src={ele.flagImg}
