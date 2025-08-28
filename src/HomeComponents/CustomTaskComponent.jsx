@@ -1,4 +1,4 @@
-import {useRef, useState , useEffect} from 'react';
+import {useRef, useState , useEffect , useContext} from 'react';
 import TaskComponent2 from "./TaskComponent2.jsx";
 import greenFlag from "../assets/greenFlag.png";
 import blueFlag from "../assets/blueFlag.png";
@@ -9,6 +9,8 @@ import {v4 as uuidv4} from 'uuid';
 import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
+import SettingGear from './SettingGear.jsx';
+import AppData from './AppData.jsx';
 
 
 const CustomTaskComponent = (
@@ -30,6 +32,7 @@ const CustomTaskComponent = (
     const [completed , setCompleted] = useState(0);
     const [miniTasks , setMiniTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
+    const appData = useContext(AppData);
 
     const activeTask = (e,className) => {
         const ele = document.querySelectorAll('.task-img');
@@ -68,6 +71,8 @@ const CustomTaskComponent = (
                     setNavMenuOpened={setNavMenuOpened}
                     navMenuOpened={navMenuOpened}
                 />
+                <SettingGear
+                    />
                 <div
                     className='C-H-o-Component'
                 >

@@ -28,7 +28,6 @@ import birthday from './assets/birthday.png';
 import checkList from './assets/checklist.png';
 import coffee from './assets/coffee-cup.png';
 import writing from './assets/copy-writing.png';
-import dest from './assets/destination.png';
 import discuss from './assets/discussion.png';
 import map from './assets/map.png';
 import movie from './assets/movie.png';
@@ -159,9 +158,6 @@ export const projectIcons = [
     },{
         'taskImg' : writing,
         'taskType': 'writing'
-    },{
-        'taskImg' : dest,
-        'taskType': 'destination'
     },{
         'taskImg' : discuss,
         'taskType': 'discussion'
