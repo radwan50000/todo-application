@@ -35,6 +35,12 @@ import movie from './assets/movie.png';
 import education from './assets/online-education.png';
 import palette from './assets/palette.png';
 import presentation from './assets/presentation.png';
+import book from './assets/book.png';
+import chat from './assets/chat.png';
+import money from './assets/money.png';
+import pin from './assets/pin.png';
+import stamp from './assets/stamp.png';
+import warning from './assets/warning.png';
 
 
 //Flags
@@ -174,6 +180,24 @@ export const projectIcons = [
     },{
         'taskImg' : presentation,
         'taskType': 'presentation'
+    },{
+        'taskImg' : book,
+        'taskType': 'book'
+    },{
+        'taskImg' : chat,
+        'taskType': 'chat'
+    },{
+        'taskImg' : money,
+        'taskType': 'money'
+    },{
+        'taskImg' : pin,
+        'taskType': 'pin'
+    },{
+        'taskImg' : stamp,
+        'taskType': 'stamp'
+    },{
+        'taskImg' : warning,
+        'taskType': 'warning'
     }
 
 ]
