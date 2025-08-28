@@ -202,7 +202,7 @@ body{
     }
 
     .task-img{
-        @apply border-gray-300 border p-2
+        @apply  p-2
         transition duration-250 ease-in-out select-none
         rounded-md cursor-pointer hover:bg-trans-white
         flex

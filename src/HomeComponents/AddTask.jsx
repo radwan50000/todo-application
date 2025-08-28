@@ -84,7 +84,7 @@ const AddTask = (
                         />
                         <div
                             className='absolute bottom-0 left-0
-                            translate-y-[105%] border border-white
+                            translate-y-[105%] border border-yellow-400
                              bg-gray-bg-dark rounded-md
                             hidden flex-row flex-wrap
                             content-start justify-between
