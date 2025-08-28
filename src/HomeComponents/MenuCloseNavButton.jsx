@@ -5,7 +5,7 @@ const MenuCloseNavButton = ({setNavMenuOpened,navMenuOpened}) => {
 
     return (
         <span
-            className='absolute top-5 right-5 cursor-pointer
+            className='absolute top-5 left-5 cursor-pointer
                     transition duration-250 ease-in-out
                     hover:invert-70
                     xl:hidden
