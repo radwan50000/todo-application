@@ -360,7 +360,7 @@ body{
         max-sm:w-11/12 sm:w-11/12;
     }
     .sign-out-container .warning-container {
-        @apply flex items-center justify-center w-full py-4 h-fit bg-[#ffb703];
+        @apply flex items-center justify-center w-full py-4 h-fit bg-red-800;
     }
 
     .sign-out-container .text-warning{
