@@ -19,7 +19,7 @@ const Home = () => {
     const [taskId , setTaskId] = useState('');
     const [navMenuOpened, setNavMenuOpened] = useState(false);
     const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
-    const [settingSection, setSettingSection] = useState(true);
+    const [settingSection, setSettingSection] = useState(false);
     const [settingDataToShow , setSettingDataToShow] = useState({});
 
 
@@ -87,6 +87,7 @@ const Home = () => {
                     {
                         settingSection,
                         setSettingSection,
+                        settingDataToShow,
                         setSettingDataToShow,
                         manuallyAddedTasks,
                         setManuallyAddedTasks,
