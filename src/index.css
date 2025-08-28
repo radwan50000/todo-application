@@ -214,10 +214,10 @@ body{
         @apply flex!;
     }
     .active-task-img{
-        @apply border-green-400!;
+        @apply border border-yellow-400!;
     }
     .active-flag-img{
-        @apply border-green-400!;
+        @apply border border-yellow-400!;
     }
 
     .custom-task-button{
