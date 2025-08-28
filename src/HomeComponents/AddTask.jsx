@@ -87,10 +87,9 @@ const AddTask = (
                             hidden flex-row flex-wrap
                             content-start justify-start
                             overflow-x-hidden overflow-y-scroll no-scrollbar
-                            p-2 gap-2
+                            p-2 gap-2 z-[3000]
                             xl:w-full xl:h-[350px]
-                            max-sm:w-7/12 sm:w-7/12
-                            '
+                            max-sm:w-7/12 sm:w-7/12'
                             ref={imagePickerContainer}
                             >
                             {
