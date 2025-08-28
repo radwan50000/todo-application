@@ -55,7 +55,7 @@ const HomeNav = (
         setTodaySection(false);
     }
 
-    const clostNavMenuWhenPressOnTask = () => {
+    const closetNavMenuWhenPressOnTask = () => {
         document.querySelectorAll('.task-nav-bar').forEach((btn) => {
             btn.addEventListener('click', () => {
                 if(canOpenNavMenu) {
@@ -75,8 +75,8 @@ const HomeNav = (
 
     useEffect(() => {
         window.innerWidth <= 1280 ? setCanOpenNavMenu(true):setCanOpenNavMenu(false);
-        
-        clostNavMenuWhenPressOnTask();
+
+        closetNavMenuWhenPressOnTask();
 
     },[tasks]);
 

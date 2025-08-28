@@ -3,8 +3,6 @@ import AddTask from './HomeComponents/AddTask.jsx';
 import {useState, useEffect,useRef} from 'react';
 import CustomTaskComponent from "./HomeComponents/CustomTaskComponent.jsx";
 import DailyComponent from './HomeComponents/DailyComponent.jsx';
-import todayImg from "./assets/june.png";
-import weekImg from "./assets/date-svgrepo-com.svg";
 import Hammer from 'hammerjs';
 import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 
@@ -20,30 +18,6 @@ const Home = () => {
     const [navMenuOpened, setNavMenuOpened] = useState(false);
     const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
 
-
-
-
-    const initTodayLS = () => {
-        if(localStorage.getItem('daily-tasks') === null){
-            const obj = {
-                'projectTitle': 'Daily Tasks',
-                'projectIcon': todayImg,
-                'tasks': [],
-            }
-            localStorage.setItem('daily-tasks',JSON.stringify(obj));
-        }
-    }
-
-    const initWeeklyLS = () => {
-        if(localStorage.getItem('weekly-tasks') === null){
-            const obj = {
-                'projectTitle': 'Weekly Tasks',
-                'projectIcon': weekImg,
-                'tasks': [],
-            }
-            localStorage.setItem('weekly-tasks',JSON.stringify(obj));
-        }
-    }
 
     const weeklySectionEnable = () => {
         setCustomSection(false);
@@ -70,8 +44,6 @@ const Home = () => {
     }
 
     useEffect(() => {
-        initTodayLS();
-        initWeeklyLS();
         const hammer = new Hammer(PageContainer.current);
         hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL});
         hammer.get("pan").set({
@@ -92,6 +64,8 @@ const Home = () => {
             }
         })
     },[])
+
+
 
     return (
         <>

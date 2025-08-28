@@ -134,9 +134,11 @@ const Login = () => {
                         alt={'wave image'}
                         className='wave'
                         />
-                    <span
-                        className='flex flex-col gap-4 w-fit items-center'>
-                        <div className='w-8/12 bg-white p-2 box-content
+                    <div
+                        className='flex flex-col gap-4 w-full items-center
+                            justify-center'
+                    >
+                        <div className='w-9/12 bg-white p-2 box-content
                          max-sm:hidden sm:hidden lg:flex
                         rounded-md'>
                             <Lottie animationData={ill_image}
@@ -147,7 +149,8 @@ const Login = () => {
                         {
                             fetchingError ?
                                 <div className='w-10/12 bg-white p-2 box-content
-                                          flex
+                                          lg:hidden m-4
+                                          max-sm:flex sm:flex
                                           rounded-md'>
                                             <Lottie animationData={ill_image}
                                                     loop={true}
@@ -182,7 +185,7 @@ const Login = () => {
                                         Loading...
                                     </span>
                         }
-                    </span>
+                    </div>
 
                 </div>
             </div>
