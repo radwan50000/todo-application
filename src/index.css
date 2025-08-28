@@ -75,8 +75,8 @@ body{
     }
 
     .C-Add-task{
-        @apply flex flex-col w-full h-[85%] justify-start
-        gap-8;
+        @apply flex flex-col w-full h-[90%] justify-start
+        gap-4;
     }
 
     .H-o-Component{
@@ -203,11 +203,15 @@ body{
 
     .task-img{
         @apply border-gray-300 border p-2
-        transition duration-250 ease-in-out
+        transition duration-250 ease-in-out select-none
         rounded-md cursor-pointer hover:bg-trans-white
+        flex
         xl:w-10
         max-sm:w-8 sm:w-8
         ;
+    }
+    .visible-container{
+        @apply flex!;
     }
     .active-task-img{
         @apply border-green-400!;

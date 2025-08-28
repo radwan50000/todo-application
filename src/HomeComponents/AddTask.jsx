@@ -17,7 +17,9 @@ const AddTask = (
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
+    const [taskImg , setTaskImg] = useState(projectIcons[0]['taskImg']);
     const [projectName , setProjectName] = useState('');
+    const imagePickerContainer = useRef(null);
     const mainTaskName = useRef(null);
     const [addedTasks, setAddedTasks] = useState([]);
     const [tempTasks , setTempTasks] = useState({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
@@ -50,21 +52,22 @@ const AddTask = (
                 <div className='C-Add-task'>
                     <div
                         className='flex flex-row items-center
-                    xl:gap-10 xl:w-fit
+                    xl:gap-4 xl:w-fit relative
                     max-sm:gap-3 sm:gap-3 max-sm:w-full sm:w-full
                     '>
-                        <h3
-                            className='font-light cairo
-                        xl:text-xl
-                        max-sm:text-lg sm:text-lg
-                        '>
-                            Project Name
-                        </h3>
+                        <img
+                            src={taskImg}
+                            alt={'task image'}
+                            className='task-img'
+                            onClick={() => {
+                                imagePickerContainer.current.classList.toggle('visible-container');
+                            }}
+                            />
                         <input
                             type='text'
-                            placeholder=''
+                            placeholder='Project Name'
                             value={projectName}
-                            className='border border-gray-300 rounded-md
+                            className='border-b border-gray-300
                             outline-none
                             xl:text-xl xl:p-2 xl:w-fit
                             max-sm:text-sm sm:text-sm max-sm:p-1 sm:p-1
@@ -77,29 +80,19 @@ const AddTask = (
                                 }
                             }}
                         />
-                        <h3
-                            className='font-medium cairo text-red-800 select-none
-                        xl:text-xl
-                        max-sm:hidden sm:hidden
-                        '>
-                            * required field
-                        </h3>
-                    </div>
-                    <div
-                        className='flex flex-row items-center justify-start
-                    xl:gap-14
-                    max-sm:gap-5 sm:gap-5
-                    '>
-                        <h3
-                            className='font-light cairo
-                        xl:text-xl xl:w-fit
-                        max-sm:text-lg sm:text-lg max-sm:w-fit sm:w-fit
-                        '>
-                            Icon
-                        </h3>
-                        <div className='flex flex-row gap-2 overflow-x-scroll no-scrollbar
-                        max-sm:w-9/12
-                    '>
+                        <div
+                            className='absolute bottom-0 left-0
+                            translate-y-[105%] border border-white
+                             bg-gray-bg-dark rounded-md
+                            hidden flex-row flex-wrap
+                            content-start justify-start
+                            overflow-x-hidden overflow-y-scroll no-scrollbar
+                            p-2 gap-2
+                            xl:w-full xl:h-[350px]
+                            max-sm:w-7/12 sm:w-7/12
+                            '
+                            ref={imagePickerContainer}
+                            >
                             {
                                 projectIcons.map((ele, index) => {
                                     return (
@@ -107,14 +100,20 @@ const AddTask = (
                                             src={ele.taskImg}
                                             key={index}
                                             alt={ele.taskType}
-                                            className= {index > 0 ? 'task-img select-none':'task-img active-task-img select-none'}
-                                            onClick={(e) => activeTask(e,'active-task-img')}
+                                            className= {index > 0 ? 'task-img ':'task-img active-task-img select-none'}
+                                            onClick={(e) => {
+                                                activeTask(e,'active-task-img')
+                                                imagePickerContainer.current.classList.toggle('visible-container');
+                                                setTaskImg(e.target.src)
+                                                }
+                                            }
                                         />
                                     )
                                 })
                             }
                         </div>
                     </div>
+
                     <h1
                         className='font-medium cairo
                     xl:text-3xl
