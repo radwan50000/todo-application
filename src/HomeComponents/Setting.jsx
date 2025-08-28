@@ -41,8 +41,8 @@ const Setting = () => {
                 flex w-full justify-start items-start
                 text-gray-300 font-bold cairo
                 xl:text-8xl xl:mt-8 xl:ml-8
-                max-sm:mt-4 sm:ml-8
-                max-sm: sm:
+                max-sm:mt-4 sm:mt-4
+                max-sm:ml-4 sm:ml-4
                 max-sm:text-5xl sm:text-5xl
 
             '>
