@@ -88,7 +88,7 @@ const HomeNav = (
                     overflow-x-hidden overflow-y-scroll no-scrollbar
                     transition duration-250 ease-in-out
                     bg-gray-bg
-                    z-50
+                    z-[1000]
                     xl:flex xl:relative
                     max-sm:absolute max-sm:top-0 max-sm:left-0
                     sm:absolute sm:top-0 sm:left-0

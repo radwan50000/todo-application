@@ -12,7 +12,9 @@ const AddTask = (
         setTasks,
         tasks,
         navMenuOpened,
-        setNavMenuOpened
+        setNavMenuOpened,
+        customSectionEnable,
+        setTaskId
     }) => {
     const tasksContainer = useRef(null);
     const addTaskContainer = useRef(null);
@@ -52,9 +54,9 @@ const AddTask = (
                 <div className='C-Add-task'>
                     <div
                         className='flex flex-row items-center
-                    xl:gap-4 xl:w-fit relative
-                    max-sm:gap-3 sm:gap-3 max-sm:w-full sm:w-full
-                    '>
+                        xl:gap-4 xl:w-fit relative
+                        max-sm:gap-3 sm:gap-3 max-sm:w-full sm:w-full'
+                    >
                         <img
                             src={taskImg}
                             alt={'task image'}
@@ -85,9 +87,9 @@ const AddTask = (
                             translate-y-[105%] border border-white
                              bg-gray-bg-dark rounded-md
                             hidden flex-row flex-wrap
-                            content-start justify-start
+                            content-start justify-between
                             overflow-x-hidden overflow-y-scroll no-scrollbar
-                            p-2 gap-2 z-[3000]
+                            p-2 gap-2 z-[50]
                             xl:w-full xl:h-[350px]
                             max-sm:w-7/12 sm:w-7/12'
                             ref={imagePickerContainer}
@@ -158,13 +160,16 @@ const AddTask = (
                             if(mainTaskName.current.value.trim() !== '') {
                                 tempTasks.taskname =  mainTaskName.current.value.trim();
                                 tempTasks.taskicon = document.querySelector('.active-task-img').src;
-                                tempTasks.taskid = uuidv4();
+                                let id = uuidv4();
+                                tempTasks.taskid = id;
                                 setTempTasks({'taskname': '','taskicon':'','taskid':'','tasks':[],'completed':0});
                                 tasksContainer.current.innerHTML = '';
                                 mainTaskName.current.value = '';
                                 setProjectName('');
                                 setTasks([...tasks , tempTasks]);
                                 SaveTempObjInLS(tempTasks);
+                                setTaskId(id);
+                                customSectionEnable();
                                 console.log(localStorage.getItem('custom-tasks'));
 
 

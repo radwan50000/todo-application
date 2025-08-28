@@ -19,6 +19,14 @@ const Home = () => {
     const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
 
 
+    const customSectionEnable = () => {
+        setCustomSection(true);
+        setAddTaskSection(false);
+        setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(false);
+    }
+
     const weeklySectionEnable = () => {
         setCustomSection(false);
         setAddTaskSection(false);
@@ -97,6 +105,8 @@ const Home = () => {
                             tasks={manuallyAddedTasks}
                             navMenuOpened={navMenuOpened}
                             setNavMenuOpened={setNavMenuOpened}
+                            customSectionEnable={customSectionEnable}
+                            setTaskId={setTaskId}
                         /> :
                         customSection ?
                             <CustomTaskComponent
