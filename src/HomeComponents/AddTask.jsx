@@ -60,7 +60,7 @@ const AddTask = (
                         <img
                             src={taskImg}
                             alt={'task image'}
-                            className='task-img'
+                            className='cover-img'
                             onClick={() => {
                                 imagePickerContainer.current.classList.toggle('visible-container');
                             }}
@@ -72,7 +72,7 @@ const AddTask = (
                             className='border-b border-gray-300
                             outline-none
                             xl:text-xl xl:p-2 xl:w-fit
-                            max-sm:text-sm sm:text-sm max-sm:p-1 sm:p-1
+                            max-sm:text-md sm:text-md max-sm:p-1 sm:p-1
                             max-sm:w-7/12 sm:w-7/12
                         '
                             ref={mainTaskName}

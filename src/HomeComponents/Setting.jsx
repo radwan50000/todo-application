@@ -8,7 +8,7 @@ import CustomTaskClass from "./CustomTaskClass.js";
 
 const Setting = () => {
     const data = useContext(AppData);
-    let [customTasksController] = useState(new CustomTaskClass(data.taskId));
+    let [customTasksController] = useState(() => new CustomTaskClass(data.taskId));
 
     let [projectName , setProjectName] = useState(customTasksController.projectName);
     let [projectImg , setProjectImg] = useState(customTasksController.projectImg);

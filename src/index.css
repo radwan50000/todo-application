@@ -201,6 +201,16 @@ body{
         ;
     }
 
+    .cover-img{
+        @apply  p-2
+        transition duration-250 ease-in-out select-none
+        rounded-md cursor-pointer hover:bg-trans-white
+        flex
+        xl:w-10
+        max-sm:w-10 sm:w-10
+        ;
+    }
+
     .task-img{
         @apply  p-2
         transition duration-250 ease-in-out select-none
