@@ -4,14 +4,19 @@ import close from '../assets/close2.svg';
 import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import {projectIcons} from "../Data.js";
 import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
+import CustomTaskClass from "./CustomTaskClass.js";
 
 const Setting = () => {
     const data = useContext(AppData);
-    let [dataObj , setDataObj] = useState({});
-    let [projectName , setProjectName] = useState('');
-    let [projectImg , setProjectImg] = useState(null);
-    let [tasks, setTasks] = useState(null);
+    let [customTasksController] = useState(new CustomTaskClass(data.taskId));
+
+    let [projectName , setProjectName] = useState(customTasksController.projectName);
+    let [projectImg , setProjectImg] = useState(customTasksController.projectImg);
+    let [tasks, setTasks] = useState(customTasksController.tasks);
     let imagePickerContainer = useRef(null);
+    let [pageRemoved , setPageRemoved] = useState(false);
+
+
 
 
     const activeTask = (e,className) => {
@@ -23,16 +28,6 @@ const Setting = () => {
     }
 
     useEffect(() => {
-        console.log(data.manuallyAddedTasks);
-        console.log(data.taskId);
-        data.manuallyAddedTasks.forEach((task) => {
-            if(data.taskId === task.taskid){
-                setDataObj(task);
-                setProjectName(task.taskname);
-                setProjectImg(task.taskicon);
-                setTasks(task.tasks);
-            }
-        })
 
     },[])
 
@@ -65,6 +60,7 @@ const Setting = () => {
                     >
                         <img
                             src={close}
+                            alt={'close icon'}
                             className='
                                  xl:w-7 lg:w-6
                                  max-sm:w-5 sm:w-5
@@ -82,25 +78,17 @@ const Setting = () => {
                             '
                     onClick={() => {
                         if(projectName.trim().length > 0) {
-                            console.log(dataObj);
-                            dataObj.taskname = projectName;
-                            dataObj.taskicon = projectImg;
-
-                            data.manuallyAddedTasks.forEach((task,i) => {
-                                if(task.taskid === data.taskId){
-                                    data.manuallyAddedTasks.splice(i,1);
-                                    data.manuallyAddedTasks.push(dataObj);
-                                    data.setManuallyAddedTasks(data.manuallyAddedTasks);
-                                }
-                            });
-
-                            SaveAllCustomTasksInLS(data.manuallyAddedTasks);
+                            customTasksController.changeProjectName(projectName);
+                            customTasksController.changeProjectIcon(projectImg);
+                            if(pageRemoved) data.addTaskSectionEnable();
+                            data.setManuallyAddedTasks(customTasksController.saveInCustomTasksArr());
                             data.setSettingSection(!data.settingSection);
                         }
                     }}
                 >
                 <img
                     src={done}
+                    alt={'done icon'}
                     className='
                          xl:w-7 lg:w-6
                          max-sm:w-5 sm:w-5
@@ -186,7 +174,53 @@ const Setting = () => {
                     }
                 </div>
             </div>
-
+            <div
+                className='flex flex-col w-[98%] items-start justify-start mt-8 mx-auto
+                    gap-4 text-gray-300
+                '
+                >
+                <h3
+                    className='text-2xl cairo font-bold text-gray-500'
+                    >
+                    Tasks
+                </h3>
+                <div
+                    className={tasks.length > 0 ? 'buttons':'buttons pointer-none'}
+                    onClick={() => {
+                        customTasksController.makeAllTasksUnDone();
+                    }}
+                    >
+                    Reset Progress
+                </div>
+                <div
+                    className={tasks.length > 0 ? 'danger-buttons':'danger-buttons pointer-none'}
+                    onClick={() => {
+                        customTasksController.removeTasks();
+                    }}
+                >
+                    Remove Tasks
+                </div>
+            </div>
+            <div
+                className='flex flex-col w-[98%] items-start justify-start mt-8 mx-auto
+                    gap-4 text-gray-300
+                '
+            >
+                <h3
+                    className='text-2xl cairo font-bold text-gray-500'
+                >
+                    Page
+                </h3>
+                <div
+                    className={'danger-buttons'}
+                    onClick={() => {
+                        customTasksController.removeProject();
+                        setPageRemoved(true);
+                    }}
+                >
+                Remove Page
+            </div>
+        </div>
         {/* EOF   */}
         </div>
     )
