@@ -4,6 +4,7 @@ import close from '../assets/close2.svg';
 import done from '../assets/done-mini-1484-svgrepo-com.svg';
 import {projectIcons} from "../Data.js";
 import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
+import CustomTaskClass from "./CustomTaskClass.js";
 
 const Setting = () => {
     const data = useContext(AppData);
@@ -23,8 +24,9 @@ const Setting = () => {
     }
 
     useEffect(() => {
-        console.log(data.manuallyAddedTasks);
-        console.log(data.taskId);
+        console.log('This is From class');
+        let customTasksController = new CustomTaskClass(data.taskId);
+        customTasksController.printData();
         data.manuallyAddedTasks.forEach((task) => {
             if(data.taskId === task.taskid){
                 setDataObj(task);
