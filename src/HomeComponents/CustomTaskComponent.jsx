@@ -26,7 +26,6 @@ const CustomTaskComponent = (
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
-    const removePageSection = useRef(null);
     const [taskName, setTaskName] = useState('');
     const [taskImg , setTaskImg] = useState(null);
     const [completed , setCompleted] = useState(0);
@@ -124,15 +123,8 @@ const CustomTaskComponent = (
                     </div>
                 </div>
                 <div
-                    className='add-remove-buttons-container'
+                    className='add-remove-buttons-container justify-end!'
                     >
-                    <div
-                        className='danger-buttons'
-                        onClick={() => {
-                            removePageSection.current.style.display = 'flex';
-                        }}>
-                        Remove Page
-                    </div>
                     <div
                         className='buttons'
                         onClick={() => {
@@ -261,62 +253,7 @@ const CustomTaskComponent = (
                     </div>
                 </div>
             </div>
-            <div
-                ref={removePageSection}
-                className='w-full h-dvh
-                absolute top-0 left-0
-                items-center justify-center
-                z-95 bg-trans-white hidden
-                '
-            >
-                <div
-                    className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8 m-8
-                    '
-                >
-                    <div
-                        className='flex flex-row items-center gap-4'>
 
-                        <p
-                            className='text-2xl font-light cairo w-fit text-gray-300'
-                        >
-                            <span
-                                className='text-2xl font-black cairo w-fit text-red-800 px-1 underline'>
-                                Alert!
-                            </span> you are now about to remove this page of tasks , are you sure you want to delete it ?
-                        </p>
-                    </div>
-
-                    <div
-                        className='flex flex-row items-center justify-end gap-4'
-                    >
-                        <div
-                            className='buttons'
-                            onClick={() => {
-                                removePageSection.current.style.display = 'none';
-                            }}
-                        >
-                            Cancel
-                        </div>
-                        <div
-                            className='danger-buttons'
-                            onClick={() => {
-                                task.forEach((t,i) => {
-                                    if(t.taskid === taskId){
-                                        task.splice(i,1);
-                                    }
-                                });
-                                setTask(perv => perv.filter(t => t.taskid !== taskId));
-                                SaveAllCustomTasksInLS(task);
-                                addTaskSectionEnable();
-                                removePageSection.current.style.display = 'none';
-                            }}>
-                            Remove
-                        </div>
-
-                    </div>
-                </div>
-            </div>
             <ToastContainer />
         </>
     )
