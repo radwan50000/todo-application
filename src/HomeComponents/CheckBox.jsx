@@ -1,9 +1,12 @@
 import doneIcon from '../assets/done-mini-1484-svgrepo-com.svg';
-import {useState} from 'react';
+import soundTrack from '../sounds/tik.mp3';
+import {useState , useRef} from 'react';
 import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
 
 const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP}) => {
     const [checked, setChecked] = useState(isDone);
+    const audio = useRef(null);
+
     return (
         <>
             <div className='check-box-1'
@@ -18,6 +21,10 @@ const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP})
                                      setCompleted(perv => j.done ? perv+1:perv-1);
                                      t.completed = j.done ? t.completed+1:t.completed-1;
                                      taskP.current.style.textDecoration = j.done ? 'line-through' : 'none';
+                                     if(j.done){
+                                         audio.current.currentTime = 0;
+                                         audio.current.play();
+                                     }
                                      console.log(t);
                                  }
                              })
@@ -44,6 +51,7 @@ const CheckBox = ({isDone,setCompleted,allTasks,setAllTasks,objId,taskId,taskP})
                         :null
                 }
             </div>
+            <audio ref={audio} src={soundTrack} preload="auto"></audio>
         </>
     )
 }
