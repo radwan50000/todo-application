@@ -44,6 +44,7 @@ class CustomTaskClass {
 
     removeTasks(){
         this.projectData.tasks = [];
+        this.tasks = this.projectData.tasks;
         this.projectData.completed = 0;
     }
 

@@ -211,6 +211,20 @@ body{
         ;
     }
 
+    .disabled-btn{
+        @apply  pointer-events-none!
+                brightness-55! cursor-none;
+    }
+
+    .setting-second-header{
+        @apply font-bold text-gray-500
+        xl:text-4xl translate-x-[-12px]
+        xl:mb-2
+        max-sm:text-2xl sm:text-2xl
+        max-sm:mb-0 sm:mb-0
+        ;
+    }
+
     .task-img{
         @apply  p-2
         transition duration-250 ease-in-out select-none

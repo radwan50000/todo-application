@@ -13,8 +13,11 @@ const Setting = () => {
     let [projectName , setProjectName] = useState(customTasksController.projectName);
     let [projectImg , setProjectImg] = useState(customTasksController.projectImg);
     let [tasks, setTasks] = useState(customTasksController.tasks);
-    let imagePickerContainer = useRef(null);
     let [pageRemoved , setPageRemoved] = useState(false);
+
+    let imagePickerContainer = useRef(null);
+    let resetDNBtn = useRef(null);
+    let rmTasksBtn = useRef(null);
 
 
 
@@ -28,8 +31,15 @@ const Setting = () => {
     }
 
     useEffect(() => {
-
-    },[])
+        if(tasks.filter((task) => task.done).length < 1){
+            resetDNBtn.current.disabled = true;
+            resetDNBtn.current.classList.add('disabled-btn');
+        }
+        if(tasks.length < 1){
+            rmTasksBtn.current.disabled = true;
+            rmTasksBtn.current.classList.add('disabled-btn');
+        }
+    },[tasks,setTasks])
 
     return (
         <div
@@ -121,17 +131,22 @@ const Setting = () => {
                 <img
                     src={projectImg}
                     alt={'project image'}
-                    className='w-10 cursor-pointer'
+                    className='cursor-pointer
+                        xl:w-14
+                        max-sm:w-10 sm:w-10
+                    '
                     onClick={() => {
                         imagePickerContainer.current.classList.toggle('visible-container')
                     }}
                 />
                 <input
                     className='
-                        cairo text-3xl outline-none
+                        cairo outline-none
                         text-gray-300 w-fit
                         border-b border-gray-bg-dark
                         transition duration-250 ease-in-out
+                        xl:text-5xl
+                        max-sm:text-3xl sm:text-3xl
                     '
                     value={projectName}
                     onChange={(e) => {
@@ -180,26 +195,34 @@ const Setting = () => {
                 '
                 >
                 <h3
-                    className='text-2xl cairo font-bold text-gray-500'
+                    className='setting-second-header cairo'
                     >
                     Tasks
                 </h3>
-                <div
-                    className={tasks.length > 0 ? 'buttons':'buttons pointer-none'}
+                <button
+                    className={'buttons'}
                     onClick={() => {
                         customTasksController.makeAllTasksUnDone();
+                        resetDNBtn.current.disabled = true;
+                        resetDNBtn.current.classList.add('disabled-btn');
                     }}
+                    ref={resetDNBtn}
                     >
                     Reset Progress
-                </div>
-                <div
-                    className={tasks.length > 0 ? 'danger-buttons':'danger-buttons pointer-none'}
-                    onClick={() => {
+                </button>
+                <button
+                    className={'danger-buttons'}
+                    onClick={(e) => {
                         customTasksController.removeTasks();
+                        resetDNBtn.current.disabled = true;
+                        resetDNBtn.current.classList.add('disabled-btn');
+                        e.target.disabled = true;
+                        e.target.classList.add('disabled-btn');
                     }}
+                    ref={rmTasksBtn}
                 >
                     Remove Tasks
-                </div>
+                </button>
             </div>
             <div
                 className='flex flex-col w-[98%] items-start justify-start mt-8 mx-auto
@@ -207,15 +230,17 @@ const Setting = () => {
                 '
             >
                 <h3
-                    className='text-2xl cairo font-bold text-gray-500'
+                    className='setting-second-header cairo'
                 >
                     Page
                 </h3>
                 <div
                     className={'danger-buttons'}
-                    onClick={() => {
+                    onClick={(e) => {
                         customTasksController.removeProject();
                         setPageRemoved(true);
+                        e.target.disabled = true;
+                        e.target.classList.add('disabled-btn');
                     }}
                 >
                 Remove Page
