@@ -1,5 +1,3 @@
-import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
-
 
 class CustomTaskClass {
 
@@ -11,45 +9,74 @@ class CustomTaskClass {
         this.projectName = null;
         this.projectImg = null;
         this.tasks = [];
+        this.allTasksDone = false;
+        this.projectRemoved = false;
         this.getProjectData(this.taskId);
+        console.log('this is constructor');
     }
 
     getProjectData(taskId){
+
         this.allProjectArr.forEach((task) => {
             if(taskId === task.taskid){
                 this.projectData = task;
                 this.projectName = task.taskname
                 this.projectImg = task.taskicon;
                 this.tasks = task.tasks;
+                this.allTasksDone = this.isAllTasksDone();
             }
         });
     }
 
-    changeProjectImage(Image){
-        this.projectData.taskicon = Image;
+    changeProjectIcon(icon){
+        this.projectData.taskicon = icon;
     }
 
     changeProjectName(Name){
         this.projectData.taskname = Name;
     }
 
-    removeTasks(){
-        this.projectData.tasks = [];
+    changeProjectData(name , icon , tasks){
+        this.projectData.taskname = name;
+        this.projectData.taskicon = icon;
+        this.projectData.tasks = tasks;
     }
 
+    removeTasks(){
+        this.projectData.tasks = [];
+        this.projectData.completed = 0;
+    }
+
+    isAllTasksDone(){
+        if(this.tasks.length < 1) return false;
+        let isDone = true;
+        this.tasks.forEach((task) => {
+            if(!task.done) isDone = false;
+        })
+        return isDone;
+    }
+
+
+
     makeAllTasksUnDone(){
-        this.projectData.forEach((task) => {
+        this.projectData.tasks.forEach((task) => {
             task.done = false;
         });
+        this.projectData.completed = 0;
     }
 
     saveInCustomTasksArr () {
-        this.allProjectArr.forEach((project,i) => {
-            if(project.taskid === this.taskId){
-                this.allProjectArr[i] = this.projectData;
-            }
-        })
-        saveAllCustomTaskInLS(this.allProjectArr);
+        if(!this.projectRemoved){
+            this.allProjectArr.forEach((project,i) => {
+                if(project.taskid === this.taskId){
+                    this.allProjectArr[i] = this.projectData;
+                }
+            })
+        }
+        console.log(this.projectRemoved);
+        console.log(this.allProjectArr);
+        this.saveAllCustomTaskInLS(this.allProjectArr);
+        return this.allProjectArr;
     }
 
     saveAllCustomTaskInLS = (arrToSave) => {
@@ -60,14 +87,12 @@ class CustomTaskClass {
         }
     }
 
-
-
-
-    printData(){
+    removeProject(){
+        this.allProjectArr = this.allProjectArr.filter((project) => project.taskid !== this.taskId);
+        this.projectRemoved = true;
         console.log(this.allProjectArr);
-        console.log(this.projectName);
-        console.log(this.tasks);
     }
+
 }
 
 export default CustomTaskClass;

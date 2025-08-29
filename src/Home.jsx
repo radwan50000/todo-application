@@ -92,6 +92,8 @@ const Home = () => {
                         manuallyAddedTasks,
                         setManuallyAddedTasks,
                         taskId,
+                        addTaskSectionEnable,
+                        customSectionEnable,
                     }
 
                 }>
