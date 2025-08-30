@@ -10,6 +10,7 @@ import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SaveDailyTasks from "./SaveDailyTasks.js";
 import saveWeeklyTasks from "./SaveWeeklyTasks.jsx";
+import SettingGear from "./SettingGear.jsx";
 
 
 const WeeklyComponent = (
@@ -52,10 +53,16 @@ const WeeklyComponent = (
     return (
         <>
             <div className='right-component-style no-scrollbar'>
-                <MenuCloseNavButton
-                    setNavMenuOpened={setNavMenuOpened}
-                    navMenuOpened={navMenuOpened}
-                />
+                <div
+                    className='opt-header'
+                >
+                    <MenuCloseNavButton
+                        setNavMenuOpened={setNavMenuOpened}
+                        navMenuOpened={navMenuOpened}
+                    />
+                    <SettingGear
+                    />
+                </div>
                 <div className='C-H-o-Component'>
                     <div
                         className='H-o-Component'

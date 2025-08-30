@@ -66,12 +66,16 @@ const CustomTaskComponent = (
         <>
             <div className='right-component-style no-scrollbar'>
 
-                <MenuCloseNavButton
-                    setNavMenuOpened={setNavMenuOpened}
-                    navMenuOpened={navMenuOpened}
-                />
-                <SettingGear
+                <div
+                    className='opt-header'
+                >
+                    <MenuCloseNavButton
+                        setNavMenuOpened={setNavMenuOpened}
+                        navMenuOpened={navMenuOpened}
                     />
+                    <SettingGear
+                    />
+                </div>
                 <div
                     className='C-H-o-Component'
                 >

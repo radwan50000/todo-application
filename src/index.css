@@ -179,8 +179,9 @@ body{
     .danger-buttons{
         @apply py-2 px-5 border border-red-800 rounded-lg w-fit text-red-800
         font-bold cursor-pointer transition duration-250 select-none
-        hover:bg-red-800 hover:text-gray-300
-        xl:text-lg
+        xl:text-lg xl:hover:bg-red-800 xl:hover:text-gray-300
+        max-sm:active:bg-red-800 sm:active:bg-red-800
+        max-sm:active:text-gray-300 sm:active:text-gray-300
         max-sm:text-sm sm:text-sm;
     }
 
@@ -256,16 +257,23 @@ body{
         @apply h-dvh bg-gray-bg-dark
          overflow-x-hidden overflow-y-scroll
         text-gray-300 flex items-start flex-col justify-between
-        xl:w-[calc(100%-24rem)] xl:pt-20 xl:pl-8 xl:gap-12
-        max-sm:w-dvw max-sm:pt-15 max-sm:pl-2 max-sm:gap-6
-        sm:w-dvw sm:pt-15 sm:pl-2 sm:gap-6
+        xl:w-[calc(100%-24rem)]  xl:pl-8 xl:gap-12
+        max-sm:w-dvw  max-sm:pl-2 max-sm:gap-6
+        sm:w-dvw  sm:pl-2 sm:gap-6
         ;
+    }
+
+    .opt-header{
+        @apply flex w-[98%] h-fit mx-auto
+        items-center justify-between mt-5;
     }
 
     .addTaskButton{
         @apply py-2 px-5 border border-green-400 rounded-lg w-fit
         font-bold cursor-pointer transition duration-250 select-none
-        hover:bg-green-400 hover:text-gray-300
+        xl:hover:bg-green-400 xl:hover:text-gray-300
+        max-sm:active:bg-green-400 sm:active:bg-green-400
+        max-sm:active:text-gray-300 sm:active:text-gray-300
         xl:text-lg
         max-sm:text-sm sm:text-sm;
     }
@@ -273,8 +281,9 @@ body{
     .cancelTaskButton{
         @apply py-2 px-5 border border-red-800 rounded-lg w-fit
         font-bold cursor-pointer transition duration-250 select-none
-        hover:bg-red-800 hover:text-gray-300
-        xl:text-lg
+        xl:text-lg xl:hover:bg-red-800 xl:hover:text-gray-300
+        max-sm:active:bg-red-800 sm:active:bg-red-800
+        max-sm:active:text-gray-300 sm:active:text-gray-300
         max-sm:text-sm sm:text-sm;
     }
 
@@ -407,7 +416,10 @@ body{
     .sign-out-container .sign-out-button{
         @apply w-8/12 border-red-800 border-4
         mt-4 text-red-800 rounded-md font-black flex items-center justify-center
-        cursor-pointer transition duration-350 ease-out select-none hover:bg-red-800 hover:text-white
+        cursor-pointer transition duration-350 ease-out select-none
+        xl:hover:bg-red-800 xl:hover:text-gray-300
+        max-sm:active:bg-red-800 sm:active:bg-red-800
+        max-sm:active:text-gray-300 sm:active:text-gray-300
         xl:text-4xl xl:py-4
         max-sm:text-3xl sm:text-3xl
         max-sm:py-2 sm:py-2;
@@ -417,6 +429,9 @@ body{
         @apply h-fit p-2 box-content border border-green-400 rounded-sm
         transition duration-250 ease-in-out select-none
         cursor-pointer hover:bg-green-400
+        xl:text-lg xl:hover:bg-green-400 xl:hover:text-gray-300
+        max-sm:active:bg-green-400 sm:active:bg-green-400
+        max-sm:active:text-gray-300 sm:active:text-gray-300
         xl:w-4
         max-sm:w-3 sm:w-3;
     }

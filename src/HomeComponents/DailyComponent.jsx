@@ -8,6 +8,7 @@ import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
 import SaveDailyTasks from "./SaveDailyTasks.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
+import SettingGear from "./SettingGear.jsx";
 
 
 const DailyComponent = (
@@ -51,10 +52,16 @@ const DailyComponent = (
     return (
         <>
             <div className='right-component-style no-scrollbar'>
-                <MenuCloseNavButton
-                    setNavMenuOpened={setNavMenuOpened}
-                    navMenuOpened={navMenuOpened}
-                />
+                <div
+                    className='opt-header'
+                >
+                    <MenuCloseNavButton
+                        setNavMenuOpened={setNavMenuOpened}
+                        navMenuOpened={navMenuOpened}
+                    />
+                    <SettingGear
+                    />
+                </div>
                 <div className='C-H-o-Component'>
                     <div
                         className='H-o-Component'

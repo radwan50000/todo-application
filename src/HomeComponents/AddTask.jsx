@@ -5,6 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 import SaveTempObjInLS from '../SavingTempObjInLS.js';
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import {projectIcons,flagsData} from '../Data.js';
+import SettingGear from "./SettingGear.jsx";
 
 
 const AddTask = (
@@ -47,10 +48,15 @@ const AddTask = (
                 className='right-component-style
                 '
             >
-                <MenuCloseNavButton
-                    setNavMenuOpened={setNavMenuOpened}
-                    navMenuOpened={navMenuOpened}
-                />
+                <div
+                    className='opt-header'
+                >
+                    <MenuCloseNavButton
+                        setNavMenuOpened={setNavMenuOpened}
+                        navMenuOpened={navMenuOpened}
+                    />
+
+                </div>
                 <div className='C-Add-task'>
                     <div
                         className='flex flex-row items-center
