@@ -11,6 +11,7 @@ import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from './SettingGear.jsx';
 import AppData from './AppData.jsx';
+import addIcon from '../assets/edit-svgrepo-com.svg';
 
 
 const CustomTaskComponent = (
@@ -130,12 +131,16 @@ const CustomTaskComponent = (
                     className='add-remove-buttons-container justify-end!'
                     >
                     <div
-                        className='buttons'
+                        className='addButton'
                         onClick={() => {
                             addTaskContainer.current.style.display = 'flex';
                             ST_toAdd.current.focus();
                         }}>
-                        Add Task
+                        <img
+                            src={addIcon}
+                            alt={'add task icon'}
+
+                            />
                     </div>
                 </div>
             </div>
