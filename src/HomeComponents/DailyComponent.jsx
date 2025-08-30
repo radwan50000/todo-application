@@ -5,10 +5,10 @@ import yellowFlag from "../assets/yellowFlag.png";
 import greenFlag from "../assets/greenFlag.png";
 import blueFlag from "../assets/blueFlag.png";
 import {toast, ToastContainer} from "react-toastify";
-import {v4 as uuidv4} from 'uuid';
 import SaveDailyTasks from "./SaveDailyTasks.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from "./SettingGear.jsx";
+import DailyController from "./DailyController.js";
 
 
 const DailyComponent = (
@@ -29,6 +29,9 @@ const DailyComponent = (
     const [tasks , setTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
 
+    // Controller
+    const controller = new DailyController();
+
     const activeTask = (e,className) => {
         const ele = document.querySelectorAll('.task-img');
         ele.forEach(ele => {
@@ -40,12 +43,11 @@ const DailyComponent = (
 
 
     useEffect(() => {
-        console.log(dailyObj);
         setProjectName(dailyObj.projectTitle);
         setProjectImg(dailyObj.projectIcon);
-        setTasks([...dailyObj.tasks]);
-        setNoOfTasks(dailyObj.tasks.length);
-        setCompleted(dailyObj.tasks.filter((t) => t.done).length);
+        setTasks(dailyObj.tasks);
+        setNoOfTasks(controller.tasksNumber);
+        setCompleted(controller.completed);
     },[dailyObj]);
 
 
@@ -103,6 +105,7 @@ const DailyComponent = (
                                         isDone={t.done}
                                         setNoOfTasks={setNoOfTasks}
                                         noOfTasks={noOfTasks}
+                                        controller={controller}
                                     />
                                 )
                             })
@@ -215,19 +218,9 @@ const DailyComponent = (
                             className='addTaskButton'
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
-                                    const uniqueID = uuidv4();
-                                    const obj = {
-                                        'task': ST_toAdd.current.value.trim(),
-                                        'priority': document.querySelector('.active-flag-img').src,
-                                        'done': false,
-                                        'id': uniqueID,
-                                    }
-                                    dailyObj.tasks.push(obj);
-                                    setTasks(dailyObj.tasks);
-                                    setNoOfTasks(dailyObj.tasks.length);
-
-
-                                    SaveDailyTasks(dailyObj);
+                                    controller.addTask(ST_toAdd.current.value.trim())
+                                    setTasks(controller.tasks);
+                                    setNoOfTasks(controller.tasksNumber);
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
                                 }else {
@@ -284,13 +277,11 @@ const DailyComponent = (
                         <div
                             className='danger-buttons'
                             onClick={() => {
-                                dailyObj.tasks = [];
-                                setDailyObj(dailyObj);
-                                SaveDailyTasks(dailyObj);
-                                setTasks(dailyObj.tasks);
-                                setNoOfTasks(dailyObj.tasks.length);
-                                setCompleted(0);
-                                console.log(dailyObj);
+                                controller.removeTasks();
+                                setTasks(controller.tasks);
+                                setNoOfTasks(controller.tasksNumber);
+                                setCompleted(controller.completed);
+                                setDailyObj(controller.objData);
                                 removePageSection.current.style.display = 'none';
                             }}>
                             Clear All

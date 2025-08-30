@@ -7,7 +7,19 @@ import CheckBox2 from "./CheckBox2.jsx";
 import SaveDailyTasks from "./SaveDailyTasks.js";
 import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
 
-const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,setNoOfTasks}) => {
+const TaskComponent3 = (
+        {
+            task,
+            taskId,
+            flag,
+            allTasks,
+            setAllTasks,
+            isDone,
+            setCompleted,
+            setNoOfTasks,
+            controller,
+        }
+    ) => {
     const [editingMode , setEditingMode] = useState(false);
     const taskP = useRef(null);
     const [taskField, setTaskField] = useState(task);
@@ -48,16 +60,11 @@ const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 alt={'edit image'}
                                 className='done-edit-buttons-TC'
                                 onClick={() => {
-                                    allTasks.tasks.forEach((j) => {
-                                        if(j.id === taskId){
-                                            j.task = taskField;
-                                            console.log('Editied');
-                                            setOldField(taskField);
-                                            setEditingMode(false);
-                                        }
-                                    })
-                                    setAllTasks(allTasks);
-                                    allTasks.projectTitle === 'Daily Tasks' ? SaveDailyTasks(allTasks):SaveWeeklyTasks(allTasks);
+                                    console.log(controller);
+                                    controller.editTask(taskId, taskField);
+                                    setOldField(taskField);
+                                    setEditingMode(false);
+                                    setAllTasks(controller.objData);
                                 }}
                             />
                             <img
@@ -86,6 +93,7 @@ const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 setAllTasks={setAllTasks}
                                 taskId={taskId}
                                 taskP={taskP}
+                                controller={controller}
                             />
                             <img
                                 src={flag}
@@ -115,17 +123,11 @@ const TaskComponent3 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 alt={'delete image'}
                                 className='CD-btns-TC'
                                 onClick={() => {
-                                    allTasks.tasks.forEach((j, k) => {
-                                        if(j.id === taskId){
-                                            allTasks.tasks.splice(k, 1);
-                                            if(j.done) {
-                                                setCompleted(perv => perv - 1);
-                                            }
-                                            setNoOfTasks(perv => perv - 1);
-                                        }
-                                    })
-                                    setAllTasks(allTasks);
-                                    allTasks.projectTitle === 'Daily Tasks' ? SaveDailyTasks(allTasks):SaveWeeklyTasks(allTasks);
+                                    controller.removeTask(taskId);
+                                    setCompleted(controller.completed);
+                                    setNoOfTasks(controller.tasksNumber);
+                                    controller.saveChanges();
+                                    setAllTasks(controller.objData);
                                     container.current.style.display= 'none';
 
                                 }}

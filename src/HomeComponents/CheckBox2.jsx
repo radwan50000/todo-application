@@ -1,26 +1,24 @@
 import doneIcon from '../assets/done-mini-1484-svgrepo-com.svg';
-import {useState} from 'react';
-import SaveDailyTasks from "./SaveDailyTasks.js";
-import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
+import {useState , useRef} from 'react';
+import soundTrack from "../sounds/tik.mp3";
 
-const CheckBox2 = ({isDone,setCompleted,allTasks,setAllTasks,taskId,taskP}) => {
+const CheckBox2 = ({isDone,setAllTasks,taskId,taskP,controller}) => {
     const [checked, setChecked] = useState(isDone);
+    const audio = useRef(null);
+
     return (
         <>
             <div className='check-box-1'
                  data-checked={checked}
                  onClick={() => {
-                     setChecked(!checked)
-                     allTasks.tasks.forEach((j) => {
-                         if(j.id === taskId){
-                             j.done = j.done ? false:true;
-                             setCompleted(perv => j.done ? perv+1:perv-1);
-                             taskP.current.style.textDecoration = j.done ? 'line-through' : 'none';
-                             console.log(allTasks);
-                         }
-                     })
-                     setAllTasks(allTasks);
-                     allTasks.projectTitle === 'Daily Tasks' ? SaveDailyTasks(allTasks):SaveWeeklyTasks(allTasks);
+                     setChecked(!checked);
+                     const done = controller.taskIsDone(taskId)
+                     taskP.current.style.textDecoration = done ? 'line-through' : 'none';
+                     if(done){
+                         audio.current.currentTime = 0;
+                         audio.current.play();
+                     }
+                     setAllTasks(controller.objData);
                  }}
             >
                 {
@@ -39,6 +37,7 @@ const CheckBox2 = ({isDone,setCompleted,allTasks,setAllTasks,taskId,taskP}) => {
                         :null
                 }
             </div>
+            <audio ref={audio} src={soundTrack} preload="auto"></audio>
         </>
     )
 }

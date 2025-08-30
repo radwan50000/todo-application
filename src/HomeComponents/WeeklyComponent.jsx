@@ -1,24 +1,20 @@
 import {useEffect, useRef, useState} from "react";
 import TaskComponent3 from "./TaskComponent3.jsx";
-import redFlag from "../assets/redFlag.png";
-import yellowFlag from "../assets/yellowFlag.png";
-import greenFlag from "../assets/greenFlag.png";
-import blueFlag from "../assets/blueFlag.png";
 import {toast, ToastContainer} from "react-toastify";
-import {v4 as uuidv4} from 'uuid';
-import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
-import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SaveDailyTasks from "./SaveDailyTasks.js";
-import saveWeeklyTasks from "./SaveWeeklyTasks.jsx";
+import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from "./SettingGear.jsx";
+import WeeklyController from "./WeeklyController.js";
+import {flagsData} from '../Data.js';
 
 
 const WeeklyComponent = (
-        {
-            setNavMenuOpened,
-            navMenuOpened
-        }
-    ) => {
+    {
+        setNavMenuOpened,
+        navMenuOpened
+    }
+
+) => {
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
@@ -29,6 +25,9 @@ const WeeklyComponent = (
     const [completed , setCompleted] = useState(0);
     const [tasks , setTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
+
+    // Controller
+    const controller = new WeeklyController();
 
     const activeTask = (e,className) => {
         const ele = document.querySelectorAll('.task-img');
@@ -41,12 +40,11 @@ const WeeklyComponent = (
 
 
     useEffect(() => {
-        console.log(dailyObj);
         setProjectName(dailyObj.projectTitle);
         setProjectImg(dailyObj.projectIcon);
-        setTasks([...dailyObj.tasks]);
-        setNoOfTasks(dailyObj.tasks.length);
-        setCompleted(dailyObj.tasks.filter((t) => t.done).length);
+        setTasks(dailyObj.tasks);
+        setNoOfTasks(controller.tasksNumber);
+        setCompleted(controller.completed);
     },[dailyObj]);
 
 
@@ -104,6 +102,7 @@ const WeeklyComponent = (
                                         isDone={t.done}
                                         setNoOfTasks={setNoOfTasks}
                                         noOfTasks={noOfTasks}
+                                        controller={controller}
                                     />
                                 )
                             })
@@ -170,23 +169,7 @@ const WeeklyComponent = (
                         </h3>
                         <div className='flex flex-row gap-2 w-fit'>
                             {
-                                [
-                                    {
-                                        'flagType': 'red flag',
-                                        'flagImg': redFlag,
-                                    },
-                                    {
-                                        'flagType': 'yellow flag',
-                                        'flagImg': yellowFlag
-                                    },
-                                    {
-                                        'flagType': 'green flag',
-                                        'flagImg': greenFlag
-                                    },
-                                    {
-                                        'flagType': 'blue flag',
-                                        'flagImg': blueFlag,
-                                    }].map((ele, index) => {
+                                flagsData.map((ele, index) => {
                                     return (
                                         <img
                                             src={ele.flagImg}
@@ -216,17 +199,9 @@ const WeeklyComponent = (
                             className='addTaskButton'
                             onClick={() => {
                                 if(ST_toAdd.current.value.trim() !== '') {
-                                    const uniqueID = uuidv4();
-                                    const obj = {
-                                        'task': ST_toAdd.current.value.trim(),
-                                        'priority': document.querySelector('.active-flag-img').src,
-                                        'done': false,
-                                        'id': uniqueID,
-                                    }
-                                    dailyObj.tasks.push(obj);
-                                    setTasks(dailyObj.tasks);
-                                    setNoOfTasks(dailyObj.tasks.length);
-                                    saveWeeklyTasks(dailyObj);
+                                    controller.addTask(ST_toAdd.current.value.trim())
+                                    setTasks(controller.tasks);
+                                    setNoOfTasks(controller.tasksNumber);
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
                                 }else {
@@ -283,13 +258,11 @@ const WeeklyComponent = (
                         <div
                             className='danger-buttons'
                             onClick={() => {
-                                dailyObj.tasks = [];
-                                setDailyObj(dailyObj);
-                                SaveWeeklyTasks(dailyObj);
-                                setTasks(dailyObj.tasks);
-                                setNoOfTasks(dailyObj.tasks.length);
-                                setCompleted(0);
-                                console.log(dailyObj);
+                                controller.removeTasks();
+                                setTasks(controller.tasks);
+                                setNoOfTasks(controller.tasksNumber);
+                                setCompleted(controller.completed);
+                                setDailyObj(controller.objData);
                                 removePageSection.current.style.display = 'none';
                             }}>
                             Clear All
