@@ -7,6 +7,9 @@ import Hammer from 'hammerjs';
 import WeeklyComponent from './HomeComponents/WeeklyComponent.jsx';
 import Setting from './HomeComponents/Setting.jsx';
 import AppData from './HomeComponents/AppData.jsx';
+import CustomTaskClass from "./HomeComponents/CustomTaskClass.js";
+import WeeklyController from "./HomeComponents/WeeklyController.js";
+import DailyController from "./HomeComponents/DailyController.js";
 
 const Home = () => {
     const PageContainer = useRef(null);
@@ -21,6 +24,7 @@ const Home = () => {
     const [canOpenNavMenu, setCanOpenNavMenu] = useState(true);
     const [settingSection, setSettingSection] = useState(false);
     const [settingDataToShow , setSettingDataToShow] = useState({});
+
 
 
     const customSectionEnable = () => {
@@ -65,7 +69,7 @@ const Home = () => {
                 pointers: 1
             });
 
-            hammer.on('panleft',(e) => {
+            hammer.on('panleft',() => {
                 if(canOpenNavMenu){
                     setNavMenuOpened(false);
                 }
@@ -99,7 +103,9 @@ const Home = () => {
                 }>
                     {
                         settingSection ?
-                            <Setting />
+                            customSection ? <Setting obj={() => new CustomTaskClass(taskId)} custom={true}/> :
+                                todaySection ? <Setting  obj={() => new DailyController()} custom={false}/> :
+                                    weeklySection ? <Setting  obj={() => new WeeklyController()} custom={false}/>:null
                             :
                             <div
                                 className='flex flex-row items-start

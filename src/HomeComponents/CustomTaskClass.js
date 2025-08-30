@@ -6,7 +6,7 @@ class CustomTaskClass {
         this.taskId = taskId;
         this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks'));
         this.projectData = {};
-        this.projectName = null;
+        this.projectTitle = null;
         this.projectImg = null;
         this.tasks = [];
         this.allTasksDone = false;
@@ -20,7 +20,7 @@ class CustomTaskClass {
         this.allProjectArr.forEach((task) => {
             if(taskId === task.taskid){
                 this.projectData = task;
-                this.projectName = task.taskname
+                this.projectTitle = task.taskname
                 this.projectImg = task.taskicon;
                 this.tasks = task.tasks;
                 this.allTasksDone = this.isAllTasksDone();

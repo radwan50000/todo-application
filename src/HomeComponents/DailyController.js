@@ -48,8 +48,6 @@ class DailyController{
 
         this.countDone();
         this.countTasks();
-
-        this.saveChanges();
     }
 
     countTasks(){
@@ -81,6 +79,14 @@ class DailyController{
             }
         })
         return done;
+    }
+
+    makeAllTasksUnDone(){
+        this.tasks.forEach((task) => {
+            task.done = false;
+        })
+
+        this.completed = 0;
     }
 
 }

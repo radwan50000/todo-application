@@ -32,6 +32,7 @@ const HomeNav = (
     const navMenu = useRef(null);
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
+
     //CTB_Container -> Custom Tasks Button Container
     const CTB_Container = useRef(null);
 

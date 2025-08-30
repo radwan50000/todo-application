@@ -6,16 +6,22 @@ import {projectIcons} from "../Data.js";
 import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import CustomTaskClass from "./CustomTaskClass.js";
 
-const Setting = () => {
+const Setting = (
+    {
+        obj,
+        custom,
+    }
+    ) => {
     const data = useContext(AppData);
-    let [customTasksController] = useState(() => new CustomTaskClass(data.taskId));
+    let [customTasksController] = useState(obj);
 
-    let [projectName , setProjectName] = useState(customTasksController.projectName);
+    let [projectName , setProjectName] = useState(customTasksController.projectTitle);
     let [projectImg , setProjectImg] = useState(customTasksController.projectImg);
     let [tasks, setTasks] = useState(customTasksController.tasks);
-    let [pageRemoved , setPageRemoved] = useState(false);
 
+    let [pageRemoved , setPageRemoved] = useState(false);
     let imagePickerContainer = useRef(null);
+
     let resetDNBtn = useRef(null);
     let rmTasksBtn = useRef(null);
 
@@ -31,6 +37,7 @@ const Setting = () => {
     }
 
     useEffect(() => {
+        console.log(projectName);
         if(tasks.filter((task) => task.done).length < 1){
             resetDNBtn.current.disabled = true;
             resetDNBtn.current.classList.add('disabled-btn');
@@ -88,10 +95,13 @@ const Setting = () => {
                             '
                     onClick={() => {
                         if(projectName.trim().length > 0) {
-                            customTasksController.changeProjectName(projectName);
-                            customTasksController.changeProjectIcon(projectImg);
+                            if(custom) {
+                                customTasksController.changeProjectName(projectName);
+                                customTasksController.changeProjectIcon(projectImg);
+                            }
                             if(pageRemoved) data.addTaskSectionEnable();
-                            data.setManuallyAddedTasks(customTasksController.saveInCustomTasksArr());
+                            if(custom) data.setManuallyAddedTasks(customTasksController.saveInCustomTasksArr());
+                            else customTasksController.saveChanges();
                             data.setSettingSection(!data.settingSection);
                         }
                     }}
@@ -136,11 +146,13 @@ const Setting = () => {
                         max-sm:w-10 sm:w-10
                     '
                     onClick={() => {
-                        imagePickerContainer.current.classList.toggle('visible-container')
+                        if(custom) imagePickerContainer.current.classList.toggle('visible-container')
                     }}
                 />
-                <input
-                    className='
+                {
+                    custom ?
+                        <input
+                            className='
                         cairo outline-none
                         text-gray-300 w-fit
                         border-b border-gray-bg-dark
@@ -148,13 +160,22 @@ const Setting = () => {
                         xl:text-5xl
                         max-sm:text-3xl sm:text-3xl
                     '
-                    value={projectName}
-                    onChange={(e) => {
-                        if(e.target.value.length < 15) {
-                            setProjectName(e.target.value);
-                        }
-                    }}
-                    />
+                            value={projectName}
+                            onChange={(e) => {
+                                if(e.target.value.length < 15) {
+                                    setProjectName(e.target.value);
+                                }
+                            }}
+                        />
+                        :<h1 className='
+                        cairo outline-none
+                        text-gray-300 w-fit
+                        border-b border-gray-bg-dark
+                        transition duration-250 ease-in-out
+                        xl:text-5xl
+                        max-sm:text-3xl sm:text-3xl
+                    '> {projectName} </h1>
+                }
 
             {/*  Picker Image Container  */}
                 <div
@@ -224,28 +245,33 @@ const Setting = () => {
                     Remove Tasks
                 </button>
             </div>
-            <div
-                className='flex flex-col w-[98%] items-start justify-start mt-8 mx-auto
+            {
+                custom
+                ?
+                    <div
+                        className='flex flex-col w-[98%] items-start justify-start mt-8 mx-auto
                     gap-4 text-gray-300
                 '
-            >
-                <h3
-                    className='setting-second-header cairo'
-                >
-                    Page
-                </h3>
-                <div
-                    className={'danger-buttons'}
-                    onClick={(e) => {
-                        customTasksController.removeProject();
-                        setPageRemoved(true);
-                        e.target.disabled = true;
-                        e.target.classList.add('disabled-btn');
-                    }}
-                >
-                Remove Page
-            </div>
-        </div>
+                    >
+                        <h3
+                            className='setting-second-header cairo'
+                        >
+                            Page
+                        </h3>
+                        <div
+                            className={'danger-buttons'}
+                            onClick={(e) => {
+                                customTasksController.removeProject();
+                                setPageRemoved(true);
+                                e.target.disabled = true;
+                                e.target.classList.add('disabled-btn');
+                            }}
+                        >
+                            <p>Remove Page</p>
+                        </div>
+                    </div>
+                    : null
+            }
         {/* EOF   */}
         </div>
     )
