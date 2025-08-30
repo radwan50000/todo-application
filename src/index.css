@@ -187,10 +187,9 @@ body{
 
     .add-remove-buttons-container{
         @apply flex h-fit items-center justify-between
-        p-2
+        p-2 mb-4
         xl:w-11/12
         max-sm:w-12/12 sm:w-12/12;
-
     }
 
     .task-nav-bar:first-child img{
