@@ -176,6 +176,18 @@ body{
         ;
     }
 
+    .addButton{
+        @apply bg-yellow-400 rounded-full p-4 m-4 cursor-pointer
+        xl:hover:brightness-75
+        max-sm:active:brightness-75 sm:active:brightness-75;
+    }
+
+    .addButton img{
+        @apply
+            xl:w-8!
+            max-sm:w-6! sm:w-6!;
+    }
+
     .danger-buttons{
         @apply py-2 px-5 border border-red-800 rounded-lg w-fit text-red-800
         font-bold cursor-pointer transition duration-250 select-none
@@ -186,7 +198,7 @@ body{
     }
 
     .add-remove-buttons-container{
-        @apply flex h-fit items-center justify-between
+        @apply flex h-fit items-center justify-end
         p-2
         xl:w-11/12
         max-sm:w-12/12 sm:w-12/12;

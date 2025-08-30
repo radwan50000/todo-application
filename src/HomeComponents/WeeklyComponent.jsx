@@ -6,6 +6,7 @@ import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from "./SettingGear.jsx";
 import WeeklyController from "./WeeklyController.js";
 import {flagsData} from '../Data.js';
+import addIcon from '../assets/edit-svgrepo-com.svg';
 
 
 const WeeklyComponent = (
@@ -113,20 +114,15 @@ const WeeklyComponent = (
                     className='add-remove-buttons-container'
                 >
                     <div
-                        className='danger-buttons'
-                        style={{visibility: noOfTasks > 0 ? 'visible' : 'hidden'}}
-                        onClick={() => {
-                            removePageSection.current.style.display = 'flex';
-                        }}>
-                        Clear All
-                    </div>
-                    <div
-                        className='buttons'
+                        className='addButton'
                         onClick={() => {
                             addTaskContainer.current.style.display = 'flex';
                             ST_toAdd.current.focus();
                         }}>
-                        Add Task
+                        <img
+                            src={addIcon}
+                            alt={'add task icon'}
+                        />
                     </div>
                 </div>
             </div>
@@ -215,59 +211,6 @@ const WeeklyComponent = (
                         >
                             Add Task
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                ref={removePageSection}
-                className='w-full h-dvh
-                absolute top-0 left-0
-                items-center justify-center
-                z-95 bg-trans-white hidden
-                '
-            >
-                <div
-                    className='py-16 px-12 bg-gray-bg rounded-md
-                    text-gray-300 flex flex-col gap-8 m-8
-                    '
-                >
-                    <div
-                        className='flex flex-row items-center gap-4'>
-
-                        <p
-                            className='text-2xl font-light cairo w-fit text-gray-300'
-                        >
-                            <span
-                                className='text-2xl font-black cairo w-fit text-red-800 px-1 underline'>
-                                Alert!
-                            </span> you are now about to remove all tasks in this page, are you sure you want to delete them ?
-                        </p>
-                    </div>
-
-                    <div
-                        className='flex flex-row items-center justify-end gap-4'
-                    >
-                        <div
-                            className='buttons'
-                            onClick={() => {
-                                removePageSection.current.style.display = 'none';
-                            }}
-                        >
-                            Cancel
-                        </div>
-                        <div
-                            className='danger-buttons'
-                            onClick={() => {
-                                controller.removeTasks();
-                                setTasks(controller.tasks);
-                                setNoOfTasks(controller.tasksNumber);
-                                setCompleted(controller.completed);
-                                setDailyObj(controller.objData);
-                                removePageSection.current.style.display = 'none';
-                            }}>
-                            Clear All
-                        </div>
-
                     </div>
                 </div>
             </div>
