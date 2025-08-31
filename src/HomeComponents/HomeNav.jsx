@@ -7,8 +7,9 @@ import todayImg from '../assets/june.png';
 import weekImg from '../assets/calendar.png';
 import signOut from '../assets/logout.png';
 import warningImg from '../assets/warning-svgrepo-com.svg';
+import AppData from './AppData.jsx';
 import {useNavigate} from 'react-router-dom';
-import {useRef, useState} from 'react';
+import {useRef, useState , useContext} from 'react';
 import {useEffect} from 'react';
 
 
@@ -32,6 +33,7 @@ const HomeNav = (
     const navMenu = useRef(null);
     const confirmSignOutContainer = useRef(null);
     const confirmSignOutField = useRef(null);
+    const data = useContext(AppData);
 
     //CTB_Container -> Custom Tasks Button Container
     const CTB_Container = useRef(null);
@@ -146,7 +148,12 @@ const HomeNav = (
                        </p>
                    </div>
                    <div
-                       className={'task-nav-bar '}>
+                       className={'task-nav-bar '}
+                       onClick={() => {
+                           data.searchSectionEnable();
+                           console.log('search')
+                       }}
+                   >
                        <img
                            src={searchImg}
                            alt={'search icon image'}
