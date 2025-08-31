@@ -470,6 +470,30 @@ body{
         max-sm:flex-col sm:flex-col;
     }
 
+    /*  Search Component  */
+
+    .search-input{
+        @apply w-11/12  outline-none
+        transition duration-250 ease-in-out
+        p-2
+        focus:border-gray-300
+        xl:text-3xl
+        max-sm:text-2xl sm:text-2xl;
+    }
+
+    .search-input-container{
+        @apply flex flex-row items-center justify-start w-full h-fit
+        border-b-2 border-gray-400 rounded-sm
+        transition duration-250 ease-in-out;
+    }
+
+    .search-input-container img{
+        @apply
+        xl:w-8
+        max-sm:w-6 sm:w-6;
+    }
+
+
 
 }
 

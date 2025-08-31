@@ -286,7 +286,7 @@ const Setting = (
                             <span
                                 className='text-2xl font-black cairo w-fit text-red-800 px-1 underline'>
                                 Alert!
-                            </span> you are now about to make changes to the page , are you sure you want to save the changes
+                            </span> you are now about to make changes to this page , are you sure you want to save the changes
                         </p>
                     </div>
 

@@ -10,6 +10,7 @@ import AppData from './HomeComponents/AppData.jsx';
 import CustomTaskClass from "./HomeComponents/CustomTaskClass.js";
 import WeeklyController from "./HomeComponents/WeeklyController.js";
 import DailyController from "./HomeComponents/DailyController.js";
+import SearchComponent from './HomeComponents/SearchComponent.jsx';
 
 const Home = () => {
     const PageContainer = useRef(null);
@@ -31,6 +32,14 @@ const Home = () => {
         setCustomSection(true);
         setAddTaskSection(false);
         setSearchSection(false);
+        setWeeklySection(false);
+        setTodaySection(false);
+    }
+
+    const searchSectionEnable = () => {
+        setCustomSection(false);
+        setAddTaskSection(false);
+        setSearchSection(true);
         setWeeklySection(false);
         setTodaySection(false);
     }
@@ -98,6 +107,9 @@ const Home = () => {
                         taskId,
                         addTaskSectionEnable,
                         customSectionEnable,
+                        searchSectionEnable,
+                        navMenuOpened,
+                        setNavMenuOpened,
                     }
 
                 }>
@@ -157,6 +169,8 @@ const Home = () => {
                                                         navMenuOpened={navMenuOpened}
                                                         setNavMenuOpened={setNavMenuOpened}
                                                     />
+                                                :searchSection ?
+                                                    <SearchComponent />
                                                     : null
                                         }
                            </div>

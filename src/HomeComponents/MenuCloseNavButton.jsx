@@ -1,7 +1,9 @@
 import menuImg from "../assets/menu-icon.svg";
-
+import {useContext} from "react";
+import AppData from './AppData.jsx';
 
 const MenuCloseNavButton = ({setNavMenuOpened,navMenuOpened}) => {
+    let data = useContext(AppData);
 
     return (
         <span
@@ -12,12 +14,12 @@ const MenuCloseNavButton = ({setNavMenuOpened,navMenuOpened}) => {
                     max-sm:inline-block sm:inline-block
                     '
             onClick={() => {
-                setNavMenuOpened(!navMenuOpened);
-
+                data.setNavMenuOpened(!data.navMenuOpened);
             }}
         >
                     <img
                         src={menuImg}
+                        alt={'Hamburger Menu Icon'}
                         className='w-5'
                     />
                 </span>
