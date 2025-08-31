@@ -12,7 +12,6 @@ class CustomTaskClass {
         this.allTasksDone = false;
         this.projectRemoved = false;
         this.getProjectData(this.taskId);
-        console.log('this is constructor');
     }
 
     getProjectData(taskId){
@@ -74,8 +73,6 @@ class CustomTaskClass {
                 }
             })
         }
-        console.log(this.projectRemoved);
-        console.log(this.allProjectArr);
         this.saveAllCustomTaskInLS(this.allProjectArr);
         return this.allProjectArr;
     }
@@ -91,7 +88,6 @@ class CustomTaskClass {
     removeProject(){
         this.allProjectArr = this.allProjectArr.filter((project) => project.taskid !== this.taskId);
         this.projectRemoved = true;
-        console.log(this.allProjectArr);
     }
 
 }

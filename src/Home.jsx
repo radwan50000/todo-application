@@ -10,7 +10,7 @@ import AppData from './HomeComponents/AppData.jsx';
 import CustomTaskClass from "./HomeComponents/CustomTaskClass.js";
 import WeeklyController from "./HomeComponents/WeeklyController.js";
 import DailyController from "./HomeComponents/DailyController.js";
-import SearchSection from './HomeComponents/SearchComponent.jsx';
+import SearchComponent from './HomeComponents/SearchComponent.jsx';
 
 const Home = () => {
     const PageContainer = useRef(null);
@@ -108,6 +108,8 @@ const Home = () => {
                         addTaskSectionEnable,
                         customSectionEnable,
                         searchSectionEnable,
+                        navMenuOpened,
+                        setNavMenuOpened,
                     }
 
                 }>
@@ -168,7 +170,7 @@ const Home = () => {
                                                         setNavMenuOpened={setNavMenuOpened}
                                                     />
                                                 :searchSection ?
-                                                    <SearchSection />
+                                                    <SearchComponent />
                                                     : null
                                         }
                            </div>
