@@ -35,6 +35,26 @@ class CustomTaskClass {
         this.projectData.taskname = Name;
     }
 
+    changeFlag(flag,taskId){
+        this.projectData.tasks.map((task) => {
+            if(task.id === taskId) {
+                task.priority = flag;
+                console.log(this.projectData);
+            }
+        });
+        console.log(this.projectData);
+    }
+
+    changeProjectTask(taskText,taskId){
+        this.projectData.tasks.map((task) => {
+            if(task.id === taskId) {
+                task.task = taskText;
+                console.log(this.projectData);
+            }
+        })
+        console.log(this.projectData);
+    }
+
     changeProjectData(name , icon , tasks){
         this.projectData.taskname = name;
         this.projectData.taskicon = icon;

@@ -31,10 +31,10 @@ const SearchValue = ({taskName , projectName , obj}) => {
         >
             <p
                 className='
-                                                text-gray-300
-                                                xl:text-xl xl:w-8/12
-                                                max-sm:text-lg sm:text-lg
-                                            '
+                        text-gray-300
+                        xl:text-xl xl:w-8/12
+                        max-sm:text-lg sm:text-lg
+                    '
             >
                 {taskName}
             </p>
