@@ -387,6 +387,7 @@ body{
 
     .left-side-TC2{
         @apply flex flex-row
+        relative
         xl:w-8/12 xl:gap-4
         max-sm:gap-2 sm:gap-2
         max-sm:w-12/12 sm:w-12/12
@@ -395,7 +396,7 @@ body{
 
     .container-of-TC-container{
         @apply w-[98%] h-[80%] border border-gray-300 rounded-md
-        overflow-x-hidden overflow-y-scroll
+         overflow-y-scroll
         flex flex-col gap-2 items-start
         xl:p-8
         max-sm:p-2 sm:p-2

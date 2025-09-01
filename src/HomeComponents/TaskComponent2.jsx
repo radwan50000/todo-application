@@ -5,6 +5,8 @@ import close from '../assets/close-bold-svgrepo-com.svg';
 import {useState , useRef} from 'react';
 import CheckBox from "./CheckBox.jsx";
 import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
+import {flagsData} from "../Data.js";
+import CustomTaskClass from "./CustomTaskClass.js";
 
 const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setCompleted,objId,setNoOfTasks}) => {
     const [editingMode , setEditingMode] = useState(false);
@@ -12,8 +14,10 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
     const [taskField, setTaskField] = useState(task);
     const [oldField , setOldField] = useState(taskField);
     const container = useRef(null);
-
-
+    const flagImage = useRef(null);
+    const chooseFlagContainer = useRef(null);
+    const [controller] = useState(() => new CustomTaskClass(objId));
+    const [flagSrc , setFlagSrc] = useState(flag);
 
 
     return (
@@ -28,9 +32,14 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                             className='left-side-TC2'
                         >
                             <img
-                                src={flag}
+                                src={flagSrc}
                                 alt={'flag image'}
-                                className='flag-img-TC'
+                                className='flag-img-TC cursor-pointer'
+                                ref={flagImage}
+                                onClick={() => {
+                                        chooseFlagContainer.current.classList.toggle('visible-container')
+                                    }
+                                }
                             />
                             <input
                                 type={'text'}
@@ -41,6 +50,33 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                     setTaskField(e.target.value);
                                 }}
                             />
+                            <div
+                                className='hidden flex-row gap-2 w-fit px-4 py-1
+                                    justify-center
+                                    absolute bottom-[-1] left-0 translate-y-[100%]
+                                    rounded-md bg-black
+                                '
+                                ref={chooseFlagContainer}
+                                >
+                                {
+                                    flagsData.map((flag , i) => {
+                                        return (
+                                            <img
+                                                key={i}
+                                                src={flag.flagImg}
+                                                alt={flag.flagType}
+                                                className={'flag-img-TC cursor-pointer'}
+                                                onClick={() => {
+                                                    setFlagSrc(flag.flagImg);
+                                                    controller.changeFlag(flag.flagImg,taskId);
+                                                    chooseFlagContainer.current.classList.toggle('visible-container');
+                                                }}
+                                            />
+                                        )
+                                    })
+                                }
+
+                            </div>
                         </div>
                         <div
                             className='TC-buttons-container'
@@ -50,20 +86,11 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 alt={'edit image'}
                                 className='done-edit-buttons-TC'
                                 onClick={() => {
-                                    allTasks.forEach((t) => {
-                                        if(t.taskid == objId){
-                                            t.tasks.forEach((j) => {
-                                                if(j.id === taskId){
-                                                    j.task = taskField;
-                                                    console.log('Editied');
-                                                    setOldField(taskField);
-                                                    setEditingMode(false);
-                                                }
-                                            })
-                                        }
-                                    })
-                                    setAllTasks(allTasks);
-                                    saveAllCustomTaskInLS(allTasks);
+                                    controller.changeProjectTask(taskField,taskId);
+                                    console.log(controller.projectData);
+                                    setOldField(taskField);
+                                    setEditingMode(false);
+                                    setAllTasks(controller.saveInCustomTasksArr());
                                 }}
                             />
                             <img
@@ -95,7 +122,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 taskP={taskP}
                             />
                             <img
-                                src={flag}
+                                src={flagSrc}
                                 alt={'redFlag flag'}
                                 className='flag-img-TC'
                             />
