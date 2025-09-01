@@ -89,7 +89,12 @@ const SearchComponent = () => {
                                     </div>
                                     :
                                     tasksArr.map((task,i) => (
-                                        <SearchValue key={i} taskName={task.taskName} projectName={task.projectName} />
+                                        <SearchValue
+                                            key={i}
+                                            taskName={task.taskName}
+                                            projectName={task.projectName}
+                                            obj={task}
+                                        />
                                     ))
                             }
                         </div>

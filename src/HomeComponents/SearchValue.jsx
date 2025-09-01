@@ -1,5 +1,10 @@
+import Data from './AppData.jsx';
+import {useContext} from 'react';
 
-const SearchValue = ({taskName , projectName}) => {
+
+const SearchValue = ({taskName , projectName , obj}) => {
+    const data = useContext(Data);
+
     return (
         <div
             className='w-full h-auto py-1 px-2
@@ -13,7 +18,15 @@ const SearchValue = ({taskName , projectName}) => {
                                         my-4
                                         '
             onClick={() => {
-
+                console.log(obj);
+                if(obj.type === 'custom') {
+                    data.setTaskId(obj.taskId);
+                    data.customSectionEnable();
+                }else if(obj.type === 'daily') {
+                    data.dailySectionEnable();
+                }else {
+                    data.weeklySectionEnable();
+                }
             }}
         >
             <p

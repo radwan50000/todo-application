@@ -105,9 +105,12 @@ const Home = () => {
                         manuallyAddedTasks,
                         setManuallyAddedTasks,
                         taskId,
+                        setTaskId,
                         addTaskSectionEnable,
                         customSectionEnable,
                         searchSectionEnable,
+                        dailySectionEnable,
+                        weeklySectionEnable,
                         navMenuOpened,
                         setNavMenuOpened,
                     }
