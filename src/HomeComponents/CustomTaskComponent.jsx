@@ -57,11 +57,6 @@ const CustomTaskComponent = (
         });
     },[task , taskId]);
 
-    useEffect(() => {
-
-
-    },[completed , miniTasks]);
-
 
     return (
         <>
