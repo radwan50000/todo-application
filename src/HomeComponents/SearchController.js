@@ -9,8 +9,6 @@ class SearchController{
         this.getCustomTasks();
         this.getDailyTasks();
         this.getWeeklyTasks();
-
-        console.log(this.tasks);
     }
 
     getCustomTasks(){
@@ -44,6 +42,24 @@ class SearchController{
                 type: 'weekly',
             })
         })
+    }
+
+    getAllTasks(){
+        return this.tasks;
+    }
+
+    getMatchedTasks(keyWord){
+        if(keyWord.trim() === '') return [];
+        const regex = new RegExp(keyWord , 'i');
+        let matchedArr = [];
+
+        this.tasks.forEach((task) => {
+                if(regex.test(task.taskName)){
+                    matchedArr.push(task);
+                }
+        });
+
+        return matchedArr;
     }
 
 }
