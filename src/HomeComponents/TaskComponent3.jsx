@@ -6,6 +6,8 @@ import {useState , useRef} from 'react';
 import CheckBox2 from "./CheckBox2.jsx";
 import SaveDailyTasks from "./SaveDailyTasks.js";
 import SaveWeeklyTasks from "./SaveWeeklyTasks.jsx";
+import CustomTaskClass from "./CustomTaskClass.js";
+import {flagsData} from "../Data.js";
 
 const TaskComponent3 = (
         {
@@ -25,6 +27,9 @@ const TaskComponent3 = (
     const [taskField, setTaskField] = useState(task);
     const [oldField , setOldField] = useState(taskField);
     const container = useRef(null);
+    const flagImage = useRef(null);
+    const chooseFlagContainer = useRef(null);
+    const [flagSrc , setFlagSrc] = useState(flag);
 
     return (
         <div ref={container} className="w-full h-fit">
@@ -38,9 +43,14 @@ const TaskComponent3 = (
                             className='left-side-TC2'
                         >
                             <img
-                                src={flag}
+                                src={flagSrc}
                                 alt={'flag image'}
-                                className='flag-img-TC'
+                                className='flag-img-TC cursor-pointer'
+                                ref={flagImage}
+                                onClick={() => {
+                                    chooseFlagContainer.current.classList.toggle('visible-container')
+                                }
+                                }
                             />
                             <input
                                 type={'text'}
@@ -51,6 +61,33 @@ const TaskComponent3 = (
                                     setTaskField(e.target.value);
                                 }}
                             />
+                            <div
+                                className='hidden flex-row gap-2 w-fit px-4 py-1
+                                    justify-center
+                                    absolute bottom-[-1] left-0 translate-y-[100%]
+                                    rounded-md bg-black
+                                '
+                                ref={chooseFlagContainer}
+                            >
+                                {
+                                    flagsData.map((flag , i) => {
+                                        return (
+                                            <img
+                                                key={i}
+                                                src={flag.flagImg}
+                                                alt={flag.flagType}
+                                                className={'flag-img-TC cursor-pointer'}
+                                                onClick={() => {
+                                                    flagImage.current.src = flag.flagImg;
+                                                    controller.changeFlag(flag.flagImg,taskId);
+                                                    chooseFlagContainer.current.classList.toggle('visible-container');
+                                                }}
+                                            />
+                                        )
+                                    })
+                                }
+
+                            </div>
                         </div>
                         <div
                             className='TC-buttons-container'
@@ -60,7 +97,7 @@ const TaskComponent3 = (
                                 alt={'edit image'}
                                 className='done-edit-buttons-TC'
                                 onClick={() => {
-                                    console.log(controller);
+                                    setFlagSrc(flagImage.current.src);
                                     controller.editTask(taskId, taskField);
                                     setOldField(taskField);
                                     setEditingMode(false);
@@ -96,7 +133,7 @@ const TaskComponent3 = (
                                 controller={controller}
                             />
                             <img
-                                src={flag}
+                                src={flagSrc}
                                 alt={'redFlag flag'}
                                 className='flag-img-TC'
                             />

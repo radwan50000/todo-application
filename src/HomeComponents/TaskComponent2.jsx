@@ -67,7 +67,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                                 alt={flag.flagType}
                                                 className={'flag-img-TC cursor-pointer'}
                                                 onClick={() => {
-                                                    setFlagSrc(flag.flagImg);
+                                                    flagImage.current.src = flag.flagImg;
                                                     controller.changeFlag(flag.flagImg,taskId);
                                                     chooseFlagContainer.current.classList.toggle('visible-container');
                                                 }}
@@ -87,7 +87,7 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 className='done-edit-buttons-TC'
                                 onClick={() => {
                                     controller.changeProjectTask(taskField,taskId);
-                                    console.log(controller.projectData);
+                                    setFlagSrc(flagImage.current.src);
                                     setOldField(taskField);
                                     setEditingMode(false);
                                     setAllTasks(controller.saveInCustomTasksArr());

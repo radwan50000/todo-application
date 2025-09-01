@@ -28,6 +28,14 @@ class DailyController{
         this.saveChanges();
     }
 
+    changeFlag(flag,taskId){
+        this.objData.tasks.map((task) => {
+            if(task.id === taskId) {
+                task.priority = flag;
+            }
+        });
+    }
+
     saveChanges(){
         SaveWeeklyTasks(this.objData);
     }
