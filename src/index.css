@@ -30,6 +30,7 @@ body{
     --color-gray-bg: #2a2b2d;
     --color-gray-bg-dark: #222325;
     --color-text-dark: #023047;
+    --color-trans2-white: rgba(255, 255, 255, 0.1);
     --color-trans-white: rgba(255, 255, 255, 0.3);
 }
 

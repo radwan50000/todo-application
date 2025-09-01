@@ -4,11 +4,14 @@ import AppData from './AppData.jsx';
 import searchImg from '../assets/search-alt-2-svgrepo-com.svg';
 import {useEffect, useContext, useState} from 'react';
 import SearchController from "./SearchController.js";
+import searchIll from '../assets/search_ill.webp';
+import SearchValue from "./SearchValue.jsx";
 
 const SearchComponent = () => {
     let data = useContext(AppData);
-    const conroller = new SearchController();
+    const controller = new SearchController();
     let [searchValue , setSearchValue] = useState('');
+    let [tasksArr , setTasksArr] = useState([]);
 
     useEffect(() => {
         console.log(data.navMenuOpened);
@@ -43,17 +46,52 @@ const SearchComponent = () => {
                                 value={searchValue}
                                 onChange={(e) => {
                                     setSearchValue(e.target.value);
+                                    console.log('This is Matched Arr');
+                                    console.log(controller.getMatchedTasks(e.target.value));
+                                    setTasksArr(controller.getMatchedTasks(e.target.value));
                                 }}
                             />
                         </div>
                         <div
-                            className='w-full h-11/12 bg-red-800
-                                p-2 flex flex-col items-center justify-start
+                            className='w-full h-11/12
+                                 flex flex-col items-center justify-start
                                 overflow-x-hidden overflow-y-scroll no-scrollbar
+                                xl:p-2
+                                max-sm:p-0 sm:p-0
+                                max-sm:mt-4 sm:mt-4
 
                             '
                         >
-                        AAA
+                            {
+                                ( searchValue.trim() === ''  ) || ( tasksArr.length < 1 )?
+                                    <div
+                                        className='w-full
+                                        flex flex-col items-center justify-center
+                                        lg:h-8/12
+                                        max-sm:h-6/12 sm:h-6/12
+                                        '
+                                        >
+                                        <img
+                                            src={searchIll}
+                                            alt={'search image'}
+                                            className='
+                                            saturate-10
+                                            brightness-50
+                                            xl:w-4/12
+                                            max-sm:w-6/12 sm:w-6/12
+                                            '
+                                        />
+                                        <p
+                                            className='cairo text-lg font-medium italic'
+                                        >
+                                            No Tasks Found
+                                        </p>
+                                    </div>
+                                    :
+                                    tasksArr.map((task,i) => (
+                                        <SearchValue key={i} taskName={task.taskName} projectName={task.projectName} />
+                                    ))
+                            }
                         </div>
                 </div>
                 {/* End Data Page Container */}
