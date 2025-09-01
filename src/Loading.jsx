@@ -18,6 +18,12 @@ const Loading = () => {
         }
     }
 
+    const initCustomLS = () => {
+        if(localStorage.getItem('custom-tasks') === null){
+            localStorage.setItem('custom-tasks',JSON.stringify([]));
+        }
+    }
+
     const initWeeklyLS = () => {
         if(localStorage.getItem('weekly-tasks') === null){
             const obj = {
@@ -34,6 +40,7 @@ const Loading = () => {
             if(Cookies.get('username') !== undefined) {
                 initTodayLS();
                 initWeeklyLS();
+                initCustomLS();
                 nav('/Home');
             }else{
                 nav('/Login');
