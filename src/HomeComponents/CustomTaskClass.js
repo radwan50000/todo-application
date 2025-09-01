@@ -76,6 +76,11 @@ class CustomTaskClass {
         this.projectData.completed = 0;
     }
 
+    addTask(obj){
+        this.projectData.tasks.push(obj);
+        console.log(this.projectData);
+    }
+
     saveInCustomTasksArr () {
         if(!this.projectRemoved){
             this.allProjectArr.forEach((project,i) => {
