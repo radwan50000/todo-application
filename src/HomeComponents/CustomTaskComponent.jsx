@@ -3,8 +3,6 @@ import TaskComponent2 from "./TaskComponent2.jsx";
 import {flagsData} from "../Data.js";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
-import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
-import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from './SettingGear.jsx';
 import AppData from './AppData.jsx';
@@ -136,7 +134,6 @@ const CustomTaskComponent = (
                         <img
                             src={addIcon}
                             alt={'add task icon'}
-
                             />
                     </div>
                 </div>
@@ -224,6 +221,7 @@ const CustomTaskComponent = (
                                     setMiniTasks([...miniTasks,obj]);
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
+
                                 }else {
                                     toast('No Data Entered!',{
                                         theme: 'dark',

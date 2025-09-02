@@ -4,7 +4,6 @@ class CustomTaskClass {
 
     constructor(taskId){
         this.taskId = taskId;
-        this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks'));
         this.projectData = {};
         this.projectTitle = null;
         this.projectImg = null;
@@ -15,6 +14,7 @@ class CustomTaskClass {
     }
 
     getProjectData(taskId){
+        this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks')) || [];
 
         this.allProjectArr.forEach((task) => {
             if(taskId === task.taskid){
@@ -36,20 +36,20 @@ class CustomTaskClass {
     }
 
     changeFlag(flag,taskId){
-        this.projectData.tasks.map((task) => {
+        this.projectData.tasks.forEach((task) => {
             if(task.id === taskId) {
                 task.priority = flag;
-                console.log(this.projectData);
             }
         });
+        console.log(this.projectData);
     }
 
     changeProjectTask(taskText,taskId){
-        this.projectData.tasks.map((task) => {
+        this.projectData.tasks.forEach((task) => {
             if(task.id === taskId) {
                 task.task = taskText;
             }
-        })
+        });
     }
 
     removeTasks(){
@@ -78,10 +78,13 @@ class CustomTaskClass {
 
     addTask(obj){
         this.projectData.tasks.push(obj);
-        console.log(this.projectData);
+        this.saveInCustomTasksArr();
+        console.log(JSON.parse(localStorage.getItem('custom-tasks')));
     }
 
     saveInCustomTasksArr () {
+        this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks')) || [];
+
         if(!this.projectRemoved){
             this.allProjectArr.forEach((project,i) => {
                 if(project.taskid === this.taskId){
@@ -92,7 +95,6 @@ class CustomTaskClass {
         this.saveAllCustomTaskInLS(this.allProjectArr);
         return this.allProjectArr;
     }
-
     saveAllCustomTaskInLS = (arrToSave) => {
         if(localStorage.getItem('custom-tasks') === null){
             localStorage.setItem('custom-tasks',JSON.stringify(arrToSave));
