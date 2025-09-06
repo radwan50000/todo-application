@@ -1,8 +1,13 @@
 import {useRef, useState , useEffect , useContext} from 'react';
 import TaskComponent2 from "./TaskComponent2.jsx";
-import {flagsData} from "../Data.js";
+import greenFlag from "../assets/greenFlag.png";
+import blueFlag from "../assets/blueFlag.png";
+import redFlag from "../assets/redFlag.png";
+import yellowFlag from "../assets/yellowFlag.png";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
+import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
+import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from './SettingGear.jsx';
 import AppData from './AppData.jsx';
@@ -20,16 +25,22 @@ const CustomTaskComponent = (
             navMenuOpened
         }
     ) => {
+
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
+
+    const [changeOccur, setChangeOccur] = useState(false);
     const [taskName, setTaskName] = useState('');
     const [taskImg , setTaskImg] = useState(null);
     const [completed , setCompleted] = useState(0);
     const [miniTasks , setMiniTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
+    const [controller] = useState(() => new CustomTaskClass(taskId));
+
+
     const appData = useContext(AppData);
-    const [controller , setContoller] = useState(() => new CustomTaskClass(taskId));
+
 
     const activeTask = (e,className) => {
         const ele = document.querySelectorAll('.task-img');
@@ -42,20 +53,27 @@ const CustomTaskComponent = (
 
 
     useEffect(() => {
-        task.forEach((t) => {
-            if(t.taskid === taskId){
-                setTaskName(t.taskname);
-                setTaskImg(t.taskicon);
-                setMiniTasks([...t.tasks]);
-                setNoOfTasks(t.tasks.length);
-                setCompleted(t.completed);
-            }
-        });
-    },[task , taskId]);
+        console.log(task);
+        // task.forEach((t) => {
+        //     if(t.taskid === taskId){
+        //         setTaskName(t.taskname);
+        //         setTaskImg(t.taskicon);
+        //         setMiniTasks([...t.tasks]);
+        //         setNoOfTasks(t.tasks.length);
+        //         setCompleted(t.completed);
+        //     }
+        // });
+        setTaskName(controller.projectTitle);
+        setTaskImg(controller.projectImg);
+        setMiniTasks(controller.projectData.tasks);
+        setNoOfTasks(controller.tasksNumber);
+        setCompleted(controller.completed);
+    },[task , taskId , changeOccur]);
 
     useEffect(() => {
-        setContoller(() => new CustomTaskClass(taskId));
-    },[taskId])
+
+
+    },[completed , miniTasks]);
 
 
     return (
@@ -82,14 +100,14 @@ const CustomTaskComponent = (
                             className='l-H-o-Component'
                         >
                             <img
-                                src={controller.projectImg}
+                                src={taskImg}
                                 alt='task image'
                             />
                             <h1
                                 className='cairo'
                                 ref={header}
                             >
-                                {controller.projectTitle}
+                                {taskName}
                             </h1>
                         </div>
                         <span
@@ -134,6 +152,7 @@ const CustomTaskComponent = (
                         <img
                             src={addIcon}
                             alt={'add task icon'}
+
                             />
                     </div>
                 </div>
@@ -177,7 +196,23 @@ const CustomTaskComponent = (
                         </h3>
                         <div className='flex flex-row gap-2 w-fit'>
                             {
-                                flagsData.map((ele, index) => {
+                                [
+                                    {
+                                        'flagType': 'red flag',
+                                        'flagImg': redFlag,
+                                    },
+                                    {
+                                        'flagType': 'yellow flag',
+                                        'flagImg': yellowFlag
+                                    },
+                                    {
+                                    'flagType': 'green flag',
+                                    'flagImg': greenFlag
+                                     },
+                                    {
+                                        'flagType': 'blue flag',
+                                        'flagImg': blueFlag,
+                                    }].map((ele, index) => {
                                     return (
                                         <img
                                             src={ele.flagImg}
@@ -215,12 +250,15 @@ const CustomTaskComponent = (
                                         'id': uniqueID,
                                     }
 
+
                                     controller.addTask(obj);
-                                    setNoOfTasks(controller.projectData.tasks.length);
-                                    setTask(controller.saveInCustomTasksArr());
-                                    setMiniTasks([...miniTasks,obj]);
+
+                                    setTask(controller.allProjectArr);
+
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
+
+                                    setChangeOccur(!changeOccur);
 
                                 }else {
                                     toast('No Data Entered!',{
