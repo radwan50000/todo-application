@@ -4,6 +4,7 @@ class CustomTaskClass {
 
     constructor(taskId){
         this.taskId = taskId;
+        this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks'));
         this.projectData = {};
         this.projectTitle = null;
         this.projectImg = null;
@@ -17,11 +18,6 @@ class CustomTaskClass {
     }
 
     getProjectData(taskId){
-<<<<<<< HEAD
-        this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks')) || [];
-
-=======
->>>>>>> features
         this.allProjectArr.forEach((task) => {
             if(taskId === task.taskid){
                 this.projectData = task;
@@ -45,11 +41,6 @@ class CustomTaskClass {
     }
 
     changeFlag(flag,taskId){
-<<<<<<< HEAD
-        this.projectData.tasks.forEach((task) => {
-            if(task.id === taskId) {
-                task.priority = flag;
-=======
         let tasks = this.projectData.tasks.map(task => task);
         let task = tasks.filter(task => task.id === taskId)[0];
 
@@ -58,7 +49,6 @@ class CustomTaskClass {
         tasks = tasks.map((t,i) => {
             if(t.id === taskId){
                 tasks[i] = task;
->>>>>>> features
             }
             return t;
         });
@@ -67,13 +57,6 @@ class CustomTaskClass {
     }
 
     changeProjectTask(taskText,taskId){
-<<<<<<< HEAD
-        this.projectData.tasks.forEach((task) => {
-            if(task.id === taskId) {
-                task.task = taskText;
-            }
-        });
-=======
         let tasks = this.projectData.tasks.map(task => task);
         let task = tasks.filter(task => task.id === taskId)[0];
 
@@ -109,7 +92,6 @@ class CustomTaskClass {
     countDone(){
         this.completed = this.projectData.tasks.filter((task) => task.done).length;
         this.projectData.completed = this.completed;
->>>>>>> features
     }
 
     removeTasks(){
@@ -137,15 +119,7 @@ class CustomTaskClass {
         this.projectData.completed = 0;
     }
 
-    addTask(obj){
-        this.projectData.tasks.push(obj);
-        this.saveInCustomTasksArr();
-        console.log(JSON.parse(localStorage.getItem('custom-tasks')));
-    }
-
     saveInCustomTasksArr () {
-        this.allProjectArr = JSON.parse(localStorage.getItem('custom-tasks')) || [];
-
         if(!this.projectRemoved){
             this.allProjectArr.forEach((project,i) => {
                 if(project.taskid === this.taskId){
@@ -156,8 +130,6 @@ class CustomTaskClass {
         this.saveAllCustomTaskInLS(this.allProjectArr);
         return this.allProjectArr;
     }
-<<<<<<< HEAD
-=======
 
     saveChanges () {
         if(!this.projectRemoved){
@@ -170,7 +142,6 @@ class CustomTaskClass {
         this.saveAllCustomTaskInLS(this.allProjectArr);
     }
 
->>>>>>> features
     saveAllCustomTaskInLS = (arrToSave) => {
         if(localStorage.getItem('custom-tasks') === null){
             localStorage.setItem('custom-tasks',JSON.stringify(arrToSave));
