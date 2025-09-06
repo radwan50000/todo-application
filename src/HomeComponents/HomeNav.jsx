@@ -211,6 +211,7 @@ const HomeNav = (
                                         onClick={() => {
                                             customSectionEnable();
                                             setTaskId(task.taskid);
+                                            console.log(task.taskid);
                                         }}
                                    >
                                        <img

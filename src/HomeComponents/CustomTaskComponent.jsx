@@ -6,8 +6,6 @@ import redFlag from "../assets/redFlag.png";
 import yellowFlag from "../assets/yellowFlag.png";
 import {toast, ToastContainer} from "react-toastify";
 import {v4 as uuidv4} from 'uuid';
-import saveAllCustomTaskInLS from "../SaveAllCustomTasksInLS.js";
-import SaveAllCustomTasksInLS from "../SaveAllCustomTasksInLS.js";
 import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from './SettingGear.jsx';
 import AppData from './AppData.jsx';
@@ -36,7 +34,7 @@ const CustomTaskComponent = (
     const [completed , setCompleted] = useState(0);
     const [miniTasks , setMiniTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
-    const [controller] = useState(() => new CustomTaskClass(taskId));
+    let [controller , setController] = useState(() => new CustomTaskClass(taskId));
 
 
     const appData = useContext(AppData);
@@ -53,22 +51,17 @@ const CustomTaskComponent = (
 
 
     useEffect(() => {
-        console.log(task);
-        // task.forEach((t) => {
-        //     if(t.taskid === taskId){
-        //         setTaskName(t.taskname);
-        //         setTaskImg(t.taskicon);
-        //         setMiniTasks([...t.tasks]);
-        //         setNoOfTasks(t.tasks.length);
-        //         setCompleted(t.completed);
-        //     }
-        // });
         setTaskName(controller.projectTitle);
         setTaskImg(controller.projectImg);
         setMiniTasks(controller.projectData.tasks);
         setNoOfTasks(controller.tasksNumber);
         setCompleted(controller.completed);
-    },[task , taskId , changeOccur]);
+    },[task , controller , changeOccur]);
+
+
+    useEffect(() => {
+        setController(() => new CustomTaskClass(taskId));
+    },[taskId]);
 
     useEffect(() => {
 
