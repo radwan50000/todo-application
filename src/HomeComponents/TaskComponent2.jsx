@@ -86,25 +86,15 @@ const TaskComponent2 = ({task,taskId,flag,allTasks,setAllTasks,isDone,setComplet
                                 alt={'Done image'}
                                 className='done-edit-buttons-TC'
                                 onClick={() => {
-                                    controller.changeProjectTask(taskField,taskId);
                                     setFlagSrc(flagImage.current.src);
                                     setOldField(taskField);
                                     setEditingMode(false);
-                                    setAllTasks(prevTasks => {
-                                        return prevTasks.map(project => {
-                                            if (project.taskid === objId) {
-                                                return {
-                                                    ...project,
-                                                    tasks: project.tasks.map(t =>
-                                                        t.id === taskId
-                                                            ? { ...t, task: taskField, priority: flagImage.current.src }
-                                                            : t
-                                                    )
-                                                };
-                                            }
-                                            return project;
-                                        });
-                                    });
+
+                                    controller.changeProjectTask(taskField,taskId);
+
+                                    controller.saveInCustomTasksArr();
+
+                                    setAllTasks(controller.allProjectArr);
                                 }}
                             />
                             <img
