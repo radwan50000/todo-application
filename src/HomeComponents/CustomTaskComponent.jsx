@@ -12,6 +12,7 @@ import MenuCloseNavButton from "./MenuCloseNavButton.jsx";
 import SettingGear from './SettingGear.jsx';
 import AppData from './AppData.jsx';
 import addIcon from '../assets/edit-svgrepo-com.svg';
+import CustomTaskClass from "./CustomTaskClass.js";
 
 
 const CustomTaskComponent = (
@@ -24,15 +25,22 @@ const CustomTaskComponent = (
             navMenuOpened
         }
     ) => {
+
     const header = useRef(null);
     const addTaskContainer = useRef(null);
     const ST_toAdd = useRef(null);
+
+    const [changeOccur, setChangeOccur] = useState(false);
     const [taskName, setTaskName] = useState('');
     const [taskImg , setTaskImg] = useState(null);
     const [completed , setCompleted] = useState(0);
     const [miniTasks , setMiniTasks] = useState([]);
     const [noOfTasks , setNoOfTasks] = useState(0);
+    const [controller] = useState(() => new CustomTaskClass(taskId));
+
+
     const appData = useContext(AppData);
+
 
     const activeTask = (e,className) => {
         const ele = document.querySelectorAll('.task-img');
@@ -46,16 +54,21 @@ const CustomTaskComponent = (
 
     useEffect(() => {
         console.log(task);
-        task.forEach((t) => {
-            if(t.taskid === taskId){
-                setTaskName(t.taskname);
-                setTaskImg(t.taskicon);
-                setMiniTasks([...t.tasks]);
-                setNoOfTasks(t.tasks.length);
-                setCompleted(t.completed);
-            }
-        });
-    },[task , taskId]);
+        // task.forEach((t) => {
+        //     if(t.taskid === taskId){
+        //         setTaskName(t.taskname);
+        //         setTaskImg(t.taskicon);
+        //         setMiniTasks([...t.tasks]);
+        //         setNoOfTasks(t.tasks.length);
+        //         setCompleted(t.completed);
+        //     }
+        // });
+        setTaskName(controller.projectTitle);
+        setTaskImg(controller.projectImg);
+        setMiniTasks(controller.projectData.tasks);
+        setNoOfTasks(controller.tasksNumber);
+        setCompleted(controller.completed);
+    },[task , taskId , changeOccur]);
 
     useEffect(() => {
 
@@ -236,18 +249,17 @@ const CustomTaskComponent = (
                                         'done': false,
                                         'id': uniqueID,
                                     }
-                                    task.forEach((t) => {
-                                        if(t.taskid === taskId){
-                                            t.tasks.push(obj);
-                                            setMiniTasks(t.tasks);
-                                            setNoOfTasks(t.tasks.length);
-                                        }
-                                    });
-                                    setTask(task);
-                                    setMiniTasks([...miniTasks,obj]);
-                                    saveAllCustomTaskInLS(task);
+
+
+                                    controller.addTask(obj);
+
+                                    setTask(controller.allProjectArr);
+
                                     ST_toAdd.current.value = ''
                                     addTaskContainer.current.style.display = 'none';
+
+                                    setChangeOccur(!changeOccur);
+
                                 }else {
                                     toast('No Data Entered!',{
                                         theme: 'dark',

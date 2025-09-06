@@ -9,13 +9,15 @@ class CustomTaskClass {
         this.projectTitle = null;
         this.projectImg = null;
         this.tasks = [];
+        this.tasksNumber = 0;
+        this.completed = 0;
         this.allTasksDone = false;
         this.projectRemoved = false;
         this.getProjectData(this.taskId);
+        this.countDone();
     }
 
     getProjectData(taskId){
-
         this.allProjectArr.forEach((task) => {
             if(taskId === task.taskid){
                 this.projectData = task;
@@ -23,48 +25,82 @@ class CustomTaskClass {
                 this.projectImg = task.taskicon;
                 this.tasks = task.tasks;
                 this.allTasksDone = this.isAllTasksDone();
+                this.tasksNumber = task.tasks.length;
             }
         });
     }
 
     changeProjectIcon(icon){
         this.projectData.taskicon = icon;
+        this.projectImg = icon;
     }
 
     changeProjectName(Name){
         this.projectData.taskname = Name;
+        this.projectTitle = Name;
     }
 
     changeFlag(flag,taskId){
-        this.projectData.tasks.map((task) => {
-            if(task.id === taskId) {
-                task.priority = flag;
-                console.log(this.projectData);
+        let tasks = this.projectData.tasks.map(task => task);
+        let task = tasks.filter(task => task.id === taskId)[0];
+
+        task.priority = flag;
+
+        tasks = tasks.map((t,i) => {
+            if(t.id === taskId){
+                tasks[i] = task;
             }
+            return t;
         });
-        console.log(this.projectData);
+
+        this.projectData.tasks = tasks;
     }
 
     changeProjectTask(taskText,taskId){
-        this.projectData.tasks.map((task) => {
-            if(task.id === taskId) {
-                task.task = taskText;
-                console.log(this.projectData);
+        let tasks = this.projectData.tasks.map(task => task);
+        let task = tasks.filter(task => task.id === taskId)[0];
+
+        task.task = taskText;
+
+        tasks = tasks.map((t,i) => {
+            if(t.id === taskId){
+                tasks[i] = task;
             }
-        })
-        console.log(this.projectData);
+            return t;
+        });
+
+        this.projectData.tasks = tasks;
     }
 
-    changeProjectData(name , icon , tasks){
-        this.projectData.taskname = name;
-        this.projectData.taskicon = icon;
+    addTask(obj){
+        let tasks = this.projectData.tasks.map(task => task);
+
+        tasks.push(obj);
+
         this.projectData.tasks = tasks;
+
+        this.countTasks();
+        this.countDone();
+        this.saveChanges();
+
+    }
+
+    countTasks(){
+        this.tasksNumber = this.projectData.tasks.length;
+    }
+
+    countDone(){
+        this.completed = this.projectData.tasks.filter((task) => task.done).length;
+        this.projectData.completed = this.completed;
     }
 
     removeTasks(){
         this.projectData.tasks = [];
+
         this.tasks = this.projectData.tasks;
-        this.projectData.completed = 0;
+
+        this.countTasks();
+        this.countDone();
     }
 
     isAllTasksDone(){
@@ -75,8 +111,6 @@ class CustomTaskClass {
         })
         return isDone;
     }
-
-
 
     makeAllTasksUnDone(){
         this.projectData.tasks.forEach((task) => {
@@ -97,6 +131,17 @@ class CustomTaskClass {
         return this.allProjectArr;
     }
 
+    saveChanges () {
+        if(!this.projectRemoved){
+            this.allProjectArr.forEach((project,i) => {
+                if(project.taskid === this.taskId){
+                    this.allProjectArr[i] = this.projectData;
+                }
+            })
+        }
+        this.saveAllCustomTaskInLS(this.allProjectArr);
+    }
+
     saveAllCustomTaskInLS = (arrToSave) => {
         if(localStorage.getItem('custom-tasks') === null){
             localStorage.setItem('custom-tasks',JSON.stringify(arrToSave));
@@ -104,6 +149,8 @@ class CustomTaskClass {
             localStorage.setItem('custom-tasks',JSON.stringify(arrToSave));
         }
     }
+
+
 
     removeProject(){
         this.allProjectArr = this.allProjectArr.filter((project) => project.taskid !== this.taskId);
